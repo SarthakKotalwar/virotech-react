@@ -1,0 +1,27 @@
+@use "../abstracts/mixins" as *;
+
+body{
+
+    overflow-x:hidden;
+
+    background:var(--color-background);
+
+}
+
+section{
+
+    @include section;
+
+}
+
+.container{
+
+    @include container;
+
+}
+
+main{
+
+    overflow:hidden;
+
+}
