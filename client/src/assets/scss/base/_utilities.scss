@@ -1,3 +1,13 @@
+@use "../abstracts/mixins" as *;
+
+.btn-primary {
+  @include button-primary;
+}
+
+.btn-outline {
+  @include button-outline;
+}
+
 .text-center{
 
     text-align:center;

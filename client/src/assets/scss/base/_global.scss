@@ -1,27 +1,19 @@
 @use "../abstracts/mixins" as *;
 
 body{
-
-    overflow-x:hidden;
-
     background:var(--color-background);
-
+    color:var(--color-text);
 }
 
 section{
-
     @include section;
-
 }
 
 .container{
-
     @include container;
-
 }
 
-main{
-
-    overflow:hidden;
-
+.main-content{
+    padding-top:120px;
+    min-height:100vh;
 }

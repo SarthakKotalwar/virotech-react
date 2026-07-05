@@ -9,7 +9,7 @@ export default function MainLayout() {
     <>
       <ScrollToTop />
       <Navbar />
-      <main>
+      <main className="main-content">
         <Outlet />
       </main>
       <Footer />

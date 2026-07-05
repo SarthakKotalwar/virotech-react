@@ -1,0 +1,46 @@
+.hero {
+  min-height: calc(100vh - 110px);
+  display: flex;
+  align-items: center;
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.hero__left {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.hero__right {
+  display: flex;
+  justify-content: center;
+}
+
+.hero__stats {
+  display: flex;
+  gap: 48px;
+}
+
+.dashboard {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.floating-card {
+  padding: 24px;
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}

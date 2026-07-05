@@ -1,0 +1,139 @@
+@use "../../../assets/scss/abstracts/mixins" as *;
+
+/* ==========================================================
+   ABOUT SECTION
+========================================================== */
+
+.about {
+  padding: 120px 0;
+  background: #ffffff;
+}
+
+/* ==========================================================
+   GRID
+========================================================== */
+
+.about__container {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* ==========================================================
+   LEFT
+========================================================== */
+
+.about__left h2 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.15;
+  margin: 24px 0;
+  color: #0f172a;
+}
+
+.about__left p {
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: #667085;
+  margin-bottom: 35px;
+}
+
+/* ==========================================================
+   FEATURES
+========================================================== */
+
+.about__features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px;
+}
+
+.about__features li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  font-size: 1rem;
+  color: #334155;
+  font-weight: 500;
+}
+
+/* ==========================================================
+   RIGHT GRID
+========================================================== */
+
+.about__right {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+/* ==========================================================
+   CARD
+========================================================== */
+
+.about-card {
+  @include glass;
+
+  padding: 40px 30px;
+  border-radius: 22px;
+  text-align: center;
+  transition: all .35s ease;
+
+  box-shadow: 0 15px 35px rgba(0,0,0,.05);
+}
+
+.about-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 60px rgba(0,0,0,.10);
+}
+
+.about-card h3 {
+  font-size: 2.5rem;
+  color: var(--color-primary);
+  margin-bottom: 12px;
+  font-weight: 800;
+}
+
+.about-card p {
+  color: #667085;
+  font-size: .95rem;
+  margin: 0;
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 992px) {
+
+  .about {
+    padding: 90px 0;
+  }
+
+  .about__container {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .about__right {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .about {
+    padding: 70px 0;
+  }
+
+  .about__left h2 {
+    font-size: 2.4rem;
+  }
+
+  .about__right {
+    grid-template-columns: 1fr;
+  }
+
+}

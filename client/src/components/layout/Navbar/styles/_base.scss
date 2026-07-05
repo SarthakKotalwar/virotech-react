@@ -1,0 +1,82 @@
+@use "../../../../assets/scss/abstracts/mixins" as *;
+
+.navbar {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 48px);
+  max-width: 1380px;
+  z-index: 9999;
+  transition: all .35s ease;
+}
+
+.navbar__wrapper {
+
+  @include flex-between;
+
+  height: 82px;
+
+  padding: 0 34px;
+
+  border-radius: 999px;
+
+  backdrop-filter: blur(18px);
+
+  -webkit-backdrop-filter: blur(18px);
+
+  background: rgba(255,255,255,.72);
+
+  border: 1px solid rgba(255,255,255,.45);
+
+  box-shadow:
+      0 15px 45px rgba(20,35,90,.08);
+
+  transition: all .35s ease;
+
+}
+
+.navbar--scrolled {
+
+  top: 12px;
+
+}
+
+.navbar--scrolled .navbar__wrapper{
+
+  height:74px;
+
+  background:rgba(255,255,255,.92);
+
+  box-shadow:
+      0 18px 50px rgba(20,35,90,.12);
+
+}
+
+.navbar__logo{
+
+  display:flex;
+
+  align-items:center;
+
+}
+
+.navbar__logo img{
+
+  width:172px;
+
+  transition:all .35s ease;
+
+}
+
+.navbar__logo:hover img{
+
+  transform:scale(1.05);
+
+}
+
+.navbar--scrolled .navbar__logo img{
+
+  width:160px;
+
+}
