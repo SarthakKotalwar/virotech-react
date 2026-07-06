@@ -1,28 +1,30 @@
 @use "../../../../assets/scss/abstracts/mixins" as *;
 
-.navbar__menu{
+/* ==========================================
+   DESKTOP NAV LINKS
+========================================== */
 
-  display:flex;
+.navbar__menu {
 
-  align-items:center;
-
-  gap:42px;
+  display: flex;
+  align-items: center;
+  gap: 38px;
 
 }
 
-.navbar__menu a{
+.navbar__menu a {
 
-  position:relative;
+  position: relative;
 
-  font-size:.98rem;
+  text-decoration: none;
 
-  font-weight:600;
+  color: var(--color-text);
 
-  color:var(--color-text);
+  font-weight: 600;
 
-  text-decoration:none;
+  transition: .35s ease;
 
-  transition:all .3s ease;
+  padding: 8px 0;
 
 }
 
@@ -34,59 +36,120 @@
 
 }
 
+/* Animated underline */
+
 .navbar__menu a::after{
 
-  content:"";
+content:"";
 
-  position:absolute;
+position:absolute;
 
-  left:50%;
+left:50%;
 
-  bottom:-10px;
+bottom:-8px;
 
-  width:0;
+width:0;
 
-  height:2px;
+height:3px;
 
-  border-radius:999px;
+border-radius:999px;
 
-  background:linear-gradient(
-      90deg,
-      #2b5bff,
-      #6b8dff
+background:linear-gradient(
+90deg,
+#2563eb,
+#4f46e5
+);
+
+transition:.35s ease;
+
+transform:translateX(-50%);
+
+}
+
+.navbar__menu a:hover::after {
+
+  width: 80%;
+
+}
+
+/* Active link */
+
+.navbar__menu a.active {
+
+  color: var(--color-primary);
+
+}
+
+.navbar__menu a.active::after {
+
+  width: 80%;
+
+}
+
+.navbar__cta {
+
+  display: flex;
+
+  align-items: center;
+
+}
+
+.navbar__cta a {
+
+  padding: 14px 28px;
+
+  border-radius: 999px;
+
+  background: linear-gradient(
+    135deg,
+    #2563eb,
+    #4f46e5
   );
 
-  transform:translateX(-50%);
+  color: white;
 
-  transition:all .35s ease;
+  text-decoration: none;
+
+  font-weight: 700;
+
+  transition: .35s ease;
+
+  box-shadow: 0 12px 30px rgba(37,99,235,.20);
 
 }
 
-.navbar__menu a:hover::after{
+.navbar__cta a:hover{
 
-  width:100%;
+  transform:
+
+  translateY(-3px)
+
+  scale(1.02);
+
+  box-shadow:
+
+  0 22px 40px rgba(37,99,235,.30);
 
 }
 
-.navbar__cta{
+.navbar__menu a.active{
 
-  @include button-primary;
-
-  padding:16px 30px;
-
-  border-radius:999px;
+  color:#2563eb;
 
   font-weight:700;
 
-  transition:all .35s ease;
+}
+
+.navbar__menu a.active::after{
+
+  width:80%;
 
 }
 
-.navbar__cta:hover{
+.navbar__menu a.active{
 
-  transform:translateY(-3px);
+  text-shadow:
 
-  box-shadow:
-      0 18px 40px rgba(43,91,255,.28);
+  0 0 12px rgba(37,99,235,.18);
 
 }

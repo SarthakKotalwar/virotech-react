@@ -1,7 +1,7 @@
 @use "../../../assets/scss/abstracts/mixins" as *;
 
 .services {
-  padding: 120px 0;
+  padding: 20px 0;
   background: #ffffff;
 }
 
@@ -40,15 +40,19 @@
 
 .service-card {
 
-  @include glass;
+    @include card-primary;
 
-  border-radius: 24px;
+    @include card-hover;
 
-  padding: 40px;
+    @include card-padding;
 
-  transition: .35s;
+    display: flex;
 
-  cursor: pointer;
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    min-height: 340px;
 
 }
 

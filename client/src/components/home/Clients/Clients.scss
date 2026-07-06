@@ -5,7 +5,7 @@
 ========================================================== */
 
 .clients {
-  padding: 120px 0;
+  padding: 20px 0;
   background: #ffffff;
   position: relative;
 }
@@ -40,21 +40,20 @@
 
 .client-logo {
   @include glass;
-
+  @include card-primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
   height: 90px;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   border-radius: 20px;
-
   font-size: 1rem;
   font-weight: 700;
   color: #0f172a;
-
   transition: all .35s ease;
-
   box-shadow: 0 10px 25px rgba(0,0,0,.05);
 }
 
@@ -62,6 +61,24 @@
   transform: translateY(-8px);
   box-shadow: 0 20px 45px rgba(0,0,0,.12);
   color: var(--color-primary);
+}
+
+.client-logo img {
+
+  max-width: 130px;
+
+  opacity: .75;
+
+  transition: .35s;
+
+}
+
+.client-logo:hover img {
+
+  opacity: 1;
+
+  transform: scale(1.08);
+
 }
 
 /* ==========================================================

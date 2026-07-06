@@ -1,59 +1,136 @@
 /* =====================================================
-   VIROTECH DESIGN TOKENS
+   VIROTECH DESIGN SYSTEM
 ===================================================== */
 
-/* ========= Colors ========= */
-
 :root {
-  --color-primary: #1d4ed8;
-  --color-primary-dark: #1e3a8a;
-  --color-secondary: #0f172a;
 
-  --color-accent: #ff7a00;
+  /* =====================================================
+     BRAND COLORS
+  ===================================================== */
+
+  --color-primary: #2563eb;
+  --color-primary-dark: #1d4ed8;
+  --color-primary-light: #60a5fa;
+
+  --color-secondary: #0f172a;
+  --color-secondary-light: #334155;
+
+  --color-accent: #7c3aed;
+  --color-accent-light: #a855f7;
 
   --color-success: #22c55e;
   --color-warning: #f59e0b;
   --color-danger: #ef4444;
 
+  /* =====================================================
+     NEUTRAL COLORS
+  ===================================================== */
+
   --color-white: #ffffff;
   --color-black: #000000;
 
-  --color-text: #1e293b;
+  --color-heading: #0f172a;
+
+  --color-text: #334155;
   --color-text-light: #64748b;
+  --color-text-muted: #94a3b8;
+
+  /* =====================================================
+     BACKGROUNDS
+  ===================================================== */
 
   --color-background: #ffffff;
-  --color-background-alt: #f8fafc;
+
+  --color-background-alt: #f8fbff;
+
+  --color-background-soft: #f1f5f9;
+
+  /* =====================================================
+     BORDERS
+  ===================================================== */
 
   --color-border: #e2e8f0;
 
-  /* Glass */
-  --glass-bg: rgba(255,255,255,.72);
-  --glass-border: rgba(255,255,255,.22);
+  --color-border-light: #edf2f7;
 
-  /* Shadows */
+  /* =====================================================
+     GLASS
+  ===================================================== */
 
-  --shadow-sm: 0 2px 10px rgba(0,0,0,.05);
+  --glass-bg: rgba(255,255,255,.74);
 
-  --shadow-md: 0 10px 30px rgba(0,0,0,.08);
+  --glass-bg-strong: rgba(255,255,255,.86);
 
-  --shadow-lg: 0 20px 60px rgba(0,0,0,.12);
+  --glass-border: rgba(255,255,255,.32);
 
-  /* Radius */
+  /* =====================================================
+     SHADOWS
+  ===================================================== */
 
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  --radius-xl: 40px;
+  --shadow-xs: 0 2px 8px rgba(15,23,42,.04);
 
-  /* Width */
+  --shadow-sm: 0 8px 24px rgba(15,23,42,.05);
+
+  --shadow-md: 0 15px 40px rgba(15,23,42,.08);
+
+  --shadow-lg: 0 25px 60px rgba(15,23,42,.10);
+
+  --shadow-xl: 0 40px 80px rgba(15,23,42,.14);
+
+  /* =====================================================
+     BORDER RADIUS
+  ===================================================== */
+
+  --radius-xs: 8px;
+
+  --radius-sm: 14px;
+
+  --radius-md: 20px;
+
+  --radius-lg: 28px;
+
+  --radius-xl: 36px;
+
+  --radius-round: 999px;
+
+  /* =====================================================
+     LAYOUT
+  ===================================================== */
 
   --container: 1320px;
 
-  /* Navbar */
+  --container-wide: 1440px;
 
-  --navbar-height: 90px;
+  --navbar-height: 88px;
 
-  /* Animation */
+  --section-padding: 120px;
 
-  --transition: all .35s ease;
+  --section-padding-mobile: 80px;
+
+  /* =====================================================
+     TYPOGRAPHY
+  ===================================================== */
+
+  --fs-display: clamp(3.8rem,7vw,5.8rem);
+
+  --fs-h1: clamp(3rem,6vw,4.8rem);
+
+  --fs-h2: clamp(2.4rem,5vw,3.5rem);
+
+  --fs-h3: 1.6rem;
+
+  --fs-body: 1.05rem;
+
+  --fs-small: .95rem;
+
+  /* =====================================================
+     TRANSITIONS
+  ===================================================== */
+
+  --transition-fast: .25s ease;
+
+  --transition: .35s ease;
+
+  --transition-slow: .5s ease;
+
 }

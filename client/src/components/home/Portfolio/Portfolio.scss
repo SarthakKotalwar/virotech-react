@@ -5,7 +5,7 @@
 ========================================================== */
 
 .portfolio {
-  padding: 100px 0;
+  padding: 20px 0;
   background: #f8fbff;
 }
 
@@ -57,11 +57,13 @@
 ========================================================== */
 
 .portfolio-card {
-  background: #fff;
-  border-radius: 28px;
-  overflow: hidden;
-  transition: all .35s ease;
-  box-shadow: 0 20px 45px rgba(15, 23, 42, .06);
+    @include card-primary;
+    @include card-hover;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition:.35s;
+    height: 100%;
 }
 
 .portfolio-card:hover {
@@ -81,13 +83,14 @@
 
 .portfolio-card__image img {
   width: 100%;
-  height: 100%;
+  height: 240px;
   object-fit: cover;
-  transition: transform .5s ease;
+  display: block;
+  transition: transform .45s ease;
 }
 
 .portfolio-card:hover .portfolio-card__image img {
-  transform: scale(1.08);
+  transform: scale(1.05);
 }
 
 /* ==========================================================
@@ -119,6 +122,9 @@
 
 .portfolio-card__content {
   padding: 32px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .portfolio-card__content h3 {
@@ -145,14 +151,11 @@
 }
 
 .portfolio-card__tech span {
-  background: #eef4ff;
+  background: rgba(37,99,235,.08);
   color: var(--color-primary);
-
-  padding: 9px 16px;
-
+  padding: 8px 16px;
   border-radius: 999px;
-
-  font-size: .82rem;
+  font-size: .85rem;
   font-weight: 600;
 
   transition: .3s;
@@ -168,16 +171,9 @@
 ========================================================== */
 
 .portfolio-card__button {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+  @include button-primary;
 
-  color: var(--color-primary);
-
-  font-weight: 700;
-  text-decoration: none;
-
-  transition: .3s;
+  margin-top: auto;
 }
 
 .portfolio-card__button:hover {

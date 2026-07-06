@@ -1,63 +1,87 @@
 @use "../../../assets/scss/abstracts/mixins" as *;
 
-.stats {
-  margin-top: -60px;
-  position: relative;
-  z-index: 10;
-  padding-bottom: 100px;
+.stats{
+
+padding: 20px 0;
+
+background:#ffffff;
+
 }
 
-.stats__grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+.stats__grid{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:30px;
+
 }
 
-.stats-card {
-  @include glass;
+.stats__card{
 
-  border-radius: 28px;
-  padding: 35px;
+    @include glass;
+    @include card-primary;
+    @include card-hover;
+    @include card-padding;
+    text-align: center;
+    transition:.35s;
 
-  text-align: center;
-
-  transition: 0.35s;
-
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.06);
 }
 
-.stats-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 30px 60px rgba(43, 91, 255, 0.12);
+.stats__card:hover{
+
+transform:translateY(-10px);
+
+box-shadow:0 25px 60px rgba(0,0,0,.08);
+
 }
 
-.stats-card__icon {
-  font-size: 2.2rem;
-  margin-bottom: 18px;
+.stats__card h2{
+
+font-size:3rem;
+
+font-weight:800;
+
+color:var(--color-primary);
+
+margin-bottom:12px;
+
 }
 
-.stats-card h3 {
-  font-size: 2.4rem;
+.stats__card h3 {
+
+  font-size: 3rem;
+
+  font-weight: 800;
+
   color: var(--color-primary);
-  margin-bottom: 10px;
+
 }
 
-.stats-card p {
-  color: #667085;
+.stats__card p{
+
+  margin-top: 10px;
+  color: var(--color-text-light);
+
 }
 
-@media (max-width: 992px) {
-  .stats__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+@media(max-width:992px){
+
+.stats__grid{
+
+grid-template-columns:repeat(2,1fr);
+
 }
 
-@media (max-width: 600px) {
-  .stats__grid {
-    grid-template-columns: 1fr;
-  }
+}
 
-  .stats {
-    margin-top: 30px;
-  }
+@media(max-width:600px){
+
+.stats__grid{
+
+grid-template-columns:1fr;
+
+}
+
 }
