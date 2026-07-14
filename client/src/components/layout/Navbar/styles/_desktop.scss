@@ -1,155 +1,219 @@
 @use "../../../../assets/scss/abstracts/mixins" as *;
 
-/* ==========================================
-   DESKTOP NAV LINKS
-========================================== */
+/* =====================================================
+   DESKTOP NAVIGATION
+===================================================== */
+
+.navbar__desktop {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex: 1;
+
+}
+
+/* =====================================================
+   MENU
+===================================================== */
 
 .navbar__menu {
 
   display: flex;
+
   align-items: center;
-  gap: 38px;
+
+  justify-content: center;
+
+  gap: 2.25rem;
+
+  margin: 0;
+
+  padding: 0;
+
+  list-style: none;
 
 }
 
-.navbar__menu a {
+/* =====================================================
+   MENU ITEM
+===================================================== */
+
+.navbar__item {
+
+  display: flex;
+
+  align-items: center;
+
+}
+
+/* =====================================================
+   LINK
+===================================================== */
+
+.navbar__link {
 
   position: relative;
+
+  display: flex;
+
+  align-items: center;
 
   text-decoration: none;
 
   color: var(--color-text);
 
+  font-size: .98rem;
+
   font-weight: 600;
 
-  transition: .35s ease;
+  letter-spacing: .2px;
 
-  padding: 8px 0;
+  padding: 10px 0;
 
-}
-
-.navbar__menu a:hover{
-
-  color:var(--color-primary);
-
-  transform:translateY(-2px);
+  transition:
+    color .3s ease,
+    transform .3s ease;
 
 }
 
-/* Animated underline */
+.navbar__link:hover {
 
-.navbar__menu a::after{
+  color: var(--color-primary);
 
-content:"";
-
-position:absolute;
-
-left:50%;
-
-bottom:-8px;
-
-width:0;
-
-height:3px;
-
-border-radius:999px;
-
-background:linear-gradient(
-90deg,
-#2563eb,
-#4f46e5
-);
-
-transition:.35s ease;
-
-transform:translateX(-50%);
+  transform: translateY(-2px);
 
 }
 
-.navbar__menu a:hover::after {
-
-  width: 80%;
-
-}
-
-/* Active link */
-
-.navbar__menu a.active {
+.navbar__link.active {
 
   color: var(--color-primary);
 
 }
 
-.navbar__menu a.active::after {
+/* =====================================================
+   UNDERLINE
+===================================================== */
 
-  width: 80%;
+.navbar__link::after {
 
-}
+  content: "";
 
-.navbar__cta {
+  position: absolute;
 
-  display: flex;
+  left: 0;
 
-  align-items: center;
+  bottom: -.35rem;
 
-}
+  width: 0;
 
-.navbar__cta a {
-
-  padding: 14px 28px;
+  height: 2px;
 
   border-radius: 999px;
 
-  background: linear-gradient(
-    135deg,
-    #2563eb,
-    #4f46e5
-  );
+  background: var(--color-primary);
 
-  color: white;
-
-  text-decoration: none;
-
-  font-weight: 700;
-
-  transition: .35s ease;
-
-  box-shadow: 0 12px 30px rgba(37,99,235,.20);
+  transition: .3s ease;
 
 }
 
-.navbar__cta a:hover{
+.navbar__link:hover::after,
 
-  transform:
+.navbar__link.active::after {
 
-  translateY(-3px)
-
-  scale(1.02);
-
-  box-shadow:
-
-  0 22px 40px rgba(37,99,235,.30);
+  width: 100%;
 
 }
 
-.navbar__menu a.active{
+/* =====================================================
+   CTA BUTTON
+===================================================== */
 
-  color:#2563eb;
+.navbar__cta {
 
-  font-weight:700;
+  @include button-primary;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 14px 26px;
+
+  font-size: .95rem;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  border-radius: 14px;
+
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease,
+    background .35s ease,
+    color .35s ease;
 
 }
 
-.navbar__menu a.active::after{
+.navbar__cta:hover {
 
-  width:80%;
+  transform: translateY(-3px);
+
+  box-shadow: 0 18px 35px rgba(29,78,216,.22);
 
 }
 
-.navbar__menu a.active{
+.navbar__cta-icon {
 
-  text-shadow:
+  font-size: 1rem;
 
-  0 0 12px rgba(37,99,235,.18);
+  transition: transform .35s ease;
+
+}
+
+.navbar__cta:hover .navbar__cta-icon {
+
+  transform: translateX(5px);
+
+}
+
+/* =====================================================
+   LARGE DESKTOP
+===================================================== */
+
+@media (max-width: 1400px) {
+
+  .navbar__menu {
+
+    gap: 2rem;
+
+  }
+
+}
+
+/* =====================================================
+   DESKTOP
+===================================================== */
+
+@media (max-width: 1200px) {
+
+  .navbar__menu {
+
+    gap: 1.6rem;
+
+  }
+
+  .navbar__link {
+
+    font-size: .92rem;
+
+  }
 
 }

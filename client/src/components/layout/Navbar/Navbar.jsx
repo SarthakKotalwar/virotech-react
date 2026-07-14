@@ -7,21 +7,50 @@ import MobileMenu from "./MobileMenu";
 import useNavbar from "./useNavbar";
 
 export default function Navbar() {
-  const { scrolled } = useNavbar();
+
+  const {
+    scrolled,
+    mobileOpen,
+    setMobileOpen,
+  } = useNavbar();
 
   return (
-    <header className={`navbar ${scrolled ? "navbar--scrolled" : ""}`}>
+
+    <header
+      className={`navbar ${
+        scrolled ? "navbar--scrolled" : ""
+      }`}
+    >
+
       <div className="navbar__wrapper">
 
-        <NavbarLogo />
+        <div className="navbar__left">
 
-        <DesktopMenu />
+          <NavbarLogo />
 
-        <CTAButton />
+        </div>
 
-        <MobileMenu />
+        <div className="navbar__center">
+
+          <DesktopMenu />
+
+        </div>
+
+        <div className="navbar__right">
+
+          <CTAButton />
+
+          <MobileMenu
+            mobileOpen={mobileOpen}
+            setMobileOpen={setMobileOpen}
+          />
+
+        </div>
 
       </div>
+
     </header>
+
   );
+
 }

@@ -6,10 +6,11 @@ export default function CTAButton() {
     <Link
       to="/contact"
       className="navbar__cta"
+      aria-label="Start your project with Virotech Technologies"
     >
-      Start Project
+      <span>Start Project</span>
 
-      <FiArrowRight />
+      <FiArrowRight className="navbar__cta-icon" />
     </Link>
   );
 }
