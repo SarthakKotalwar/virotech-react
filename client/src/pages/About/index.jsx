@@ -12,31 +12,55 @@ import Statistics from "../../components/about/Statistics/Statistics";
 import CTA from "../../components/about/CTA/CTA";
 import WhyChoose from "../../components/about/WhyChoose/WhyChoose";
 
+import Reveal from "../../components/common/Reveal/Reveal";
+
 export default function About() {
   return (
     <main className="about-page">
 
-      <Hero />
+      <Reveal>
+        <Hero />
+      </Reveal>
 
-      <Overview />
+      <Reveal delay={0.05}>
+        <Overview />
+      </Reveal>
 
-      <VisionMission />
+      <Reveal delay={0.10}>
+        <VisionMission />
+      </Reveal>
 
-      <Values />
+      <Reveal delay={0.15}>
+        <Values />
+      </Reveal>
 
-      <WhyChoose />
+      <Reveal delay={0.20}>
+        <WhyChoose />
+      </Reveal>
 
-      <Technology />
+      <Reveal delay={0.25}>
+        <Technology />
+      </Reveal>
 
-      <Journey />
+      <Reveal delay={0.30}>
+        <Journey />
+      </Reveal>
 
-      <Industries />
+      <Reveal delay={0.35}>
+        <Industries />
+      </Reveal>
 
-      <Process />
+      <Reveal delay={0.40}>
+        <Process />
+      </Reveal>
 
-      <Statistics />
+      <Reveal delay={0.45}>
+        <Statistics />
+      </Reveal>
 
-      <CTA />
+      <Reveal delay={0.50}>
+        <CTA />
+      </Reveal>
 
     </main>
   );
