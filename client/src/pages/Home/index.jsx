@@ -16,51 +16,42 @@ export default function Home() {
     <>
       <Reveal>
         <Hero />
-         <div className="section-divider"></div>
       </Reveal>
 
       <Reveal delay={0.05}>
         <Services />
-         <div className="section-divider"></div>
       </Reveal>
 
       <Reveal delay={0.10}>
         <About />
-         <div className="section-divider"></div>
       </Reveal>
 
       <Reveal delay={0.15}>
         <Process />
-         <div className="section-divider"></div>
       </Reveal>
 
       <Reveal delay={0.20}>
         <Portfolio />
-         <div className="section-divider"></div>
       </Reveal>
 
       <Reveal delay={0.25}>
         <Stats />
-         <div className="section-divider"></div>
       </Reveal>
 
       <Reveal delay={0.25}>
         <Testimonials />
-         <div className="section-divider"></div>
       </Reveal>
 
       <Reveal delay={0.35}>
         <FAQ />
-         <div className="section-divider"></div>
       </Reveal>
 
       <Reveal delay={0.30}>
         <Clients />
-         <div className="section-divider"></div>
       </Reveal>
 
       <Reveal delay={0.40}>
-        <ContactCTA />    
+        <ContactCTA />
       </Reveal>
     </>
   );

@@ -1,0 +1,354 @@
+@use "../../../assets/scss/abstracts/mixins" as *;
+
+/* =====================================================
+   ABOUT HERO
+===================================================== */
+
+.about-hero{
+
+  position: relative;
+
+  overflow: hidden;
+
+  padding: 170px 0 120px;
+
+  background:
+    radial-gradient(circle at top right,
+      rgba(37,99,235,.08),
+      transparent 35%),
+    radial-gradient(circle at bottom left,
+      rgba(37,99,235,.05),
+      transparent 40%),
+    var(--color-background);
+
+}
+
+/* =====================================================
+   GRID
+===================================================== */
+
+.about-hero__grid{
+
+  display:grid;
+
+  grid-template-columns:1.05fr .95fr;
+
+  align-items:center;
+
+  gap:70px;
+
+}
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.about-hero__content{
+
+  display:flex;
+
+  flex-direction:column;
+
+}
+
+.about-hero__badge{
+
+  display:inline-flex;
+
+  align-self:flex-start;
+
+  padding:8px 18px;
+
+  margin-bottom:22px;
+
+  border-radius:999px;
+
+  background:rgba(37,99,235,.08);
+
+  color:var(--color-primary);
+
+  font-size:.82rem;
+
+  font-weight:700;
+
+  letter-spacing:1px;
+
+}
+
+.about-hero__content h1{
+
+  font-size:clamp(2.7rem,5vw,4.6rem);
+
+  line-height:1.12;
+
+  color:var(--color-secondary);
+
+  margin-bottom:28px;
+
+}
+
+.about-hero__content p{
+
+  max-width:640px;
+
+  font-size:1.08rem;
+
+  line-height:1.9;
+
+  color:var(--color-text-light);
+
+  margin-bottom:42px;
+
+}
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.about-hero__buttons{
+
+  display:flex;
+
+  gap:18px;
+
+  flex-wrap:wrap;
+
+}
+
+.about-hero__buttons .btn-primary{
+
+  @include button-primary;
+}
+
+.about-hero__buttons .btn-outline{
+
+  @include button-outline;
+}
+
+/* =====================================================
+   RIGHT SIDE
+===================================================== */
+
+.about-hero__visual{
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+}
+
+.about-hero__illustration{
+
+  width:100%;
+
+  max-width:500px;
+
+  min-height:420px;
+
+  border-radius:32px;
+
+  @include glass;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:center;
+
+  align-items:center;
+
+  text-align:center;
+
+  padding:50px;
+
+  box-shadow:var(--shadow-lg);
+
+}
+
+.about-hero__illustration h3{
+
+  font-size:2rem;
+
+  color:var(--color-primary);
+
+  margin-bottom:18px;
+
+}
+
+.about-hero__illustration span{
+
+  font-size:1rem;
+
+  color:var(--color-text-light);
+
+}
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.about-hero__stats{
+
+  display:grid;
+
+  grid-template-columns:repeat(4,1fr);
+
+  gap:26px;
+
+  margin-top:90px;
+
+}
+
+.about-stat-card{
+
+  @include card;
+
+  padding:34px 24px;
+
+  text-align:center;
+
+}
+
+.about-stat-card h3{
+
+  font-size:2.2rem;
+
+  color:var(--color-primary);
+
+  margin-bottom:10px;
+
+}
+
+.about-stat-card p{
+
+  color:var(--color-text-light);
+
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:1024px){
+
+  .about-hero{
+
+    padding:150px 0 100px;
+
+  }
+
+  .about-hero__grid{
+
+    grid-template-columns:1fr;
+
+    gap:55px;
+
+  }
+
+  .about-hero__content{
+
+    text-align:center;
+
+    align-items:center;
+
+  }
+
+  .about-hero__badge{
+
+    align-self:center;
+
+  }
+
+  .about-hero__content p{
+
+    max-width:760px;
+
+  }
+
+  .about-hero__illustration{
+
+    max-width:650px;
+
+    min-height:360px;
+
+  }
+
+}
+
+@media(max-width:768px){
+
+  .about-hero{
+
+    padding:135px 0 90px;
+
+  }
+
+  .about-hero__buttons{
+
+    justify-content:center;
+
+  }
+
+  .about-hero__stats{
+
+    grid-template-columns:repeat(2,1fr);
+
+  }
+
+}
+
+@media(max-width:576px){
+
+  .about-hero{
+
+    padding:120px 0 80px;
+
+  }
+
+  .about-hero__content h1{
+
+    font-size:2.3rem;
+
+  }
+
+  .about-hero__content p{
+
+    font-size:1rem;
+
+  }
+
+  .about-hero__buttons{
+
+    flex-direction:column;
+
+    width:100%;
+
+  }
+
+  .about-hero__buttons a{
+
+    width:100%;
+
+    justify-content:center;
+
+  }
+
+  .about-hero__stats{
+
+    grid-template-columns:1fr;
+
+    gap:18px;
+
+  }
+
+  .about-hero__illustration{
+
+    min-height:300px;
+
+    padding:35px;
+
+  }
+
+}

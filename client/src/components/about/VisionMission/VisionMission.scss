@@ -1,0 +1,200 @@
+@use "../../../assets/scss/abstracts/mixins" as *;
+
+/* ==========================================
+   VISION & MISSION
+========================================== */
+
+.vision-mission {
+  position: relative;
+  overflow: hidden;
+
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f8fbff 100%
+  );
+}
+
+/* ==========================================
+   BACKGROUND GLOW
+========================================== */
+
+.vision-mission::before {
+  content: "";
+
+  position: absolute;
+
+  width: 420px;
+  height: 420px;
+
+  left: -180px;
+  bottom: -150px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    rgba(37, 99, 235, 0.08),
+    transparent 70%
+  );
+
+  pointer-events: none;
+}
+
+/* ==========================================
+   VISION & MISSION GRID
+   Wider cards with original vertical sizing
+========================================== */
+
+.vision-mission .about-grid {
+  display: grid;
+
+  /* Makes both cards wider */
+  grid-template-columns: repeat(2, minmax(380px, 1fr));
+
+  /* Horizontal gap between cards */
+  gap: 30px;
+
+  /* Keeps the entire group centered */
+  max-width: 1050px;
+  margin: 0 auto;
+}
+
+/* ==========================================
+   CARD
+========================================== */
+
+.vision-card {
+  position: relative;
+
+  /* Original vertical sizing */
+  min-height: 0;
+
+  /* Horizontal width controlled by grid */
+  width: 100%;
+
+  /* Keep content balanced */
+  padding: 30px;
+}
+
+/* ==========================================
+   CARD TITLE
+========================================== */
+
+.vision-card h3 {
+  margin-bottom: 18px;
+
+  font-size: 1.55rem;
+
+  color: var(--color-secondary);
+}
+
+/* ==========================================
+   CARD DESCRIPTION
+========================================== */
+
+.vision-card p {
+  color: var(--color-text-light);
+
+  line-height: 1.9;
+
+  margin: 0;
+}
+
+/* ==========================================
+   ICON
+========================================== */
+
+.vision-card .about-card__icon {
+  transition:
+    transform 0.35s ease,
+    background 0.35s ease;
+}
+
+.vision-card:hover .about-card__icon {
+  transform: rotate(-8deg) scale(1.08);
+}
+
+/* ==========================================
+   HOVER EFFECT
+========================================== */
+
+.vision-card:hover {
+  transform: translateY(-7px);
+}
+
+/* ==========================================
+   LARGE DESKTOP
+========================================== */
+
+@media (min-width: 1200px) {
+
+  .vision-mission .about-grid {
+    max-width: 1100px;
+    grid-template-columns: repeat(
+      2,
+      minmax(480px, 1fr)
+    );
+  }
+
+}
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 992px) {
+
+  .vision-mission .about-grid {
+    grid-template-columns: repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+    max-width: 900px;
+
+    gap: 24px;
+  }
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 768px) {
+
+  .vision-mission .about-grid {
+    grid-template-columns: 1fr;
+
+    max-width: 600px;
+
+    gap: 20px;
+  }
+
+  .vision-card {
+    text-align: center;
+
+    padding: 30px;
+  }
+
+  .vision-card .about-card__icon {
+    margin: 0 auto 24px;
+  }
+
+}
+
+/* ==========================================
+   SMALL MOBILE
+========================================== */
+
+@media (max-width: 576px) {
+
+  .vision-card {
+    padding: 26px 22px;
+  }
+
+  .vision-card h3 {
+    font-size: 1.35rem;
+  }
+
+}

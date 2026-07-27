@@ -1,0 +1,194 @@
+@use "../../assets/scss/abstracts/mixins" as *;
+
+/* =====================================================
+   ABOUT DESIGN SYSTEM
+===================================================== */
+
+@use "../../components/about/styles/aboutLayout";
+@use "../../components/about/styles/aboutCards";
+@use "../../components/about/styles/aboutDivider";
+@use "../../components/about/styles/aboutResponsive";
+
+
+/* =====================================================
+   ABOUT PAGE
+===================================================== */
+
+.about-page {
+
+  overflow: hidden;
+
+  background: var(--color-background);
+
+}
+
+
+/* =====================================================
+   ABOUT PAGE SECTION SYSTEM
+   Matches Homepage global spacing
+===================================================== */
+
+.about-page section {
+
+  position: relative;
+
+  padding-top: 64px;
+  padding-bottom: 52px;
+
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.about-container {
+
+  @include container;
+
+}
+
+
+/* =====================================================
+   SECTION HEADER
+===================================================== */
+
+.about-section-header {
+
+  width: 100%;
+
+  max-width: 760px;
+
+  margin: 0 auto 42px;
+
+  text-align: center;
+
+}
+
+
+/* =====================================================
+   SECTION TAG
+===================================================== */
+
+.about-section-tag {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 8px 18px;
+
+  border-radius: 999px;
+
+  background: rgba(37, 99, 235, 0.08);
+
+  color: var(--color-primary);
+
+  font-size: 0.82rem;
+
+  font-weight: 600;
+
+  line-height: 1;
+
+  margin-bottom: 18px;
+
+}
+
+
+/* =====================================================
+   SECTION TITLE
+===================================================== */
+
+.about-section-header h2 {
+
+  font-size: clamp(2rem, 4vw, 3.2rem);
+
+  line-height: 1.15;
+
+  margin: 0 0 18px;
+
+  color: var(--color-secondary);
+
+}
+
+
+/* =====================================================
+   SECTION DESCRIPTION
+===================================================== */
+
+.about-section-header p {
+
+  max-width: 680px;
+
+  margin: 0 auto;
+
+  font-size: 1.05rem;
+
+  color: var(--color-text-light);
+
+  line-height: 1.8;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1024px) {
+
+  .about-page section {
+
+    padding-top: 58px;
+
+    padding-bottom: 46px;
+
+  }
+
+  .about-section-header {
+
+    margin-bottom: 38px;
+
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  .about-page section {
+
+    padding-top: 50px;
+
+    padding-bottom: 40px;
+
+  }
+
+  .about-section-header {
+
+    margin-bottom: 34px;
+
+  }
+
+}
+
+
+@media (max-width: 480px) {
+
+  .about-page section {
+
+    padding-top: 44px;
+
+    padding-bottom: 34px;
+
+  }
+
+  .about-section-header {
+
+    margin-bottom: 30px;
+
+  }
+
+}

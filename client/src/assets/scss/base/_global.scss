@@ -1,51 +1,89 @@
 @use "../abstracts/mixins" as *;
 
-body{
-    background:var(--color-background);
-    color:var(--color-text);
-}
-
-section{
-    @include section;
-}
-
-.container{
-    @include container;
-}
-
-.main-content{
-    padding-top:120px;
-    min-height:100vh;
-}
-
 /* =====================================================
-   SECTION DIVIDER
+   GLOBAL BASE
 ===================================================== */
 
-.section-divider {
-  width: 100%;
-  max-width: 180px;
-  height: 2px;
+body {
+  background: var(--color-background);
+  color: var(--color-text);
 
-  margin: 80px auto;
-
-  border-radius: 999px;
-
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(37, 99, 235, 0.18),
-    rgba(37, 99, 235, 0.45),
-    rgba(37, 99, 235, 0.18),
-    transparent
-  );
+  margin: 0;
 }
 
+
 /* =====================================================
-   GLOBAL SECTION SPACING
+   GLOBAL CONTAINER
+===================================================== */
+
+.container {
+  @include container;
+}
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.main-content {
+  min-height: 100vh;
+
+  padding-top: 120px;
+}
+
+
+/* =====================================================
+   GLOBAL SECTION SYSTEM
+   Consistent compact spacing across the website
 ===================================================== */
 
 section {
   position: relative;
-  padding: 110px 0;
+
+  padding-top: 64px;
+  padding-bottom: 52px;
+}
+
+
+/* =====================================================
+   SECTION SPACING
+   Prevent unnecessary vertical gaps between sections
+===================================================== */
+
+section + section {
+  margin-top: 0;
+}
+
+
+/* =====================================================
+   RESPONSIVE SECTION SPACING
+===================================================== */
+
+@media (max-width: 1024px) {
+
+  section {
+    padding-top: 58px;
+    padding-bottom: 46px;
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  section {
+    padding-top: 50px;
+    padding-bottom: 40px;
+  }
+
+}
+
+
+@media (max-width: 480px) {
+
+  section {
+    padding-top: 44px;
+    padding-bottom: 34px;
+  }
+
 }

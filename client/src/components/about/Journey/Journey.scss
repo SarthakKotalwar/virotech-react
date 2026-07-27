@@ -1,0 +1,491 @@
+@use "../../../assets/scss/abstracts/mixins" as *;
+
+/* =====================================================
+   JOURNEY SECTION
+===================================================== */
+
+.journey{
+
+  position: relative;
+
+  overflow: hidden;
+
+  background: linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #f8fbff 100%
+  );
+
+}
+
+/* =====================================================
+   BACKGROUND GLOW
+===================================================== */
+
+.journey::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:500px;
+
+  height:500px;
+
+  left:-220px;
+
+  top:-180px;
+
+  border-radius:50%;
+
+  background:
+  radial-gradient(
+      rgba(37,99,235,.08),
+      transparent 72%
+  );
+
+}
+
+.journey::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:420px;
+
+  height:420px;
+
+  right:-180px;
+
+  bottom:-180px;
+
+  border-radius:50%;
+
+  background:
+  radial-gradient(
+      rgba(59,130,246,.06),
+      transparent 72%
+  );
+
+}
+
+/* =====================================================
+   TIMELINE
+===================================================== */
+
+.journey__timeline{
+
+  position:relative;
+
+  margin-top:90px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:70px;
+
+}
+
+/* =====================================================
+   CENTER LINE
+===================================================== */
+
+.journey__timeline::before{
+
+  content:"";
+
+  position:absolute;
+
+  left:50%;
+
+  top:0;
+
+  transform:translateX(-50%);
+
+  width:5px;
+
+  height:100%;
+
+  border-radius:100px;
+
+  background:
+
+  linear-gradient(
+
+      180deg,
+
+      #2563eb,
+
+      #3b82f6,
+
+      #60a5fa
+
+  );
+
+  box-shadow:
+
+      0 0 22px rgba(37,99,235,.25);
+
+}
+
+/* =====================================================
+   TIMELINE ITEM
+===================================================== */
+
+.journey-item{
+
+  position:relative;
+
+  display:flex;
+
+  align-items:center;
+
+  width:100%;
+
+}
+
+.journey-item--left{
+
+  justify-content:flex-start;
+
+}
+
+.journey-item--right{
+
+  justify-content:flex-end;
+
+}
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.journey-item__card{
+
+  width:calc(50% - 70px);
+
+  position:relative;
+
+  z-index:2;
+
+}
+
+/* =====================================================
+   NODE
+===================================================== */
+
+.journey-item__node{
+
+  position:absolute;
+
+  left:50%;
+
+  transform:translateX(-50%);
+
+  width:84px;
+
+  height:84px;
+
+  border-radius:50%;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:#ffffff;
+
+  border:5px solid #2563eb;
+
+  box-shadow:
+
+      0 15px 40px rgba(37,99,235,.18);
+
+  z-index:5;
+
+}
+
+/* =====================================================
+   ICON
+===================================================== */
+
+.journey-item__icon{
+
+  width:58px;
+
+  height:58px;
+
+  border-radius:50%;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  color:#ffffff;
+
+  background:
+
+  linear-gradient(
+
+      135deg,
+
+      #2563eb,
+
+      #3b82f6
+
+  );
+
+  font-size:1.45rem;
+
+  transition:.35s ease;
+
+}
+
+.journey-item:hover .journey-item__icon{
+
+  transform:rotate(-10deg) scale(1.12);
+
+}
+
+/* =====================================================
+   YEAR BADGE
+===================================================== */
+
+.journey-item__year{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:8px 20px;
+
+  border-radius:999px;
+
+  margin-bottom:22px;
+
+  background:
+
+  linear-gradient(
+
+      135deg,
+
+      #2563eb,
+
+      #3b82f6
+
+  );
+
+  color:#ffffff;
+
+  font-weight:700;
+
+  font-size:.85rem;
+
+  letter-spacing:.6px;
+
+}
+
+/* =====================================================
+   TYPOGRAPHY
+===================================================== */
+
+.journey-item__card h3{
+
+  margin-bottom:18px;
+
+  font-size:1.55rem;
+
+  color:var(--color-secondary);
+
+}
+
+.journey-item__card p{
+
+  color:var(--color-text-light);
+
+  line-height:1.9;
+
+}
+
+/* =====================================================
+   HOVER
+===================================================== */
+
+.journey-item:hover .about-card{
+
+  transform:translateY(-10px);
+
+}
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media(max-width:992px){
+
+  .journey__timeline::before{
+
+      left:40px;
+
+  }
+
+  .journey-item{
+
+      justify-content:flex-start;
+
+      padding-left:95px;
+
+  }
+
+  .journey-item__card{
+
+      width:100%;
+
+  }
+
+  .journey-item__node{
+
+      left:40px;
+
+      transform:none;
+
+      width:72px;
+
+      height:72px;
+
+  }
+
+  .journey-item__icon{
+
+      width:50px;
+
+      height:50px;
+
+      font-size:1.2rem;
+
+  }
+
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:768px){
+
+  .journey__timeline{
+
+      gap:45px;
+
+  }
+
+  .journey-item{
+
+      padding-left:78px;
+
+  }
+
+  .journey__timeline::before{
+
+      left:30px;
+
+      width:4px;
+
+  }
+
+  .journey-item__node{
+
+      left:30px;
+
+      width:60px;
+
+      height:60px;
+
+      border-width:4px;
+
+  }
+
+  .journey-item__icon{
+
+      width:42px;
+
+      height:42px;
+
+      font-size:1rem;
+
+  }
+
+  .journey-item__card{
+
+      width:100%;
+
+  }
+
+  .journey-item__card h3{
+
+      font-size:1.35rem;
+
+  }
+
+}
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media(max-width:480px){
+
+  .journey{
+
+      overflow:hidden;
+
+  }
+
+  .journey-item{
+
+      padding-left:65px;
+
+  }
+
+  .journey__timeline::before{
+
+      left:24px;
+
+  }
+
+  .journey-item__node{
+
+      left:24px;
+
+      width:52px;
+
+      height:52px;
+
+  }
+
+  .journey-item__icon{
+
+      width:36px;
+
+      height:36px;
+
+      font-size:.9rem;
+
+  }
+
+  .journey-item__year{
+
+      font-size:.75rem;
+
+      padding:7px 16px;
+
+  }
+
+}

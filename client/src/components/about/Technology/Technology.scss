@@ -1,0 +1,175 @@
+@use "../../../assets/scss/abstracts/mixins" as *;
+
+/* ==========================================
+   TECHNOLOGY
+========================================== */
+
+.technology{
+
+  position:relative;
+
+  overflow:hidden;
+
+  background:
+  linear-gradient(
+      180deg,
+      #ffffff,
+      #f8fbff
+  );
+
+}
+
+/* ==========================================
+   BACKGROUND GLOW
+========================================== */
+
+.technology::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:420px;
+
+  height:420px;
+
+  left:-180px;
+
+  top:-150px;
+
+  border-radius:50%;
+
+  background:
+  radial-gradient(
+      rgba(37,99,235,.08),
+      transparent 70%
+  );
+
+}
+
+/* ==========================================
+   CARD
+========================================== */
+
+.technology-card{
+
+  display:flex;
+
+  flex-direction:column;
+
+}
+
+.technology-card h3{
+
+  font-size:1.45rem;
+
+  margin-bottom:26px;
+
+  color:var(--color-secondary);
+
+}
+
+/* ==========================================
+   TAGS
+========================================== */
+
+.technology-tags{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:12px;
+
+  margin-top:auto;
+
+}
+
+.technology-tag{
+
+  padding:11px 18px;
+
+  border-radius:999px;
+
+  background:rgba(37,99,235,.08);
+
+  color:var(--color-primary);
+
+  font-size:.90rem;
+
+  font-weight:600;
+
+  transition:all .35s ease;
+
+  cursor:default;
+
+  border:1px solid transparent;
+
+}
+
+.technology-tag:hover{
+
+  transform:translateY(-3px);
+
+  background:var(--color-primary);
+
+  color:#ffffff;
+
+  border-color:rgba(37,99,235,.25);
+
+  box-shadow:
+      0 12px 25px rgba(37,99,235,.18);
+
+}
+
+/* ==========================================
+   CARD HOVER
+========================================== */
+
+.technology-card:hover{
+
+  transform:translateY(-10px);
+
+}
+
+.technology-card:hover h3{
+
+  color:var(--color-primary);
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:992px){
+
+  .about-grid{
+
+    grid-template-columns:repeat(2,minmax(0,1fr));
+
+  }
+
+}
+
+@media(max-width:768px){
+
+  .about-grid{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .technology-card{
+
+    text-align:center;
+
+  }
+
+  .technology-tags{
+
+    justify-content:center;
+
+  }
+
+}

@@ -1,0 +1,55 @@
+/* ==========================================
+   SECTION DIVIDER
+========================================== */
+
+.about-divider{
+
+  position:relative;
+
+  width:140px;
+
+  height:2px;
+
+  margin:90px auto;
+
+  background:
+
+  linear-gradient(
+
+  to right,
+
+  transparent,
+
+  rgba(37,99,235,.5),
+
+  transparent
+
+  );
+
+}
+
+.about-divider::before{
+
+  content:"";
+
+  position:absolute;
+
+  left:50%;
+
+  top:50%;
+
+  width:14px;
+
+  height:14px;
+
+  border-radius:50%;
+
+  background:#2563eb;
+
+  transform:translate(-50%,-50%);
+
+  box-shadow:
+
+  0 0 18px rgba(37,99,235,.45);
+
+}

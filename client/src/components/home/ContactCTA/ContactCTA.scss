@@ -1,224 +1,357 @@
 @use "../../../assets/scss/abstracts/mixins" as *;
 
-/* =====================================================
-   CONTACT CTA
-===================================================== */
+/* ==========================================================
+   CONTACT CTA SECTION
+========================================================== */
 
-.contact-cta{
-   @include card-glass;
-   position:relative;
-   padding: 20px 0;
-   text-align: center;
-   background:#f8fbff;
-   overflow:hidden;
+.contact-cta {
+  position: relative;
+
+  padding: 64px 0 52px;
+
+  background: #f8fbff;
+
+  overflow: hidden;
+
+  isolation: isolate;
 }
 
-/* Background Glow */
 
-.contact-cta::before{
+/* ==========================================================
+   BACKGROUND GLOW - BLUE
+========================================================== */
 
-content:"";
+.contact-cta::before {
+  content: "";
 
-position:absolute;
+  position: absolute;
 
-width:450px;
+  width: 450px;
 
-height:450px;
+  height: 450px;
 
-background:#2563eb22;
+  top: -180px;
 
-border-radius:50%;
+  right: -120px;
 
-filter:blur(120px);
+  border-radius: 50%;
 
-top:-150px;
+  background: rgba(37, 99, 235, 0.12);
 
-right:-120px;
+  filter: blur(120px);
 
-z-index:0;
+  pointer-events: none;
+
+  z-index: -1;
+}
+
+
+/* ==========================================================
+   BACKGROUND GLOW - PURPLE
+========================================================== */
+
+.contact-cta::after {
+  content: "";
+
+  position: absolute;
+
+  width: 350px;
+
+  height: 350px;
+
+  bottom: -150px;
+
+  left: -100px;
+
+  border-radius: 50%;
+
+  background: rgba(124, 58, 237, 0.08);
+
+  filter: blur(100px);
+
+  pointer-events: none;
+
+  z-index: -1;
+}
+
+
+/* ==========================================================
+   CTA CONTENT CARD
+========================================================== */
+
+.contact-cta__content {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  padding: 58px 50px;
+
+  border-radius: 28px;
+
+  @include glass;
+
+  background: rgba(255, 255, 255, 0.78);
+
+  backdrop-filter: blur(18px);
+
+  -webkit-backdrop-filter: blur(18px);
+
+  text-align: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.65);
+
+  box-shadow:
+    0 24px 55px rgba(15, 23, 42, 0.07);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+
+/* ==========================================================
+   CTA CARD HOVER
+========================================================== */
+
+.contact-cta__content:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 30px 65px rgba(15, 23, 42, 0.10);
+}
+
+
+/* ==========================================================
+   SECTION TAG
+========================================================== */
+
+.contact-cta .section-tag {
+  margin-bottom: 20px;
+}
+
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.contact-cta h2 {
+  max-width: 850px;
+
+  margin: 0 auto 18px;
+
+  color: #0f172a;
+
+  font-size: clamp(2.3rem, 4.8vw, 3.6rem);
+
+  font-weight: 800;
+
+  line-height: 1.12;
+
+  letter-spacing: -0.02em;
+}
+
+
+/* ==========================================================
+   DESCRIPTION
+========================================================== */
+
+.contact-cta p {
+  max-width: 700px;
+
+  margin: 0 auto;
+
+  color: #667085;
+
+  font-size: 1.05rem;
+
+  line-height: 1.8;
+}
+
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+.contact-cta__buttons {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 16px;
+
+  margin-top: 32px;
+}
+
+
+/* ==========================================================
+   FLOATING CIRCLES
+========================================================== */
+
+.contact-cta__circle {
+  position: absolute;
+
+  z-index: 1;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #7c3aed
+    );
+
+  opacity: 0.07;
+
+  pointer-events: none;
+
+  animation:
+    ctaFloat 7s ease-in-out infinite;
+}
+
+
+.contact-cta__circle--one {
+  width: 120px;
+
+  height: 120px;
+
+  top: 40px;
+
+  left: 60px;
+}
+
+
+.contact-cta__circle--two {
+  width: 180px;
+
+  height: 180px;
+
+  right: 50px;
+
+  bottom: 35px;
+
+  animation-delay: -2s;
+}
+
+
+/* ==========================================================
+   ANIMATION
+========================================================== */
+
+@keyframes ctaFloat {
+
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
 
 }
 
-.contact-cta::after{
 
-content:"";
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
 
-position:absolute;
+@media (max-width: 992px) {
 
-width:350px;
+  .contact-cta {
+    padding: 58px 0 46px;
+  }
 
-height:350px;
+  .contact-cta__content {
+    padding: 50px 40px;
 
-background:#7c3aed15;
-
-border-radius:50%;
-
-filter:blur(100px);
-
-bottom:-120px;
-
-left:-100px;
-
-z-index:0;
+    border-radius: 26px;
+  }
 
 }
 
-/* Card */
 
-.contact-cta__content{
+@media (max-width: 768px) {
 
-position:relative;
+  .contact-cta {
+    padding: 48px 0 40px;
+  }
 
-z-index:2;
+  .contact-cta__content {
+    padding: 44px 28px;
 
-max-width:1100px;
+    border-radius: 24px;
+  }
 
-margin:auto;
+  .contact-cta h2 {
+    font-size: 2.3rem;
+  }
 
-padding:70px;
+  .contact-cta__buttons {
+    flex-direction: column;
 
-border-radius:32px;
+    width: 100%;
+  }
 
-@include glass;
+  .contact-cta__buttons a,
+  .contact-cta__buttons button {
+    width: 100%;
+  }
 
-background:rgba(255,255,255,.78);
+  .contact-cta__circle--one {
+    width: 80px;
 
-backdrop-filter:blur(18px);
+    height: 80px;
 
-text-align:center;
+    left: 20px;
 
-box-shadow:
+    top: 25px;
+  }
 
-0 25px 60px rgba(15,23,42,.08);
+  .contact-cta__circle--two {
+    width: 110px;
 
-}
+    height: 110px;
 
-/* Tag */
+    right: 20px;
 
-.contact-cta .section-tag{
-
-margin-bottom:24px;
-
-}
-
-/* Title */
-
-.contact-cta h2{
-
-font-size:clamp(2.5rem,5vw,3.6rem);
-
-font-weight:800;
-
-line-height:1.1;
-
-margin-bottom:20px;
-
-color:#0f172a;
+    bottom: 20px;
+  }
 
 }
 
-/* Description */
 
-.contact-cta p{
+@media (max-width: 480px) {
 
-font-size:1.1rem;
+  .contact-cta {
+    padding: 42px 0 34px;
+  }
 
-line-height:1.8;
+  .contact-cta__content {
+    padding: 36px 20px;
 
-max-width:700px;
+    border-radius: 20px;
+  }
 
-margin:auto;
+  .contact-cta h2 {
+    font-size: 2rem;
+  }
 
-color:#667085;
-
-}
-
-/* Buttons */
-
-.contact-cta__buttons{
-
-display:flex;
-
-justify-content:center;
-
-gap:20px;
-
-margin-top:40px;
-
-flex-wrap:wrap;
-
-}
-
-/* Floating circles */
-
-.contact-cta__circle{
-
-position:absolute;
-
-border-radius:50%;
-
-background:linear-gradient(
-
-135deg,
-
-#2563eb,
-
-#7c3aed
-
-);
-
-opacity:.08;
-
-}
-
-.contact-cta__circle--one{
-
-width:120px;
-
-height:120px;
-
-top:40px;
-
-left:60px;
-
-}
-
-.contact-cta__circle--two{
-
-width:180px;
-
-height:180px;
-
-bottom:35px;
-
-right:50px;
-
-}
-
-@media(max-width:768px){
-
-.contact-cta{
-
-padding:90px 0;
-
-}
-
-.contact-cta__content{
-
-padding:45px 28px;
-
-}
-
-.contact-cta__buttons{
-
-flex-direction:column;
-
-}
-
-.contact-cta h2{
-
-font-size:2.5rem;
-
-}
+  .contact-cta p {
+    font-size: 0.95rem;
+  }
 
 }

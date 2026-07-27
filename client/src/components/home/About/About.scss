@@ -5,8 +5,45 @@
 ========================================================== */
 
 .about {
-  padding: 20px 0;
-  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+
+  /*
+    Keep the section compact and aligned
+    with the About page spacing rhythm.
+  */
+  padding: 64px 0 56px;
+
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #fcfdff 100%
+  );
+}
+
+/* ==========================================================
+   END FADE
+========================================================== */
+
+.about__endfade {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 70px;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.7) 60%,
+    #ffffff 100%
+  );
+
+  z-index: 1;
 }
 
 /* ==========================================================
@@ -14,28 +51,49 @@
 ========================================================== */
 
 .about__container {
+  position: relative;
+
+  z-index: 2;
+
   display: grid;
+
   grid-template-columns: 1.1fr 0.9fr;
-  gap: 80px;
+
+  gap: 48px;
+
   align-items: center;
 }
 
 /* ==========================================================
-   LEFT
+   LEFT CONTENT
 ========================================================== */
 
 .about__left h2 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  line-height: 1.15;
-  margin: 24px 0;
+  font-size: clamp(
+    2.3rem,
+    4.8vw,
+    3.8rem
+  );
+
+  line-height: 1.12;
+
+  margin: 18px 0;
+
   color: #0f172a;
+
+  letter-spacing: -0.02em;
 }
 
 .about__left p {
-  font-size: 1.05rem;
-  line-height: 1.9;
+  font-size: 1.02rem;
+
+  line-height: 1.75;
+
   color: #667085;
-  margin-bottom: 35px;
+
+  margin-bottom: 26px;
+
+  max-width: 620px;
 }
 
 /* ==========================================================
@@ -44,18 +102,28 @@
 
 .about__features {
   list-style: none;
+
   padding: 0;
-  margin: 0 0 40px;
+
+  margin: 0 0 28px;
 }
 
 .about__features li {
   display: flex;
+
   align-items: center;
+
   gap: 12px;
-  margin-bottom: 18px;
+
+  margin-bottom: 14px;
+
   font-size: 1rem;
+
   color: #334155;
+
   font-weight: 500;
+
+  line-height: 1.5;
 }
 
 /* ==========================================================
@@ -64,41 +132,75 @@
 
 .about__right {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+
+  grid-template-columns: repeat(
+    2,
+    minmax(0, 1fr)
+  );
+
+  gap: 18px;
+
+  align-items: stretch;
 }
 
 /* ==========================================================
-   CARD
+   STAT CARD
 ========================================================== */
 
 .about-card {
   @include glass;
 
-  padding: 40px 30px;
-  border-radius: 22px;
-  text-align: center;
-  transition: all .35s ease;
+  display: flex;
 
-  box-shadow: 0 15px 35px rgba(0,0,0,.05);
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-height: 150px;
+
+  padding: 28px 22px;
+
+  border-radius: 20px;
+
+  text-align: center;
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.05);
 }
 
 .about-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 25px 60px rgba(0,0,0,.10);
+  transform: translateY(-6px);
+
+  box-shadow:
+    0 22px 45px rgba(0, 0, 0, 0.1);
 }
 
 .about-card h3 {
-  font-size: 2.5rem;
+  font-size: 2.1rem;
+
   color: var(--color-primary);
-  margin-bottom: 12px;
+
+  margin-bottom: 8px;
+
   font-weight: 800;
+
+  line-height: 1;
 }
 
 .about-card p {
   color: #667085;
-  font-size: .95rem;
+
+  font-size: 0.92rem;
+
   margin: 0;
+
+  line-height: 1.5;
 }
 
 /* ==========================================================
@@ -108,16 +210,24 @@
 @media (max-width: 992px) {
 
   .about {
-    padding: 90px 0;
+    padding: 58px 0 50px;
   }
 
   .about__container {
     grid-template-columns: 1fr;
-    gap: 60px;
+
+    gap: 40px;
   }
 
   .about__right {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(
+      2,
+      minmax(0, 1fr)
+    );
+  }
+
+  .about__endfade {
+    height: 60px;
   }
 
 }
@@ -125,15 +235,41 @@
 @media (max-width: 768px) {
 
   .about {
-    padding: 70px 0;
+    padding: 50px 0 44px;
   }
 
   .about__left h2 {
-    font-size: 2.4rem;
+    font-size: 2.2rem;
+  }
+
+  .about__left p {
+    margin-bottom: 22px;
+  }
+
+  .about__features {
+    margin-bottom: 22px;
   }
 
   .about__right {
     grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .about {
+    padding: 44px 0 38px;
+  }
+
+  .about-card {
+    min-height: 135px;
+
+    padding: 24px 20px;
+  }
+
+  .about-card h3 {
+    font-size: 1.9rem;
   }
 
 }

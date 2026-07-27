@@ -1,0 +1,142 @@
+@use "../../../assets/scss/abstracts/mixins" as *;
+
+/* =====================================================
+   INDUSTRIES
+===================================================== */
+
+.industries{
+
+  position:relative;
+
+  overflow:hidden;
+
+  background:
+  linear-gradient(
+      180deg,
+      #ffffff,
+      #f8fbff
+  );
+
+}
+
+/* =====================================================
+   BACKGROUND GLOW
+===================================================== */
+
+.industries::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:-180px;
+
+  right:-180px;
+
+  width:450px;
+
+  height:450px;
+
+  border-radius:50%;
+
+  background:
+  radial-gradient(
+      rgba(37,99,235,.08),
+      transparent 72%
+  );
+
+}
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.industry-card{
+
+  display:flex;
+
+  flex-direction:column;
+
+  height:100%;
+
+  transition:all .35s ease;
+
+}
+
+.industry-card h3{
+
+  font-size:1.4rem;
+
+  color:var(--color-secondary);
+
+  margin-bottom:18px;
+
+}
+
+.industry-card p{
+
+  color:var(--color-text-light);
+
+  line-height:1.9;
+
+  margin-top:auto;
+
+}
+
+/* =====================================================
+   ICON
+===================================================== */
+
+.industry-card:hover .about-card__icon{
+
+  transform:
+      rotate(-8deg)
+      scale(1.08);
+
+}
+
+/* =====================================================
+   CARD HOVER
+===================================================== */
+
+.industry-card:hover{
+
+  transform:translateY(-10px);
+
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:992px){
+
+  .about-grid{
+
+      grid-template-columns:repeat(2,minmax(0,1fr));
+
+  }
+
+}
+
+@media(max-width:768px){
+
+  .about-grid{
+
+      grid-template-columns:1fr;
+
+  }
+
+  .industry-card{
+
+      text-align:center;
+
+  }
+
+  .about-card__icon{
+
+      margin:0 auto 24px;
+
+  }
+
+}
