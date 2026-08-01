@@ -1,0 +1,235 @@
+@use "../../../assets/scss/abstracts/mixins" as *;
+
+/* ==========================================
+   ENTERPRISE SOLUTIONS
+========================================== */
+
+.enterprise-solutions {
+
+  position: relative;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #f8fbff 100%
+    );
+
+}
+
+
+/* ==========================================
+   BACKGROUND GLOW
+========================================== */
+
+.enterprise-solutions::before {
+
+  content: "";
+
+  position: absolute;
+
+  width: 420px;
+
+  height: 420px;
+
+  right: -180px;
+
+  top: 20%;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(37, 99, 235, 0.08),
+      transparent 70%
+    );
+
+  pointer-events: none;
+
+}
+
+
+/* ==========================================
+   GRID
+========================================== */
+
+.enterprise-solutions__grid {
+
+  position: relative;
+
+  z-index: 2;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 24px;
+
+}
+
+
+/* ==========================================
+   CARD
+========================================== */
+
+.enterprise-card {
+
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-height: 300px;
+
+  padding: 30px;
+
+  background:
+    rgba(255, 255, 255, 0.82);
+
+  backdrop-filter: blur(14px);
+
+  border:
+    1px solid
+    rgba(37, 99, 235, 0.06);
+
+  box-shadow:
+    0 12px 35px
+    rgba(15, 23, 42, 0.05);
+
+}
+
+
+/* ==========================================
+   CARD ICON
+========================================== */
+
+.enterprise-card .about-card__icon {
+
+  flex-shrink: 0;
+
+  margin-bottom: 24px;
+
+}
+
+
+/* ==========================================
+   CARD CONTENT
+========================================== */
+
+.enterprise-card__content {
+
+  flex: 1;
+
+}
+
+
+.enterprise-card h3 {
+
+  margin-bottom: 14px;
+
+  font-size: 1.35rem;
+
+  line-height: 1.35;
+
+  color:
+    var(--color-secondary);
+
+}
+
+
+.enterprise-card p {
+
+  margin: 0;
+
+  color:
+    var(--color-text-light);
+
+  line-height: 1.8;
+
+  font-size: 0.96rem;
+
+}
+
+
+/* ==========================================
+   HOVER
+========================================== */
+
+.enterprise-card:hover {
+
+  transform:
+    translateY(-7px);
+
+  box-shadow:
+    0 22px 50px
+    rgba(15, 23, 42, 0.09);
+
+}
+
+
+.enterprise-card:hover
+.about-card__icon {
+
+  transform:
+    translateY(-3px)
+    scale(1.05);
+
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 1024px) {
+
+  .enterprise-solutions__grid {
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  .enterprise-solutions__grid {
+
+    grid-template-columns:
+      1fr;
+
+    gap: 20px;
+
+  }
+
+  .enterprise-card {
+
+    min-height: auto;
+
+    padding: 28px;
+
+  }
+
+}
+
+
+@media (max-width: 576px) {
+
+  .enterprise-card {
+
+    padding: 26px;
+
+  }
+
+  .enterprise-card h3 {
+
+    font-size: 1.25rem;
+
+  }
+
+}

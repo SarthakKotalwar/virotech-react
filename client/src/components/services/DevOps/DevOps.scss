@@ -1,0 +1,472 @@
+@use "../../../assets/scss/abstracts/mixins" as *;
+
+/* =====================================================
+   DEVOPS & CI/CD SECTION
+===================================================== */
+
+.devops {
+
+  position: relative;
+
+  padding: 64px 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f8fbff 0%,
+      #ffffff 100%
+    );
+
+  overflow: hidden;
+
+}
+
+
+/* =====================================================
+   BACKGROUND GLOW
+===================================================== */
+
+.devops::before {
+
+  content: "";
+
+  position: absolute;
+
+  width: 460px;
+  height: 460px;
+
+  left: -220px;
+  top: -180px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(37, 99, 235, 0.07),
+      transparent 70%
+    );
+
+  pointer-events: none;
+
+}
+
+.devops::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 360px;
+  height: 360px;
+
+  right: -180px;
+  bottom: -180px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(124, 58, 237, 0.06),
+      transparent 70%
+    );
+
+  pointer-events: none;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.devops__header {
+
+  position: relative;
+
+  z-index: 1;
+
+  max-width: 800px;
+
+  margin: 0 auto 48px;
+
+  text-align: center;
+
+}
+
+
+.devops__header .section-tag {
+
+  margin-bottom: 18px;
+
+}
+
+
+.devops__header h2 {
+
+  font-size:
+    clamp(
+      2.2rem,
+      4.5vw,
+      3.5rem
+    );
+
+  line-height: 1.15;
+
+  letter-spacing: -0.02em;
+
+  color: #0f172a;
+
+  margin-bottom: 18px;
+
+}
+
+
+.devops__header p {
+
+  max-width: 720px;
+
+  margin: 0 auto;
+
+  color: #667085;
+
+  font-size: 1.05rem;
+
+  line-height: 1.8;
+
+}
+
+
+/* =====================================================
+   GRID
+===================================================== */
+
+.devops__grid {
+
+  position: relative;
+
+  z-index: 1;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0, 1fr)
+    );
+
+  gap: 22px;
+
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.devops-card {
+
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-height: 300px;
+
+  padding: 28px;
+
+  border-radius: 24px;
+
+  background:
+    rgba(255, 255, 255, 0.88);
+
+  border:
+    1px solid
+    rgba(37, 99, 235, 0.08);
+
+  box-shadow:
+    0 15px 40px
+    rgba(15, 23, 42, 0.05);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+
+}
+
+
+/* =====================================================
+   CARD HOVER
+===================================================== */
+
+.devops-card:hover {
+
+  transform:
+    translateY(-8px);
+
+  border-color:
+    rgba(37, 99, 235, 0.18);
+
+  box-shadow:
+    0 25px 60px
+    rgba(37, 99, 235, 0.10);
+
+}
+
+
+/* =====================================================
+   CARD NUMBER
+===================================================== */
+
+.devops-card__number {
+
+  position: absolute;
+
+  top: 20px;
+
+  right: 22px;
+
+  font-size: 2.2rem;
+
+  font-weight: 800;
+
+  line-height: 1;
+
+  color:
+    rgba(37, 99, 235, 0.07);
+
+  transition:
+    color 0.35s ease;
+
+}
+
+
+.devops-card:hover
+.devops-card__number {
+
+  color:
+    rgba(37, 99, 235, 0.14);
+
+}
+
+
+/* =====================================================
+   ICON
+===================================================== */
+
+.devops-card__icon {
+
+  width: 58px;
+
+  height: 58px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-bottom: 22px;
+
+  border-radius: 17px;
+
+  background:
+    rgba(37, 99, 235, 0.08);
+
+  color:
+    var(--color-primary);
+
+  font-size: 1.45rem;
+
+  transition:
+    transform 0.35s ease,
+    background 0.35s ease,
+    color 0.35s ease;
+
+}
+
+
+.devops-card:hover
+.devops-card__icon {
+
+  transform:
+    rotate(-6deg)
+    scale(1.08);
+
+  background:
+    var(--color-primary);
+
+  color:
+    #ffffff;
+
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.devops-card__content {
+
+  margin-top: auto;
+
+}
+
+
+.devops-card__content h3 {
+
+  margin-bottom: 12px;
+
+  font-size: 1.25rem;
+
+  line-height: 1.35;
+
+  color:
+    #0f172a;
+
+}
+
+
+.devops-card__content p {
+
+  margin: 0;
+
+  color:
+    #667085;
+
+  font-size: 0.92rem;
+
+  line-height: 1.7;
+
+}
+
+
+/* =====================================================
+   TOP ACCENT
+===================================================== */
+
+.devops-card::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  width: 0;
+
+  height: 3px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--color-primary),
+      #7c3aed
+    );
+
+  transition:
+    width 0.35s ease;
+
+}
+
+
+.devops-card:hover::before {
+
+  width: 100%;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1200px) {
+
+  .devops__grid {
+
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+
+  }
+
+}
+
+
+@media (max-width: 1024px) {
+
+  .devops {
+
+    padding: 58px 0;
+
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  .devops {
+
+    padding: 50px 0;
+
+  }
+
+  .devops__header {
+
+    margin-bottom: 36px;
+
+  }
+
+  .devops__grid {
+
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+
+  }
+
+  .devops-card {
+
+    min-height: auto;
+
+    padding: 26px;
+
+  }
+
+}
+
+
+@media (max-width: 480px) {
+
+  .devops {
+
+    padding: 44px 0;
+
+  }
+
+  .devops__header h2 {
+
+    font-size: 2rem;
+
+  }
+
+  .devops-card {
+
+    padding: 24px;
+
+    border-radius: 20px;
+
+  }
+
+}
