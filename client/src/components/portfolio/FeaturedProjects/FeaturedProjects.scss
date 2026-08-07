@@ -1,0 +1,897 @@
+@use "../../../assets/scss/abstracts/mixins" as *;
+
+/* ===========================================================
+   FEATURED PROJECTS
+=========================================================== */
+
+.featured-projects{
+
+    position:relative;
+
+    padding:120px 0;
+
+    overflow:hidden;
+
+    background:
+    linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #f8fbff 100%
+    );
+
+}
+
+
+/* ===========================================================
+   BACKGROUND
+=========================================================== */
+
+.featured-projects::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:700px;
+    height:700px;
+
+    top:-320px;
+    right:-250px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(circle,
+    rgba(37,99,235,.08),
+    transparent 70%);
+
+}
+
+.featured-projects::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:650px;
+    height:650px;
+
+    bottom:-350px;
+    left:-220px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(circle,
+    rgba(99,102,241,.06),
+    transparent 70%);
+
+}
+
+
+/* ===========================================================
+   HEADER
+=========================================================== */
+
+.featured-projects__header{
+
+    position:relative;
+
+    z-index:2;
+
+    max-width:760px;
+
+    margin:auto;
+
+    text-align:center;
+
+    margin-bottom:90px;
+
+}
+
+.featured-projects__header .section-tag{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:9px 20px;
+
+    border-radius:999px;
+
+    background:#edf4ff;
+
+    color:#2563eb;
+
+    font-size:.78rem;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+
+    margin-bottom:24px;
+
+}
+
+.featured-projects__header h2{
+
+    margin:0;
+
+    font-size:clamp(2.8rem,5vw,4.2rem);
+
+    line-height:1.05;
+
+    font-weight:800;
+
+    color:#0f172a;
+
+}
+
+.featured-projects__header h2 span{
+
+    color:#2563eb;
+
+}
+
+.featured-projects__header p{
+
+    margin:28px auto 0;
+
+    max-width:700px;
+
+    color:#667085;
+
+    line-height:1.9;
+
+    font-size:1.05rem;
+
+}
+
+
+/* ===========================================================
+   GRID
+=========================================================== */
+
+.featured-projects__grid{
+
+    position:relative;
+
+    z-index:2;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+    gap:38px;
+
+}
+
+
+
+/* ===========================================================
+   PROJECT CARD
+=========================================================== */
+
+.project-card{
+
+    position:relative;
+
+    display:flex;
+
+    flex-direction:column;
+
+    overflow:hidden;
+
+    border-radius:34px;
+
+    background:#fff;
+
+    border:1px solid
+    rgba(15,23,42,.05);
+
+    transition:.45s;
+
+    box-shadow:
+
+    0 30px 80px
+    rgba(15,23,42,.07);
+
+}
+
+.project-card:hover{
+
+    transform:
+    translateY(-12px);
+
+    box-shadow:
+
+    0 45px 100px
+    rgba(37,99,235,.15);
+
+}
+
+
+
+/* ===========================================================
+   BROWSER
+=========================================================== */
+
+.project-card__browser{
+
+    position:relative;
+
+    height:260px;
+
+    overflow:hidden;
+
+    background:
+    linear-gradient(
+        135deg,
+        #edf4ff,
+        #ffffff
+    );
+
+}
+
+
+/* ===========================================================
+   TOP BAR
+=========================================================== */
+
+.browser-top{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:16px 18px;
+
+    border-bottom:
+
+    1px solid
+    rgba(15,23,42,.06);
+
+}
+
+.browser-top span{
+
+    width:11px;
+    height:11px;
+
+    border-radius:50%;
+
+}
+
+.browser-top span:nth-child(1){
+
+    background:#ff5f56;
+
+}
+
+.browser-top span:nth-child(2){
+
+    background:#ffbd2e;
+
+}
+
+.browser-top span:nth-child(3){
+
+    background:#27c93f;
+
+}
+
+
+/* ===========================================================
+   SCREEN
+=========================================================== */
+
+.browser-screen{
+
+    position:relative;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    height:calc(100% - 45px);
+
+    overflow:hidden;
+
+}
+
+
+/* ===========================================================
+   GRID BG
+=========================================================== */
+
+.browser-screen::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background-image:
+
+    linear-gradient(
+    rgba(37,99,235,.05) 1px,
+    transparent 1px),
+
+    linear-gradient(
+    90deg,
+    rgba(37,99,235,.05) 1px,
+    transparent 1px);
+
+    background-size:35px 35px;
+
+}
+
+
+/* ===========================================================
+   LOGO
+=========================================================== */
+
+.browser-screen img{
+
+    position:relative;
+
+    z-index:2;
+
+    max-width:220px;
+
+    max-height:90px;
+
+    object-fit:contain;
+
+    transition:.5s;
+
+    filter:
+
+    drop-shadow(
+    0 15px 35px
+    rgba(37,99,235,.18));
+
+}
+
+.project-card:hover .browser-screen img{
+
+    transform:
+
+    scale(1.08)
+    rotate(-2deg);
+
+}
+
+
+
+/* ===========================================================
+   GLOW
+=========================================================== */
+
+.browser-screen::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:320px;
+
+    height:320px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(circle,
+    rgba(37,99,235,.15),
+    transparent 70%);
+
+    animation:
+    glowMove 6s linear infinite;
+
+}
+
+
+
+/* ===========================================================
+   CONTENT
+=========================================================== */
+
+.project-card__content{
+
+    display:flex;
+
+    flex-direction:column;
+
+    flex:1;
+
+    padding:34px;
+
+}
+
+
+
+/* ===========================================================
+   META
+=========================================================== */
+
+.project-card__meta{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.project-card__meta span:first-child{
+
+    font-size:.82rem;
+
+    font-weight:700;
+
+    color:#2563eb;
+
+    text-transform:uppercase;
+
+    letter-spacing:.8px;
+
+}
+
+.project-card__meta .live{
+
+    color:#16a34a;
+
+    font-weight:700;
+
+    font-size:.78rem;
+
+}
+
+.project-card__meta .ongoing{
+
+    color:#d97706;
+
+    font-weight:700;
+
+    font-size:.78rem;
+
+}
+
+/* ===========================================================
+   TITLE
+=========================================================== */
+
+.project-card__content h3{
+
+    margin:0 0 18px;
+
+    font-size:2rem;
+
+    line-height:1.2;
+
+    font-weight:800;
+
+    color:#101828;
+
+    transition:.35s;
+
+}
+
+.project-card:hover
+.project-card__content h3{
+
+    color:#2563eb;
+
+}
+
+
+/* ===========================================================
+   DESCRIPTION
+=========================================================== */
+
+.project-card__content p{
+
+    margin:0;
+
+    color:#667085;
+
+    line-height:1.9;
+
+    font-size:.98rem;
+
+    flex:1;
+
+}
+
+
+
+/* ===========================================================
+   TECHNOLOGY TAGS
+=========================================================== */
+
+.project-card__tech{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin:28px 0;
+
+}
+
+.project-card__tech span{
+
+    padding:9px 16px;
+
+    border-radius:999px;
+
+    background:#f4f8ff;
+
+    border:1px solid rgba(37,99,235,.12);
+
+    color:#2563eb;
+
+    font-size:.78rem;
+
+    font-weight:600;
+
+    transition:.35s;
+
+}
+
+.project-card:hover
+.project-card__tech span{
+
+    background:#2563eb;
+
+    color:#fff;
+
+    transform:translateY(-2px);
+
+}
+
+
+
+/* ===========================================================
+   FOOTER
+=========================================================== */
+
+.project-card__footer{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding-top:24px;
+
+    border-top:1px solid rgba(15,23,42,.08);
+
+}
+
+.project-card__footer>span{
+
+    color:#98A2B3;
+
+    font-size:.82rem;
+
+    font-weight:600;
+
+}
+
+
+
+/* ===========================================================
+   LINK
+=========================================================== */
+
+.project-card__footer a,
+
+.project-card__footer .disabled{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    transition:.35s;
+
+}
+
+.project-card__footer a{
+
+    color:#2563eb;
+
+}
+
+.project-card__footer a:hover{
+
+    gap:16px;
+
+}
+
+.project-card__footer a svg{
+
+    transition:.35s;
+
+}
+
+.project-card__footer a:hover svg{
+
+    transform:
+    translate(3px,-3px);
+
+}
+
+.project-card__footer .disabled{
+
+    color:#b0b6c3;
+
+}
+
+
+
+/* ===========================================================
+   FLOATING BORDER
+=========================================================== */
+
+.project-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    padding:1px;
+
+    border-radius:34px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(37,99,235,.25),
+        transparent,
+        rgba(99,102,241,.15)
+    );
+
+    /* Safari */
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
+    -webkit-mask-composite:xor;
+
+    /* Standard */
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
+    mask-composite:exclude;
+
+    opacity:0;
+
+    transition:.45s;
+
+}
+
+.project-card:hover::before{
+
+    opacity:1;
+
+}
+
+
+
+/* ===========================================================
+   SHINE EFFECT
+=========================================================== */
+
+.project-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:-120%;
+
+    left:-40%;
+
+    width:120px;
+
+    height:220%;
+
+    background:
+
+    linear-gradient(
+
+    transparent,
+
+    rgba(255,255,255,.65),
+
+    transparent
+
+    );
+
+    transform:rotate(25deg);
+
+    transition:.8s;
+
+}
+
+.project-card:hover::after{
+
+    left:130%;
+
+}
+
+
+
+/* ===========================================================
+   ANIMATION
+=========================================================== */
+
+@keyframes glowMove{
+
+0%{
+
+transform:
+translate(-60px,-60px);
+
+}
+
+50%{
+
+transform:
+translate(60px,40px);
+
+}
+
+100%{
+
+transform:
+translate(-60px,-60px);
+
+}
+
+}
+
+
+
+/* ===========================================================
+   TABLET
+=========================================================== */
+
+@include tablet{
+
+.featured-projects{
+
+padding:90px 0;
+
+}
+
+.featured-projects__grid{
+
+grid-template-columns:1fr;
+
+gap:30px;
+
+}
+
+.project-card__browser{
+
+height:230px;
+
+}
+
+.project-card__content{
+
+padding:28px;
+
+}
+
+.project-card__content h3{
+
+font-size:1.8rem;
+
+}
+
+}
+
+
+
+/* ===========================================================
+   MOBILE
+=========================================================== */
+
+@include mobile{
+
+.featured-projects{
+
+padding:70px 0;
+
+}
+
+.featured-projects__header{
+
+margin-bottom:60px;
+
+}
+
+.featured-projects__header h2{
+
+font-size:2.4rem;
+
+}
+
+.project-card{
+
+border-radius:24px;
+
+}
+
+.project-card__browser{
+
+height:190px;
+
+}
+
+.browser-screen img{
+
+max-width:170px;
+
+max-height:70px;
+
+}
+
+.project-card__content{
+
+padding:22px;
+
+}
+
+.project-card__content h3{
+
+font-size:1.45rem;
+
+}
+
+.project-card__footer{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:16px;
+
+}
+
+.project-card__tech{
+
+margin:22px 0;
+
+}
+
+}

@@ -1,0 +1,243 @@
+@use "../../../assets/scss/abstracts/mixins" as *;
+
+/* ==========================================================
+   PORTFOLIO STATS
+========================================================== */
+
+.portfolio-stats {
+
+  position: relative;
+
+  padding: 64px 0;
+
+  background: #ffffff;
+
+}
+
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.portfolio-stats__header {
+
+  max-width: 760px;
+
+  margin: 0 auto 55px;
+
+  text-align: center;
+
+}
+
+.portfolio-stats__header h2 {
+
+  font-size: clamp(
+    2.4rem,
+    5vw,
+    3.6rem
+  );
+
+  line-height: 1.15;
+
+  margin: 20px 0;
+
+  color: #111827;
+
+}
+
+.portfolio-stats__header p {
+
+  max-width: 700px;
+
+  margin: 0 auto;
+
+  color: #667085;
+
+  font-size: 1.05rem;
+
+  line-height: 1.8;
+
+}
+
+
+/* ==========================================================
+   GRID
+========================================================== */
+
+.portfolio-stats__grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 24px;
+
+}
+
+
+/* ==========================================================
+   CARD
+========================================================== */
+
+.portfolio-stat-card {
+
+  @include glass;
+
+  position: relative;
+
+  padding: 34px 28px;
+
+  min-height: 250px;
+
+  border-radius: 24px;
+
+  text-align: center;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease;
+
+  box-shadow:
+    0 14px 35px
+    rgba(15, 23, 42, .05);
+
+}
+
+
+/* ==========================================================
+   CARD HOVER
+========================================================== */
+
+.portfolio-stat-card:hover {
+
+  transform: translateY(-8px);
+
+  box-shadow:
+    0 25px 55px
+    rgba(37, 99, 235, .10);
+
+}
+
+
+/* ==========================================================
+   NUMBER
+========================================================== */
+
+.portfolio-stat-card__number {
+
+  font-size: 3.2rem;
+
+  line-height: 1;
+
+  font-weight: 800;
+
+  color: var(--color-primary);
+
+  margin-bottom: 18px;
+
+}
+
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.portfolio-stat-card h3 {
+
+  margin: 0 0 12px;
+
+  font-size: 1.3rem;
+
+  font-weight: 700;
+
+  color: #111827;
+
+}
+
+
+/* ==========================================================
+   DESCRIPTION
+========================================================== */
+
+.portfolio-stat-card p {
+
+  margin: 0;
+
+  color: #667085;
+
+  line-height: 1.7;
+
+  font-size: .95rem;
+
+  max-width: 260px;
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 1100px) {
+
+  .portfolio-stats__grid {
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  .portfolio-stats {
+
+    padding: 56px 0;
+
+  }
+
+  .portfolio-stats__header {
+
+    margin-bottom: 40px;
+
+  }
+
+  .portfolio-stats__grid {
+
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+
+  }
+
+  .portfolio-stat-card {
+
+    min-height: auto;
+
+    padding: 32px 24px;
+
+  }
+
+}
+
+
+@media (max-width: 480px) {
+
+  .portfolio-stat-card__number {
+
+    font-size: 2.8rem;
+
+  }
+
+}
