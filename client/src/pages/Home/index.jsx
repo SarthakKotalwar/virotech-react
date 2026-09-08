@@ -3,7 +3,6 @@ import Services from "../../components/home/Services/Services";
 import About from "../../components/home/About/About";
 import Process from "../../components/home/Process/Process";
 import Portfolio from "../../components/home/Portfolio/Portfolio";
-import Stats from "../../components/home/Stats/Stats";
 import Testimonials from "../../components/home/Testimonials/Testimonials";
 import FAQ from "../../components/home/FAQ/FAQ";
 import Clients from "../../components/home/Clients/Clients";
@@ -35,18 +34,14 @@ export default function Home() {
       </Reveal>
 
       <Reveal delay={0.25}>
-        <Stats />
-      </Reveal>
-
-      <Reveal delay={0.25}>
         <Testimonials />
       </Reveal>
 
-      <Reveal delay={0.35}>
+      <Reveal delay={0.30}>
         <FAQ />
       </Reveal>
 
-      <Reveal delay={0.30}>
+      <Reveal delay={0.35}>
         <Clients />
       </Reveal>
 

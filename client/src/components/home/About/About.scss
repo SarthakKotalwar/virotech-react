@@ -1,275 +1,210 @@
 @use "../../../assets/scss/abstracts/mixins" as *;
 
-/* ==========================================================
-   ABOUT SECTION
-========================================================== */
-
 .about {
   position: relative;
   overflow: hidden;
+  padding: clamp(52px, 6.8vw, 88px) 0;
+  background: linear-gradient(180deg, #ffffff 0%, #fcfdff 100%);
+  border-bottom: 1px solid #f1f5f9;
 
-  /*
-    Keep the section compact and aligned
-    with the About page spacing rhythm.
-  */
-  padding: 64px 0 56px;
-
-  background: linear-gradient(
-    180deg,
-    #ffffff 0%,
-    #fcfdff 100%
-  );
+  .container {
+    width: min(1340px, calc(100% - clamp(28px, 4vw, 56px)));
+    margin: 0 auto;
+  }
 }
-
-/* ==========================================================
-   END FADE
-========================================================== */
 
 .about__endfade {
   position: absolute;
-
   left: 0;
   right: 0;
   bottom: 0;
-
-  height: 70px;
-
+  height: 50px;
   pointer-events: none;
-
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.7) 60%,
-    #ffffff 100%
-  );
-
+  background: linear-gradient(180deg, transparent 0%, #ffffff 100%);
   z-index: 1;
 }
 
-/* ==========================================================
-   GRID
-========================================================== */
-
 .about__container {
   position: relative;
-
   z-index: 2;
-
   display: grid;
-
   grid-template-columns: 1.1fr 0.9fr;
-
-  gap: 48px;
-
+  gap: clamp(28px, 4.5vw, 54px);
   align-items: center;
 }
 
-/* ==========================================================
-   LEFT CONTENT
-========================================================== */
+.about__left {
+  .section-tag {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(43, 91, 255, 0.08);
+    border: 1px solid rgba(43, 91, 255, 0.14);
+    color: #2563eb;
+    font-weight: 700;
+    font-size: clamp(0.72rem, 1.1vw, 0.82rem);
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
 
-.about__left h2 {
-  font-size: clamp(
-    2.3rem,
-    4.8vw,
-    3.8rem
-  );
+  h2 {
+    font-size: clamp(2rem, 3.8vw, 3.2rem);
+    line-height: 1.15;
+    margin: 0 0 16px;
+    color: #0f172a;
+    letter-spacing: -0.025em;
+    font-weight: 800;
+    text-wrap: balance;
+  }
 
-  line-height: 1.12;
+  p {
+    font-size: clamp(0.92rem, 1.2vw, 1.04rem);
+    line-height: 1.75;
+    color: #64748b;
+    margin: 0 0 22px;
+    max-width: 580px;
+  }
 
-  margin: 18px 0;
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 26px;
+    border-radius: 9999px;
+    background: #2563eb;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.92rem;
+    text-decoration: none;
+    box-shadow: 0 8px 20px -3px rgba(37, 99, 235, 0.35);
+    transition: background 0.25s ease, transform 0.25s ease;
 
-  color: #0f172a;
-
-  letter-spacing: -0.02em;
+    &:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+    }
+  }
 }
-
-.about__left p {
-  font-size: 1.02rem;
-
-  line-height: 1.75;
-
-  color: #667085;
-
-  margin-bottom: 26px;
-
-  max-width: 620px;
-}
-
-/* ==========================================================
-   FEATURES
-========================================================== */
 
 .about__features {
   list-style: none;
-
   padding: 0;
-
-  margin: 0 0 28px;
-}
-
-.about__features li {
+  margin: 0 0 26px;
   display: flex;
+  flex-direction: column;
+  gap: 10px;
 
-  align-items: center;
+  li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: clamp(0.88rem, 1.1vw, 0.96rem);
+    color: #334155;
+    font-weight: 600;
+    line-height: 1.4;
 
-  gap: 12px;
-
-  margin-bottom: 14px;
-
-  font-size: 1rem;
-
-  color: #334155;
-
-  font-weight: 500;
-
-  line-height: 1.5;
+    .feature-icon {
+      color: #2563eb;
+      flex-shrink: 0;
+    }
+  }
 }
-
-/* ==========================================================
-   RIGHT GRID
-========================================================== */
 
 .about__right {
   display: grid;
-
-  grid-template-columns: repeat(
-    2,
-    minmax(0, 1fr)
-  );
-
-  gap: 18px;
-
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
   align-items: stretch;
 }
 
-/* ==========================================================
-   STAT CARD
-========================================================== */
-
 .about-card {
-  @include glass;
-
   display: flex;
-
   flex-direction: column;
-
-  align-items: center;
-
-  justify-content: center;
-
-  min-height: 150px;
-
-  padding: 28px 22px;
-
+  align-items: flex-start;
+  text-align: left;
+  min-height: clamp(140px, 15vw, 175px);
+  padding: clamp(20px, 2.5vw, 26px);
   border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.035);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 
-  text-align: center;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px rgba(37, 99, 235, 0.09);
+    border-color: #93c5fd;
 
-  transition:
-    transform 0.35s ease,
-    box-shadow 0.35s ease;
+    .about-card__icon {
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #2563eb;
+    }
+  }
 
-  box-shadow:
-    0 14px 30px rgba(0, 0, 0, 0.05);
+  &__icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: #eff6ff;
+    color: #2563eb;
+    border: 1px solid #dbeafe;
+    display: grid;
+    place-items: center;
+    margin-bottom: 12px;
+    flex-shrink: 0;
+    transition: all 0.25s ease;
+  }
+
+  h3 {
+    font-size: clamp(1.05rem, 1.3vw, 1.2rem);
+    color: #0f172a;
+    margin: 0 0 6px;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  p {
+    color: #64748b;
+    font-size: clamp(0.82rem, 1vw, 0.9rem);
+    line-height: 1.55;
+    margin: 0;
+  }
 }
-
-.about-card:hover {
-  transform: translateY(-6px);
-
-  box-shadow:
-    0 22px 45px rgba(0, 0, 0, 0.1);
-}
-
-.about-card h3 {
-  font-size: 2.1rem;
-
-  color: var(--color-primary);
-
-  margin-bottom: 8px;
-
-  font-weight: 800;
-
-  line-height: 1;
-}
-
-.about-card p {
-  color: #667085;
-
-  font-size: 0.92rem;
-
-  margin: 0;
-
-  line-height: 1.5;
-}
-
-/* ==========================================================
-   RESPONSIVE
-========================================================== */
 
 @media (max-width: 992px) {
-
-  .about {
-    padding: 58px 0 50px;
-  }
-
   .about__container {
     grid-template-columns: 1fr;
-
-    gap: 40px;
+    gap: 34px;
   }
-
-  .about__right {
-    grid-template-columns: repeat(
-      2,
-      minmax(0, 1fr)
-    );
-  }
-
-  .about__endfade {
-    height: 60px;
-  }
-
-}
-
-@media (max-width: 768px) {
-
-  .about {
-    padding: 50px 0 44px;
-  }
-
-  .about__left h2 {
-    font-size: 2.2rem;
-  }
-
-  .about__left p {
-    margin-bottom: 22px;
-  }
-
-  .about__features {
-    margin-bottom: 22px;
-  }
-
-  .about__right {
-    grid-template-columns: 1fr;
-  }
-
 }
 
 @media (max-width: 480px) {
-
-  .about {
-    padding: 44px 0 38px;
+  .about__right {
+    gap: 10px;
   }
 
   .about-card {
-    min-height: 135px;
+    padding: 16px 14px;
+    min-height: auto;
 
-    padding: 24px 20px;
+    &__icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    h3 {
+      font-size: 0.98rem;
+    }
+
+    p {
+      font-size: 0.78rem;
+    }
   }
-
-  .about-card h3 {
-    font-size: 1.9rem;
-  }
-
 }
