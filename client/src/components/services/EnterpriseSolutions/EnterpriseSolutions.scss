@@ -1,235 +1,144 @@
 @use "../../../assets/scss/abstracts/mixins" as *;
 
-/* ==========================================
-   ENTERPRISE SOLUTIONS
-========================================== */
-
 .enterprise-solutions {
-
   position: relative;
-
   overflow: hidden;
+  padding: clamp(52px, 6.8vw, 88px) 0;
+  background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+  border-bottom: 1px solid #f1f5f9;
 
-  background:
-    linear-gradient(
-      180deg,
-      #ffffff 0%,
-      #f8fbff 100%
-    );
+  .container {
+    width: min(1340px, calc(100% - clamp(28px, 4vw, 56px)));
+    margin: 0 auto;
+  }
 
+  &__header {
+    max-width: 760px;
+    margin: 0 auto clamp(30px, 4.4vw, 50px);
+    text-align: center;
+
+    .section-tag {
+      display: inline-flex;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.08);
+      border: 1px solid rgba(37, 99, 235, 0.14);
+      color: #2563eb;
+      font-weight: 700;
+      font-size: clamp(0.72rem, 1.1vw, 0.8rem);
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      color: #0f172a;
+      font-weight: 800;
+      text-wrap: balance;
+    }
+
+    p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: #64748b;
+      font-size: clamp(0.92rem, 1.2vw, 1.04rem);
+      line-height: 1.75;
+      text-wrap: pretty;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(16px, 2.2vw, 24px);
+    align-items: stretch;
+  }
 }
-
-
-/* ==========================================
-   BACKGROUND GLOW
-========================================== */
-
-.enterprise-solutions::before {
-
-  content: "";
-
-  position: absolute;
-
-  width: 420px;
-
-  height: 420px;
-
-  right: -180px;
-
-  top: 20%;
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(37, 99, 235, 0.08),
-      transparent 70%
-    );
-
-  pointer-events: none;
-
-}
-
-
-/* ==========================================
-   GRID
-========================================== */
-
-.enterprise-solutions__grid {
-
-  position: relative;
-
-  z-index: 2;
-
-  grid-template-columns:
-    repeat(3, minmax(0, 1fr));
-
-  gap: 24px;
-
-}
-
-
-/* ==========================================
-   CARD
-========================================== */
 
 .enterprise-card {
-
   position: relative;
-
   display: flex;
-
   flex-direction: column;
+  min-height: 270px;
+  height: 100%;
+  padding: clamp(22px, 2.8vw, 30px);
+  border-radius: 22px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.035);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
 
-  min-height: 300px;
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 45px rgba(37, 99, 235, 0.1);
+    border-color: #bfdbfe;
 
-  padding: 30px;
+    .enterprise-card__icon {
+      transform: translateY(-3px) scale(1.06);
+      background: #2563eb;
+      color: #ffffff;
+    }
+  }
 
-  background:
-    rgba(255, 255, 255, 0.82);
+  &__icon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    border-radius: 16px;
+    background: rgba(37, 99, 235, 0.08);
+    border: 1px solid #dbeafe;
+    color: #2563eb;
+    font-size: 1.35rem;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+  }
 
-  backdrop-filter: blur(14px);
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 
-  border:
-    1px solid
-    rgba(37, 99, 235, 0.06);
+    h3 {
+      margin: 0 0 10px;
+      font-size: clamp(1.15rem, 1.5vw, 1.35rem);
+      line-height: 1.35;
+      font-weight: 700;
+      color: #0f172a;
+    }
 
-  box-shadow:
-    0 12px 35px
-    rgba(15, 23, 42, 0.05);
-
+    p {
+      margin: 0;
+      color: #64748b;
+      line-height: 1.75;
+      font-size: clamp(0.86rem, 1.1vw, 0.96rem);
+    }
+  }
 }
-
-
-/* ==========================================
-   CARD ICON
-========================================== */
-
-.enterprise-card .about-card__icon {
-
-  flex-shrink: 0;
-
-  margin-bottom: 24px;
-
-}
-
-
-/* ==========================================
-   CARD CONTENT
-========================================== */
-
-.enterprise-card__content {
-
-  flex: 1;
-
-}
-
-
-.enterprise-card h3 {
-
-  margin-bottom: 14px;
-
-  font-size: 1.35rem;
-
-  line-height: 1.35;
-
-  color:
-    var(--color-secondary);
-
-}
-
-
-.enterprise-card p {
-
-  margin: 0;
-
-  color:
-    var(--color-text-light);
-
-  line-height: 1.8;
-
-  font-size: 0.96rem;
-
-}
-
-
-/* ==========================================
-   HOVER
-========================================== */
-
-.enterprise-card:hover {
-
-  transform:
-    translateY(-7px);
-
-  box-shadow:
-    0 22px 50px
-    rgba(15, 23, 42, 0.09);
-
-}
-
-
-.enterprise-card:hover
-.about-card__icon {
-
-  transform:
-    translateY(-3px)
-    scale(1.05);
-
-}
-
-
-/* ==========================================
-   RESPONSIVE
-========================================== */
 
 @media (max-width: 1024px) {
-
   .enterprise-solutions__grid {
-
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
 }
 
+@media (max-width: 640px) {
+  .enterprise-solutions {
+    padding: 46px 0 36px;
 
-@media (max-width: 768px) {
+    &__grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
 
-  .enterprise-solutions__grid {
-
-    grid-template-columns:
-      1fr;
-
-    gap: 20px;
-
+    .enterprise-card {
+      min-height: auto;
+      padding: 20px 18px;
+    }
   }
-
-  .enterprise-card {
-
-    min-height: auto;
-
-    padding: 28px;
-
-  }
-
-}
-
-
-@media (max-width: 576px) {
-
-  .enterprise-card {
-
-    padding: 26px;
-
-  }
-
-  .enterprise-card h3 {
-
-    font-size: 1.25rem;
-
-  }
-
 }

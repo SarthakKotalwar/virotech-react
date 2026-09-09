@@ -1,412 +1,249 @@
 @use "../../../assets/scss/abstracts/mixins" as *;
 
-/* ==========================================================
-   SERVICES PROCESS
-========================================================== */
-
 .services-process {
-
   position: relative;
-
   overflow: hidden;
+  padding: clamp(60px, 8vw, 100px) 0;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  border-bottom: 1px solid #f1f5f9;
 
-  background:
-    linear-gradient(
-      180deg,
-      #f8fbff 0%,
-      #ffffff 100%
-    );
-
+  .container {
+    width: min(1340px, calc(100% - clamp(28px, 4vw, 56px)));
+    margin: 0 auto;
+  }
 }
 
-
-/* ==========================================================
-   BACKGROUND GLOW
-========================================================== */
-
-.services-process::before {
-
-  content: "";
-
-  position: absolute;
-
-  width: 450px;
-
-  height: 450px;
-
-  left: -220px;
-
-  top: 50%;
-
-  transform: translateY(-50%);
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(37, 99, 235, 0.07),
-      transparent 70%
-    );
-
-  pointer-events: none;
-
-}
-
-
-/* ==========================================================
-   SECTION HEADER
-========================================================== */
-
-.services-process .services-section-header {
-
+.services-section-header {
   position: relative;
-
   z-index: 1;
-
   max-width: 760px;
-
-  margin: 0 auto 60px;
-
+  margin: 0 auto clamp(36px, 5vw, 60px);
   text-align: center;
 
+  .services-section-tag {
+    display: inline-flex;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+    color: #2563eb;
+    font-weight: 700;
+    font-size: clamp(0.72rem, 1.1vw, 0.8rem);
+    letter-spacing: 0.1em;
+    margin-bottom: 14px;
+  }
+
+  h2 {
+    font-size: clamp(2.1rem, 4.2vw, 3.3rem);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: #0f172a;
+    margin: 0 0 14px;
+    font-weight: 800;
+    text-wrap: balance;
+  }
+
+  p {
+    max-width: 700px;
+    margin: 0 auto;
+    color: #64748b;
+    font-size: clamp(0.92rem, 1.2vw, 1.04rem);
+    line-height: 1.75;
+  }
 }
-
-
-/* ==========================================================
-   TIMELINE
-========================================================== */
 
 .services-process__timeline {
-
   position: relative;
-
   z-index: 1;
-
-  max-width: 1000px;
-
+  max-width: 920px;
   margin: 0 auto;
+  padding-left: 10px;
 
+  /* Static Track */
+  .services-process__track-bg {
+    position: absolute;
+    left: 41px;
+    top: 32px;
+    bottom: 32px;
+    width: 3px;
+    background: #e2e8f0;
+    border-radius: 999px;
+    z-index: 0;
+  }
+
+  /* Animated Flow Fill */
+  .services-process__progress-line {
+    position: absolute;
+    left: 41px;
+    top: 32px;
+    max-height: calc(100% - 64px);
+    width: 3px;
+    background: linear-gradient(180deg, #2563eb 0%, #38bdf8 100%);
+    border-radius: 999px;
+    z-index: 1;
+    box-shadow: 0 0 12px rgba(37, 99, 235, 0.8);
+    transition: height 0.12s linear;
+
+    .progress-glow-head {
+      position: absolute;
+      bottom: -6px;
+      left: -4.5px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 14px #2563eb, 0 0 6px #ffffff;
+    }
+  }
 }
-
-
-/* ==========================================================
-   PROCESS STEP
-========================================================== */
 
 .services-process__step {
-
   position: relative;
-
   display: grid;
-
-  grid-template-columns: 90px 1fr;
-
-  column-gap: 30px;
-
-  min-height: 150px;
-
-  padding-bottom: 42px;
-
-}
-
-
-/* ==========================================================
-   ICON
-========================================================== */
-
-.services-process__icon {
-
-  position: relative;
-
-  z-index: 2;
-
-  width: 72px;
-
-  height: 72px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  border-radius: 22px;
-
-  background:
-    rgba(37, 99, 235, 0.08);
-
-  color:
-    var(--color-primary);
-
-  font-size: 1.5rem;
-
-  border:
-    1px solid
-    rgba(37, 99, 235, 0.08);
-
-  box-shadow:
-    0 12px 30px
-    rgba(37, 99, 235, 0.08);
-
-  transition:
-    transform 0.35s ease,
-    background 0.35s ease,
-    box-shadow 0.35s ease;
-
-}
-
-
-.services-process__step:hover
-.services-process__icon {
-
-  transform:
-    translateY(-5px)
-    rotate(-5deg);
-
-  background:
-    rgba(37, 99, 235, 0.12);
-
-  box-shadow:
-    0 18px 40px
-    rgba(37, 99, 235, 0.14);
-
-}
-
-
-/* ==========================================================
-   TIMELINE LINE
-========================================================== */
-
-.services-process__line {
-
-  position: absolute;
-
-  left: 35px;
-
-  top: 72px;
-
-  bottom: 0;
-
-  width: 2px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(37, 99, 235, 0.3),
-      rgba(37, 99, 235, 0.08)
-    );
-
-}
-
-
-/* ==========================================================
-   STEP NUMBER
-========================================================== */
-
-.services-process__number {
-
-  position: absolute;
-
-  top: 0;
-
-  left: 105px;
-
-  display: inline-flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  min-width: 48px;
-
-  height: 28px;
-
-  padding: 0 10px;
-
-  border-radius: 999px;
-
-  background:
-    rgba(37, 99, 235, 0.07);
-
-  color:
-    var(--color-primary);
-
-  font-size: 0.76rem;
-
-  font-weight: 700;
-
-  letter-spacing: 0.04em;
-
-}
-
-
-/* ==========================================================
-   CONTENT
-========================================================== */
-
-.services-process__content {
-
-  padding-top: 42px;
-
-  max-width: 700px;
-
-}
-
-
-.services-process__content h3 {
-
-  margin:
-    0 0 14px;
-
-  color:
-    var(--color-secondary);
-
-  font-size:
-    1.45rem;
-
-  line-height:
-    1.3;
-
-}
-
-
-.services-process__content p {
-
-  margin: 0;
-
-  color:
-    var(--color-text-light);
-
-  font-size:
-    0.98rem;
-
-  line-height:
-    1.8;
-
-}
-
-
-/* ==========================================================
-   LAST STEP
-========================================================== */
-
-.services-process__step:last-child {
-
-  min-height: auto;
-
-  padding-bottom: 0;
-
-}
-
-
-/* ==========================================================
-   RESPONSIVE
-========================================================== */
-
-@media (max-width: 768px) {
-
-  .services-process .services-section-header {
-
-    margin-bottom: 48px;
-
+  grid-template-columns: 80px 1fr;
+  column-gap: clamp(18px, 3vw, 32px);
+  min-height: 140px;
+  padding-bottom: clamp(34px, 4.5vw, 46px);
+  transition: opacity 0.3s ease;
+
+  &:last-child {
+    min-height: auto;
+    padding-bottom: 0;
   }
 
-  .services-process__step {
-
-    grid-template-columns: 72px 1fr;
-
-    column-gap: 22px;
-
-    min-height: 165px;
-
-    padding-bottom: 36px;
-
-  }
-
+  /* Inactive State Styling */
   .services-process__icon {
-
-    width: 60px;
-
-    height: 60px;
-
+    position: relative;
+    z-index: 2;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 18px;
+    background: #ffffff;
+    color: #94a3b8;
+    font-size: 1.45rem;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.04);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 
-    font-size: 1.3rem;
-
-  }
-
-  .services-process__line {
-
-    left: 29px;
-
-    top: 60px;
-
-  }
-
-  .services-process__number {
-
-    left: 94px;
-
+    .icon-ripple {
+      position: absolute;
+      inset: -4px;
+      border-radius: 22px;
+      border: 1.5px solid rgba(37, 99, 235, 0.4);
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 0.35s ease;
+    }
   }
 
   .services-process__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 22px;
+    border-radius: 18px;
+    background: #ffffff;
+    border: 1px solid transparent;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 
-    padding-top: 38px;
+    .services-process__number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      height: 24px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: #f1f5f9;
+      color: #64748b;
+      font-size: 0.74rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      transition: all 0.25s ease;
+    }
 
+    h3 {
+      margin: 0 0 8px;
+      color: #0f172a;
+      font-size: clamp(1.2rem, 1.6vw, 1.4rem);
+      line-height: 1.3;
+      font-weight: 700;
+      transition: color 0.25s ease;
+    }
+
+    p {
+      margin: 0;
+      color: #64748b;
+      font-size: clamp(0.88rem, 1.1vw, 0.96rem);
+      line-height: 1.7;
+    }
   }
 
-  .services-process__content h3 {
+  /* Active / Light Up State Driven by Scroll Tracker */
+  &.is-active {
+    .services-process__icon {
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #2563eb;
+      transform: scale(1.06);
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
 
-    font-size: 1.3rem;
+      .icon-ripple {
+        opacity: 1;
+        transform: scale(1.08);
+      }
+    }
 
+    .services-process__content {
+      background: #ffffff;
+      border-color: #e2e8f0;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
+      transform: translateX(4px);
+
+      .services-process__number {
+        background: #eff6ff;
+        color: #2563eb;
+        border: 1px solid #dbeafe;
+      }
+
+      h3 {
+        color: #2563eb;
+      }
+    }
   }
-
 }
 
+@media (max-width: 640px) {
+  .services-process {
+    padding: 46px 0 36px;
 
-@media (max-width: 480px) {
+    &__timeline {
+      padding-left: 0;
 
-  .services-process__step {
+      .services-process__track-bg,
+      .services-process__progress-line {
+        left: 26px;
+      }
+    }
 
-    grid-template-columns: 60px 1fr;
+    &__step {
+      grid-template-columns: 52px 1fr;
+      column-gap: 16px;
+      padding-bottom: 24px;
+    }
 
-    column-gap: 18px;
+    &__icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      font-size: 1.25rem;
+    }
 
+    .services-process__content {
+      padding: 12px 14px;
+    }
   }
-
-  .services-process__icon {
-
-    width: 52px;
-
-    height: 52px;
-
-    border-radius: 16px;
-
-  }
-
-  .services-process__line {
-
-    left: 25px;
-
-    top: 52px;
-
-  }
-
-  .services-process__number {
-
-    position: static;
-
-    width: fit-content;
-
-    margin-bottom: 10px;
-
-  }
-
-  .services-process__content {
-
-    padding-top: 0;
-
-  }
-
 }
