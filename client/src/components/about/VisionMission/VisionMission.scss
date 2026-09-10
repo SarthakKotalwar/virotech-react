@@ -1,200 +1,127 @@
 @use "../../../assets/scss/abstracts/mixins" as *;
 
-/* ==========================================
-   VISION & MISSION
-========================================== */
-
 .vision-mission {
   position: relative;
-  overflow: hidden;
+  overflow: clip;
+  padding: clamp(60px, 7.5vw, 90px) 0;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  border-bottom: 1px solid #f1f5f9;
 
-  background: linear-gradient(
-    180deg,
-    #ffffff 0%,
-    #f8fbff 100%
-  );
-}
-
-/* ==========================================
-   BACKGROUND GLOW
-========================================== */
-
-.vision-mission::before {
-  content: "";
-
-  position: absolute;
-
-  width: 420px;
-  height: 420px;
-
-  left: -180px;
-  bottom: -150px;
-
-  border-radius: 50%;
-
-  background: radial-gradient(
-    rgba(37, 99, 235, 0.08),
-    transparent 70%
-  );
-
-  pointer-events: none;
-}
-
-/* ==========================================
-   VISION & MISSION GRID
-   Wider cards with original vertical sizing
-========================================== */
-
-.vision-mission .about-grid {
-  display: grid;
-
-  /* Makes both cards wider */
-  grid-template-columns: repeat(2, minmax(380px, 1fr));
-
-  /* Horizontal gap between cards */
-  gap: 30px;
-
-  /* Keeps the entire group centered */
-  max-width: 1050px;
-  margin: 0 auto;
-}
-
-/* ==========================================
-   CARD
-========================================== */
-
-.vision-card {
-  position: relative;
-
-  /* Original vertical sizing */
-  min-height: 0;
-
-  /* Horizontal width controlled by grid */
-  width: 100%;
-
-  /* Keep content balanced */
-  padding: 30px;
-}
-
-/* ==========================================
-   CARD TITLE
-========================================== */
-
-.vision-card h3 {
-  margin-bottom: 18px;
-
-  font-size: 1.55rem;
-
-  color: var(--color-secondary);
-}
-
-/* ==========================================
-   CARD DESCRIPTION
-========================================== */
-
-.vision-card p {
-  color: var(--color-text-light);
-
-  line-height: 1.9;
-
-  margin: 0;
-}
-
-/* ==========================================
-   ICON
-========================================== */
-
-.vision-card .about-card__icon {
-  transition:
-    transform 0.35s ease,
-    background 0.35s ease;
-}
-
-.vision-card:hover .about-card__icon {
-  transform: rotate(-8deg) scale(1.08);
-}
-
-/* ==========================================
-   HOVER EFFECT
-========================================== */
-
-.vision-card:hover {
-  transform: translateY(-7px);
-}
-
-/* ==========================================
-   LARGE DESKTOP
-========================================== */
-
-@media (min-width: 1200px) {
-
-  .vision-mission .about-grid {
-    max-width: 1100px;
-    grid-template-columns: repeat(
-      2,
-      minmax(480px, 1fr)
-    );
-  }
-
-}
-
-/* ==========================================
-   TABLET
-========================================== */
-
-@media (max-width: 992px) {
-
-  .vision-mission .about-grid {
-    grid-template-columns: repeat(
-      2,
-      minmax(0, 1fr)
-    );
-
-    max-width: 900px;
-
-    gap: 24px;
-  }
-
-}
-
-/* ==========================================
-   MOBILE
-========================================== */
-
-@media (max-width: 768px) {
-
-  .vision-mission .about-grid {
-    grid-template-columns: 1fr;
-
-    max-width: 600px;
-
-    gap: 20px;
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(24px, 3.5vw, 40px);
+    max-width: 1080px;
+    margin: 0 auto;
+    perspective: 1200px;
   }
 
   .vision-card {
-    text-align: center;
+    position: relative;
+    padding: clamp(32px, 4vw, 46px);
+    border-radius: 28px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.04);
+    transform-style: preserve-3d;
+    transition: transform 0.2s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
+    overflow: hidden;
 
-    padding: 30px;
+    &:hover {
+      border-color: rgba(37, 99, 235, 0.35);
+      box-shadow: 0 28px 65px rgba(37, 99, 235, 0.12);
+
+      .vision-card__glow {
+        opacity: 1;
+      }
+
+      .vision-card__icon {
+        background: #2563eb;
+        color: #ffffff;
+        transform: translateZ(20px) scale(1.06);
+      }
+
+      h3 {
+        transform: translateZ(14px);
+        color: #1d4ed8;
+      }
+
+      p {
+        transform: translateZ(10px);
+      }
+    }
+
+    &__glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.09), transparent 65%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    &__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+      transform-style: preserve-3d;
+    }
+
+    &__icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      background: rgba(37, 99, 235, 0.08);
+      border: 1px solid rgba(37, 99, 235, 0.16);
+      color: #2563eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.55rem;
+      transition: all 0.3s ease;
+    }
+
+    &__num {
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: #94a3b8;
+    }
+
+    h3 {
+      font-size: clamp(1.4rem, 2vw, 1.75rem);
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0 0 14px;
+      letter-spacing: -0.02em;
+      transition: transform 0.2s ease-out, color 0.3s ease;
+    }
+
+    p {
+      margin: 0;
+      color: #64748b;
+      font-size: clamp(0.92rem, 1.15vw, 1.02rem);
+      line-height: 1.8;
+      transition: transform 0.2s ease-out;
+    }
+
+    &__bar {
+      width: 44px;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #2563eb, #60a5fa);
+      margin-top: 28px;
+    }
   }
 
-  .vision-card .about-card__icon {
-    margin: 0 auto 24px;
+  @media (max-width: 768px) {
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .vision-card {
+      transform: none !important;
+    }
   }
-
-}
-
-/* ==========================================
-   SMALL MOBILE
-========================================== */
-
-@media (max-width: 576px) {
-
-  .vision-card {
-    padding: 26px 22px;
-  }
-
-  .vision-card h3 {
-    font-size: 1.35rem;
-  }
-
 }

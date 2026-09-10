@@ -1,5 +1,4 @@
 import {
-  FiFlag,
   FiBriefcase,
   FiCloud,
   FiCpu,
@@ -7,58 +6,40 @@ import {
 } from "react-icons/fi";
 
 const journeyData = {
-
   badge: "OUR JOURNEY",
-
   title: "Growing Through Innovation",
-
   description:
     "Every milestone represents our commitment to innovation, engineering excellence, and long-term partnerships with businesses across industries.",
-
   timeline: [
-
-    {
-      year: "2021",
-      icon: FiFlag,
-      title: "Company Founded",
-      description:
-        "Started with a vision to build modern software solutions that empower businesses through innovation, quality, and customer-centric development.",
-    },
-
-    {
-      year: "2022",
-      icon: FiBriefcase,
-      title: "Enterprise Projects",
-      description:
-        "Successfully delivered enterprise-grade web and mobile applications across multiple industries while establishing long-term client partnerships.",
-    },
-
     {
       year: "2023",
-      icon: FiCloud,
-      title: "Cloud & DevOps Expansion",
+      icon: FiBriefcase,
+      title: "Company Founded & Core Systems",
       description:
-        "Expanded our expertise into cloud engineering, DevOps automation, scalable infrastructure, CI/CD pipelines, and enterprise deployment strategies.",
+        "Established with an engineering-first mindset, launching scalable full-stack web and mobile architectures for emerging startups and enterprise clients.",
     },
-
     {
       year: "2024",
-      icon: FiCpu,
-      title: "AI & Intelligent Automation",
+      icon: FiCloud,
+      title: "Cloud Native & DevOps Expansion",
       description:
-        "Integrated Artificial Intelligence, workflow automation, and smart business solutions to help organizations improve productivity and decision-making.",
+        "Integrated advanced AWS/GCP cloud environments, automated zero-downtime CI/CD pipelines, Kubernetes containerization, and microservices.",
     },
-
     {
-      year: "2025+",
-      icon: FiTrendingUp,
-      title: "Future Vision",
+      year: "2025",
+      icon: FiCpu,
+      title: "AI Integration & Workflow Automation",
       description:
-        "Driving the future with AI-first development, cloud-native platforms, digital transformation, enterprise automation, and next-generation technologies.",
+        "Expanded into custom LLM pipelines, autonomous internal automation, and intelligent data systems that supercharge operational throughput.",
     },
-
+    {
+      year: "2026+",
+      icon: FiTrendingUp,
+      title: "Next-Gen Scalability & Global Footprint",
+      description:
+        "Pioneering distributed edge intelligence, autonomous cloud resilience, and expanding cross-continental engineering support.",
+    },
   ],
-
 };
 
 export default journeyData;

@@ -1,67 +1,50 @@
 import "./About.scss";
 
 import Hero from "../../components/about/Hero/Hero";
-import Overview from "../../components/about/Overview/Overview";
 import VisionMission from "../../components/about/VisionMission/VisionMission";
-import Values from "../../components/about/Values/Values";
+import WhyChoose from "../../components/about/WhyChoose/WhyChoose";
+import Journey from "../../components/about/Journey/Journey";
 import Technology from "../../components/about/Technology/Technology";
 import Industries from "../../components/about/Industries/Industries";
-import Journey from "../../components/about/Journey/Journey";
-import Process from "../../components/about/Process/Process";
-import Statistics from "../../components/about/Statistics/Statistics";
 import CTA from "../../components/about/CTA/CTA";
-import WhyChoose from "../../components/about/WhyChoose/WhyChoose";
 
 import Reveal from "../../components/common/Reveal/Reveal";
 
 export default function About() {
   return (
     <main className="about-page">
+      {/* 1. Hero & Core Metrics */}
+      <Hero />
 
-      <Reveal>
-        <Hero />
-      </Reveal>
-
-      <Reveal delay={0.05}>
-        <Overview />
-      </Reveal>
-
-      <Reveal delay={0.10}>
+      {/* 2. Strategic Purpose & Vision */}
+      <Reveal delay={0.06}>
         <VisionMission />
       </Reveal>
 
-      <Reveal delay={0.15}>
-        <Values />
-      </Reveal>
-
-      <Reveal delay={0.20}>
+      {/* 3. Competitive Edge & Values (Unified) */}
+      <Reveal delay={0.08}>
         <WhyChoose />
       </Reveal>
 
-      <Reveal delay={0.25}>
-        <Technology />
-      </Reveal>
-
-      <Reveal delay={0.30}>
+      {/* 4. Company Journey & Milestones */}
+      <Reveal delay={0.08}>
         <Journey />
       </Reveal>
 
-      <Reveal delay={0.35}>
+      {/* 5. Tech Stack & Engineering Ecosystem */}
+      <Reveal delay={0.08}>
+        <Technology />
+      </Reveal>
+
+      {/* 6. Vertical & Industry Breadth */}
+      <Reveal delay={0.08}>
         <Industries />
       </Reveal>
 
-      <Reveal delay={0.40}>
-        <Process />
-      </Reveal>
-
-      <Reveal delay={0.45}>
-        <Statistics />
-      </Reveal>
-
-      <Reveal delay={0.50}>
+      {/* 7. Conversion Consultation & Direct Email CTA */}
+      <Reveal delay={0.08}>
         <CTA />
       </Reveal>
-
     </main>
   );
 }

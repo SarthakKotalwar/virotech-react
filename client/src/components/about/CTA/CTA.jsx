@@ -1,128 +1,47 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import { ArrowRight, Mail, CalendarCheck, Phone } from "lucide-react";
 import "./CTA.scss";
 
-import { Link } from "react-router-dom";
-
-import {
-  FiArrowRight,
-  FiMail,
-  FiPhone,
-  FiClock,
-} from "react-icons/fi";
-
-import ctaData from "./CTAData";
-
 export default function CTA() {
+  const emailAddress = "support@virotech.in";
+  const emailSubject = encodeURIComponent("Inquiry - Virotech Technologies");
+  const emailBody = encodeURIComponent(
+    "Hello Virotech Team,\n\nI would like to explore your services and solutions.\n\n"
+  );
+  const mailtoUrl = `mailto:${emailAddress}?subject=${emailSubject}&body=${emailBody}`;
+
   return (
     <section className="about-cta">
       <div className="about-container">
-        <div className="about-cta__wrapper">
+        <div className="about-cta__card">
+          <div className="about-cta__circle about-cta__circle--1" />
+          <div className="about-cta__circle about-cta__circle--2" />
 
-          {/* ================= LEFT CONTENT ================= */}
+          <span className="about-section-tag">LET'S CONNECT</span>
 
-          <div className="about-cta__content">
+          <h2>
+            Let's Build Something <span>Exceptional Together</span>
+          </h2>
 
-            <span className="about-cta__badge">
-              {ctaData.badge}
-            </span>
+          <p>
+            Whether you're planning cloud migration, enterprise software, AI
+            workflows, or modern digital experiences, our team is ready to help
+            you architect and execute.
+          </p>
 
-            <h2>
-              {ctaData.title}
-            </h2>
-
-            <p>
-              {ctaData.description}
-            </p>
-
-            <div className="about-cta__buttons">
-
-              <Link
-                to={ctaData.primaryButton.link}
-                className="about-btn about-btn--primary"
-              >
-                {ctaData.primaryButton.text}
-                <FiArrowRight />
-              </Link>
-
-              <Link
-                to={ctaData.secondaryButton.link}
-                className="about-btn about-btn--secondary"
-              >
-                {ctaData.secondaryButton.text}
-              </Link>
-
-            </div>
-
-          </div>
-
-          {/* ================= RIGHT CONTACT ================= */}
-
-          <div className="about-cta__info">
-
-            {/* EMAIL */}
-
-            <a
-              href={ctaData.contact.email.link}
-              className="contact-card"
-            >
-              <div className="contact-card__icon">
-                <FiMail />
-              </div>
-
-              <div className="contact-card__content">
-                <span>
-                  {ctaData.contact.email.label}
-                </span>
-
-                <strong>
-                  {ctaData.contact.email.value}
-                </strong>
-              </div>
-            </a>
-
-            {/* PHONE */}
-
-            <a
-              href={ctaData.contact.phone.link}
-              className="contact-card"
-            >
-              <div className="contact-card__icon">
-                <FiPhone />
-              </div>
-
-              <div className="contact-card__content">
-                <span>
-                  {ctaData.contact.phone.label}
-                </span>
-
-                <strong>
-                  {ctaData.contact.phone.value}
-                </strong>
-              </div>
-            </a>
-
-            {/* SUPPORT */}
-
-            <Link
-              to={ctaData.contact.support.link}
-              className="contact-card"
-            >
-              <div className="contact-card__icon">
-                <FiClock />
-              </div>
-
-              <div className="contact-card__content">
-                <span>
-                  {ctaData.contact.support.label}
-                </span>
-
-                <strong>
-                  {ctaData.contact.support.value}
-                </strong>
-              </div>
+          <div className="about-cta__buttons">
+            <Link to="/contact" className="btn-primary">
+              <CalendarCheck size={18} />
+              <span>Schedule Consultation</span>
+              <ArrowRight size={16} className="arrow-icon" />
             </Link>
 
+            <a href={mailtoUrl} className="btn-outline">
+              <Mail size={17} />
+              <span>Email Directly</span>
+            </a>
           </div>
-
         </div>
       </div>
     </section>

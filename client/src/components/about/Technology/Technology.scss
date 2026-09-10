@@ -1,175 +1,358 @@
 @use "../../../assets/scss/abstracts/mixins" as *;
 
-/* ==========================================
-   TECHNOLOGY
-========================================== */
-
-.technology{
-
-  position:relative;
-
-  overflow:hidden;
-
+.tech-matrix {
+  position: relative;
+  overflow: clip;
+  padding: clamp(65px, 8vw, 100px) 0;
   background:
-  linear-gradient(
-      180deg,
-      #ffffff,
-      #f8fbff
-  );
+    radial-gradient(ellipse 60% 40% at 85% 15%, rgba(37, 99, 235, 0.08), transparent 70%),
+    linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+  border-bottom: 1px solid #f1f5f9;
+  user-select: none;
 
-}
+  /* =====================================================
+     CATEGORY CONTROLS WITH LIVE INTERVAL METERS
+  ===================================================== */
+  &__nav-wrap {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    margin: clamp(24px, 3vw, 36px) 0 clamp(36px, 4.5vw, 48px);
 
-/* ==========================================
-   BACKGROUND GLOW
-========================================== */
-
-.technology::before{
-
-  content:"";
-
-  position:absolute;
-
-  width:420px;
-
-  height:420px;
-
-  left:-180px;
-
-  top:-150px;
-
-  border-radius:50%;
-
-  background:
-  radial-gradient(
-      rgba(37,99,235,.08),
-      transparent 70%
-  );
-
-}
-
-/* ==========================================
-   CARD
-========================================== */
-
-.technology-card{
-
-  display:flex;
-
-  flex-direction:column;
-
-}
-
-.technology-card h3{
-
-  font-size:1.45rem;
-
-  margin-bottom:26px;
-
-  color:var(--color-secondary);
-
-}
-
-/* ==========================================
-   TAGS
-========================================== */
-
-.technology-tags{
-
-  display:flex;
-
-  flex-wrap:wrap;
-
-  gap:12px;
-
-  margin-top:auto;
-
-}
-
-.technology-tag{
-
-  padding:11px 18px;
-
-  border-radius:999px;
-
-  background:rgba(37,99,235,.08);
-
-  color:var(--color-primary);
-
-  font-size:.90rem;
-
-  font-weight:600;
-
-  transition:all .35s ease;
-
-  cursor:default;
-
-  border:1px solid transparent;
-
-}
-
-.technology-tag:hover{
-
-  transform:translateY(-3px);
-
-  background:var(--color-primary);
-
-  color:#ffffff;
-
-  border-color:rgba(37,99,235,.25);
-
-  box-shadow:
-      0 12px 25px rgba(37,99,235,.18);
-
-}
-
-/* ==========================================
-   CARD HOVER
-========================================== */
-
-.technology-card:hover{
-
-  transform:translateY(-10px);
-
-}
-
-.technology-card:hover h3{
-
-  color:var(--color-primary);
-
-}
-
-/* ==========================================
-   RESPONSIVE
-========================================== */
-
-@media(max-width:992px){
-
-  .about-grid{
-
-    grid-template-columns:repeat(2,minmax(0,1fr));
-
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
+  &__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-width: max-content;
+    padding: 4px;
+    margin: 0 auto;
+  }
+
+  .tech-nav-btn {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 22px;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    color: #64748b;
+    font-size: clamp(0.82rem, 1vw, 0.9rem);
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+    transition: all 0.25s ease;
+    outline: none;
+
+    &:hover {
+      border-color: #93c5fd;
+      color: #2563eb;
+      transform: translateY(-2px);
+    }
+
+    &.is-active {
+      background: #091124;
+      border-color: #091124;
+      color: #ffffff;
+      box-shadow: 0 10px 24px rgba(9, 17, 36, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .nav-btn-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #2563eb, #60a5fa);
+      animation: autoProgress 4.5s linear infinite;
+    }
+  }
+
+  /* =====================================================
+     CONSOLE STAGE (DUAL WORKSPACE)
+  ===================================================== */
+  &__stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.2fr);
+    gap: clamp(24px, 3.5vw, 36px);
+    align-items: stretch;
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  /* Left Console Hub */
+  .tech-console-card {
+    position: relative;
+    padding: clamp(32px, 4vw, 44px);
+    border-radius: 28px;
+    background: linear-gradient(145deg, #091124 0%, #172a54 60%, #1e3a8a 100%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 24px 60px rgba(9, 17, 36, 0.24);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    color: #ffffff;
+
+    &__glow {
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(37, 99, 235, 0.28);
+      filter: blur(50px);
+      pointer-events: none;
+    }
+
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .console-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: monospace;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #93c5fd;
+
+      .console-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #38bdf8;
+        box-shadow: 0 0 10px #38bdf8;
+      }
+    }
+
+    .console-icon {
+      font-size: 1.3rem;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .console-body {
+      h3 {
+        font-size: clamp(1.5rem, 2.4vw, 2rem);
+        font-weight: 800;
+        color: #ffffff;
+        margin: 0 0 14px;
+        letter-spacing: -0.02em;
+      }
+
+      p {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: clamp(0.92rem, 1.15vw, 1.02rem);
+        line-height: 1.75;
+        margin: 0 0 28px;
+      }
+    }
+
+    &__footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+
+      .meta-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: #dbeafe;
+
+        svg {
+          color: #60a5fa;
+          font-size: 0.95rem;
+        }
+      }
+    }
+  }
+
+  /* Right Reactive Chips Board */
+  .tech-chips-board {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+
+    .chips-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .tech-chip {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 22px 20px;
+      border-radius: 20px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.03);
+      overflow: hidden;
+      transition: all 0.28s ease;
+      animation: chipFadeIn 0.4s ease both;
+
+      &:hover {
+        transform: translateY(-4px);
+        border-color: rgba(37, 99, 235, 0.35);
+        box-shadow: 0 16px 36px rgba(37, 99, 235, 0.1);
+
+        .tech-chip__indicator {
+          background: #2563eb;
+          color: #ffffff;
+          transform: scale(1.06);
+        }
+
+        .tech-chip__glow-bar {
+          opacity: 1;
+        }
+      }
+
+      &__indicator {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        background: rgba(37, 99, 235, 0.08);
+        border: 1px solid rgba(37, 99, 235, 0.16);
+        color: #2563eb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        flex-shrink: 0;
+        transition: all 0.25s ease;
+      }
+
+      &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+
+        h4 {
+          margin: 0;
+          font-size: 1.05rem;
+          font-weight: 800;
+          color: #0f172a;
+          letter-spacing: -0.01em;
+        }
+
+        span {
+          font-size: 0.74rem;
+          font-weight: 700;
+          color: #64748b;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+        }
+      }
+
+      &__glow-bar {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 3px;
+        background: linear-gradient(180deg, #2563eb, #60a5fa);
+        opacity: 0;
+        transition: opacity 0.25s ease;
+      }
+    }
+
+    /* Slider Micro-Controls */
+    .tech-stage-controls {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 14px;
+      margin-top: 4px;
+
+      .tech-ctrl-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        color: #0f172a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(15, 23, 42, 0.04);
+        transition: all 0.25s ease;
+
+        &:hover {
+          background: #2563eb;
+          border-color: #2563eb;
+          color: #ffffff;
+          transform: translateY(-2px);
+        }
+      }
+
+      .tech-ctrl-counter {
+        font-family: monospace;
+        font-size: 0.84rem;
+        font-weight: 700;
+        color: #94a3b8;
+      }
+    }
+  }
+
+  /* Responsive Rules */
+  @media (max-width: 992px) {
+    &__stage {
+      grid-template-columns: 1fr;
+    }
+
+    &__nav {
+      justify-content: flex-start;
+    }
+
+    .tech-chips-board .tech-stage-controls {
+      justify-content: center;
+      margin-top: 14px;
+    }
+  }
+
+  @media (max-width: 540px) {
+    .chips-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 }
 
-@media(max-width:768px){
+@keyframes autoProgress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
 
-  .about-grid{
-
-    grid-template-columns:1fr;
-
+@keyframes chipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
   }
-
-  .technology-card{
-
-    text-align:center;
-
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-
-  .technology-tags{
-
-    justify-content:center;
-
-  }
-
 }

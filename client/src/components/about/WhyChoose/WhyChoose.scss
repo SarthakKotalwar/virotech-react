@@ -1,237 +1,342 @@
 @use "../../../assets/scss/abstracts/mixins" as *;
 
-/* ==========================================
-   WHY CHOOSE US
-========================================== */
-
-.why-choose{
-
-  position:relative;
-
-  overflow:hidden;
-
+.why-choose-deck {
+  position: relative;
+  overflow: clip;
+  padding: clamp(65px, 8vw, 100px) 0;
   background:
-  linear-gradient(
-      180deg,
-      #f8fbff,
-      #ffffff
-  );
-
-}
-
-.why-choose::before{
-
-  content:"";
-
-  position:absolute;
-
-  width:450px;
-
-  height:450px;
-
-  right:-180px;
-
-  top:-120px;
-
-  border-radius:50%;
-
-  background:
-  radial-gradient(
-      rgba(37,99,235,.08),
-      transparent 70%
-  );
-
-}
-
-.why-choose__grid{
-
-  display:grid;
-
-  grid-template-columns:1.1fr .9fr;
-
-  gap:80px;
-
-  align-items:center;
-
-}
-
-.why-choose h2{
-
-  font-size:clamp(2.5rem,5vw,3.8rem);
-
-  margin:24px 0;
-
-  line-height:1.15;
-
-}
-
-.why-choose p{
-
-  color:var(--color-text-light);
-
-  line-height:1.9;
-
-}
-
-/* ==========================================
-   FEATURE GRID
-========================================== */
-
-.why-choose__features{
-
-  margin:42px 0;
-
-  grid-template-columns:repeat(2,1fr);
-
-}
-
-.why-feature{
-
-  text-align:left;
-
-}
-
-.why-feature h3{
-
-  font-size:1.15rem;
-
-  margin:0;
-
-}
-
-.why-feature:hover .about-card__icon{
-
-  transform:rotate(-8deg) scale(1.08);
-
-}
-
-/* ==========================================
-   ILLUSTRATION
-========================================== */
-
-.why-choose__illustration{
-
-  min-height:380px;
-
-  border-radius:32px;
-
-  display:flex;
-
-  flex-direction:column;
-
-  justify-content:center;
-
-  align-items:center;
-
-  color:#ffffff;
-
-  text-align:center;
-
-  background:
-  linear-gradient(
-      135deg,
-      #1d4ed8,
-      #2563eb,
-      #3b82f6
-  );
-
-  box-shadow:
-      0 35px 70px rgba(37,99,235,.20);
-
-}
-
-.why-choose__illustration h3{
-
-  font-size:2.8rem;
-
-  margin-bottom:12px;
-
-}
-
-.why-choose__illustration p{
-
-  color:#ffffff;
-
-}
-
-/* ==========================================
-   STATISTICS
-========================================== */
-
-.why-choose__stats{
-
-  margin-top:28px;
-
-  grid-template-columns:repeat(2,1fr);
-
-}
-
-.why-stat-card{
-
-  text-align:center;
-
-}
-
-.why-stat-card h4{
-
-  font-size:2.2rem;
-
-  color:var(--color-primary);
-
-  margin-bottom:12px;
-
-}
-
-/* ==========================================
-   RESPONSIVE
-========================================== */
-
-@media(max-width:992px){
-
-  .why-choose__grid{
-
-    grid-template-columns:1fr;
-
-    gap:60px;
-
+    radial-gradient(ellipse 60% 40% at 85% 10%, rgba(37, 99, 235, 0.08), transparent 60%),
+    radial-gradient(circle 350px at 15% 90%, rgba(59, 130, 246, 0.06), transparent 50%),
+    linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+
+  .deck-stage {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: clamp(36px, 4.5vw, 54px);
   }
 
+  /* Universal Base Card with Smooth Elevation & Ambient Lighting */
+  .deck-card {
+    position: relative;
+    padding: clamp(28px, 3vw, 40px);
+    border-radius: 28px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.03);
+    transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+    overflow: hidden;
+
+    &:hover {
+      transform: translateY(-5px);
+      border-color: rgba(37, 99, 235, 0.35);
+      box-shadow: 0 20px 45px rgba(37, 99, 235, 0.09);
+    }
+
+    /* CARD 1: Flagship Tech Hub */
+    &--flagship {
+      grid-column: span 2;
+      background: linear-gradient(145deg, #091124 0%, #172a54 60%, #1e3a8a 100%);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 20px 50px rgba(9, 17, 36, 0.2);
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 26px 60px rgba(9, 17, 36, 0.3);
+        border-color: rgba(96, 165, 250, 0.4);
+      }
+
+      .deck-card__specular {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.18), transparent 60%);
+        pointer-events: none;
+      }
+
+      .deck-card__header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .deck-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: rgba(37, 99, 235, 0.25);
+        border: 1px solid rgba(96, 165, 250, 0.4);
+        color: #93c5fd;
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+
+        &__pulse {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: #60a5fa;
+          box-shadow: 0 0 8px #60a5fa;
+          animation: streamPulse 2s infinite ease-in-out;
+        }
+      }
+
+      h3 {
+        font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+        font-weight: 800;
+        color: #ffffff;
+        margin: 0 0 14px;
+        line-height: 1.25;
+        letter-spacing: -0.02em;
+      }
+
+      p {
+        color: rgba(255, 255, 255, 0.78);
+        font-size: clamp(0.9rem, 1.1vw, 1rem);
+        line-height: 1.75;
+        max-width: 520px;
+        margin: 0;
+      }
+
+      .deck-tech-stream {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 28px;
+
+        .stream-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 16px;
+          border-radius: 12px;
+          background: rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          color: #ffffff;
+          font-size: 0.82rem;
+          font-weight: 600;
+          backdrop-filter: blur(10px);
+          transition: all 0.25s ease;
+
+          svg {
+            color: #60a5fa;
+            font-size: 0.95rem;
+          }
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.16);
+            border-color: rgba(96, 165, 250, 0.5);
+            transform: translateY(-2px);
+          }
+        }
+      }
+    }
+
+    /* CARD 2: SLA Metric Tile */
+    &--telemetry {
+      background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 60%, #3b82f6 100%);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 16px 40px rgba(37, 99, 235, 0.2);
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 24px 50px rgba(37, 99, 235, 0.3);
+      }
+
+      .telemetry-halo {
+        position: absolute;
+        top: -60px;
+        right: -60px;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.16);
+        filter: blur(35px);
+        pointer-events: none;
+      }
+
+      .telemetry-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.74rem;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #dbeafe;
+
+        .telemetry-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #4ade80;
+          box-shadow: 0 0 10px #4ade80;
+        }
+      }
+
+      .telemetry-number {
+        font-size: clamp(2.6rem, 3.8vw, 3.6rem);
+        font-weight: 900;
+        line-height: 1;
+        margin: 16px 0 10px;
+        letter-spacing: -0.03em;
+      }
+
+      h4 {
+        font-size: 1.15rem;
+        font-weight: 800;
+        margin: 0 0 8px;
+        color: #ffffff;
+      }
+
+      p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 0.86rem;
+        line-height: 1.65;
+      }
+    }
+
+    /* CARD 3: Security Pillar */
+    &--security {
+      display: flex;
+      flex-direction: column;
+
+      .deck-card__icon-badge {
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
+        background: rgba(37, 99, 235, 0.08);
+        border: 1px solid rgba(37, 99, 235, 0.16);
+        color: #2563eb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+      }
+
+      &:hover .deck-card__icon-badge {
+        background: #2563eb;
+        color: #ffffff;
+        transform: scale(1.05);
+      }
+
+      h4 {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: #0f172a;
+        margin: 0 0 10px;
+      }
+
+      p {
+        margin: 0;
+        color: #64748b;
+        font-size: 0.9rem;
+        line-height: 1.7;
+      }
+    }
+
+    /* CARD 4: Velocity Driver */
+    &--sprints {
+      grid-column: span 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      background: #ffffff;
+
+      .sprints-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: #2563eb;
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        margin-bottom: 8px;
+      }
+
+      h4 {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: #0f172a;
+        margin: 0 0 8px;
+      }
+
+      p {
+        margin: 0;
+        color: #64748b;
+        font-size: 0.9rem;
+        line-height: 1.65;
+        max-width: 460px;
+      }
+
+      .deck-cta-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        min-height: 48px;
+        padding: 0 28px;
+        border-radius: 999px;
+        background: #091124;
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 0.92rem;
+        text-decoration: none;
+        flex-shrink: 0;
+        box-shadow: 0 8px 20px rgba(9, 17, 36, 0.12);
+        transition: all 0.25s ease;
+
+        svg {
+          transition: transform 0.25s ease;
+        }
+
+        &:hover {
+          background: #2563eb;
+          transform: translateY(-2px);
+          box-shadow: 0 12px 26px rgba(37, 99, 235, 0.28);
+
+          svg {
+            transform: translateX(4px);
+          }
+        }
+      }
+    }
+  }
+
+  /* Responsive Behavior */
+  @media (max-width: 992px) {
+    .deck-stage {
+      grid-template-columns: 1fr;
+    }
+
+    .deck-card--flagship,
+    .deck-card--sprints {
+      grid-column: span 1;
+    }
+
+    .deck-card--sprints {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+
+      .deck-cta-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  }
 }
 
-@media(max-width:768px){
-
-  .why-choose__content{
-
-    text-align:center;
-
-  }
-
-  .why-choose__features{
-
-    grid-template-columns:1fr;
-
-  }
-
-  .why-feature{
-
-    text-align:center;
-
-  }
-
-  .about-card__icon{
-
-    margin:0 auto 24px;
-
-  }
-
-}
-
-@media(max-width:576px){
-
-  .why-choose__stats{
-
-    grid-template-columns:1fr;
-
-  }
-
+@keyframes streamPulse {
+  0%, 100% { transform: scale(0.85); opacity: 0.6; }
+  50% { transform: scale(1.2); opacity: 1; }
 }

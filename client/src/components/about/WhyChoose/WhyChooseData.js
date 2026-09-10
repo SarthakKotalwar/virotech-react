@@ -1,74 +1,57 @@
 import {
-  FiCheckCircle,
   FiUsers,
-  FiShield,
   FiCpu,
-  FiHeadphones,
+  FiShield,
   FiTrendingUp,
+  FiHeadphones,
+  FiAward,
 } from "react-icons/fi";
 
 const whyChooseData = {
-
   badge: "WHY CHOOSE VIROTECH",
-
   title: "Your Trusted Technology Partner",
-
   description:
-    "We deliver secure, scalable and future-ready digital solutions with a customer-first approach. Our experienced team combines innovation, engineering excellence and modern technologies to help businesses grow confidently.",
-
+    "We deliver secure, scalable, and future-ready digital solutions with a customer-first approach. Our engineering team combines clean architecture, modern frameworks, and transparent collaboration to accelerate business growth.",
   button: {
     text: "Explore Services",
     link: "/services",
   },
-
   features: [
-
     {
       icon: FiUsers,
-      title: "Experienced Team",
+      title: "Client-Centric Engineering",
     },
-
     {
       icon: FiCpu,
-      title: "Modern Technologies",
+      title: "Modern Tech Ecosystem",
     },
-
     {
       icon: FiShield,
-      title: "Enterprise Security",
+      title: "Enterprise-Grade Security",
     },
-
     {
       icon: FiTrendingUp,
-      title: "Scalable Solutions",
+      title: "Scalable Cloud Architecture",
     },
-
+    {
+      icon: FiAward,
+      title: "Rigorous Code Quality",
+    },
     {
       icon: FiHeadphones,
-      title: "Dedicated Support",
+      title: "24/7 Dedicated Support",
     },
-
-    {
-      icon: FiCheckCircle,
-      title: "Agile Development",
-    },
-
   ],
-
   achievements: [
-
     {
-      value: "100+",
-      label: "Projects Delivered",
+      value: "99.8%",
+      label: "On-Time Milestone Delivery",
     },
-
     {
-      value: "50+",
-      label: "Happy Clients",
+      value: "100%",
+      label: "Business-Focused Execution",
     },
-
   ],
-
 };
 
 export default whyChooseData;
