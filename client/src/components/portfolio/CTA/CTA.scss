@@ -5,10 +5,14 @@
   overflow: clip;
   padding: clamp(60px, 8vw, 100px) 0;
   background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
 
   .container {
-    width: min(1340px, calc(100% - clamp(24px, 4vw, 56px)));
+    width: 100%;
+    max-width: 1240px;
     margin: 0 auto;
+    padding: 0 clamp(16px, 3.5vw, 32px);
+    box-sizing: border-box;
   }
 
   &__card {
@@ -35,7 +39,6 @@
       top: -150px;
       right: -100px;
     }
-
     &--2 {
       width: 240px;
       height: 240px;
@@ -89,7 +92,6 @@
     flex-wrap: wrap;
     margin-top: clamp(28px, 4vw, 40px);
 
-    /* Fixed White Start Project Button */
     .btn-primary {
       display: inline-flex;
       align-items: center;
@@ -107,40 +109,23 @@
       box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
       transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
       cursor: pointer;
-      outline: none;
-      -webkit-tap-highlight-color: transparent;
 
       .arrow-icon {
         color: #1d4ed8 !important;
         transition: transform 0.25s ease;
       }
-
-      &:hover,
-      &:focus,
-      &:focus-visible {
+      &:hover {
         background: #f8fafc !important;
         color: #1e40af !important;
         transform: translateY(-3px);
         box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
-
         .arrow-icon {
           color: #1e40af !important;
           transform: translateX(4px);
         }
       }
-
-      &:active {
-        background: #f1f5f9 !important;
-        transform: translateY(-1px) scale(0.98);
-        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
-      }
-
-      &:visited {
-        color: #1d4ed8 !important;
-      }
     }
 
-    /* Email Us Button */
     .btn-outline {
       display: inline-flex;
       align-items: center;
@@ -164,10 +149,6 @@
         border-color: rgba(255, 255, 255, 0.55);
         transform: translateY(-3px);
       }
-
-      &:active {
-        transform: translateY(-1px) scale(0.98);
-      }
     }
   }
 }
@@ -180,15 +161,12 @@
 @media (max-width: 640px) {
   .portfolio-cta {
     padding: 46px 0 36px;
-
     &__card {
       padding: 36px 20px;
       border-radius: 24px;
     }
-
     &__buttons {
       flex-direction: column;
-
       .btn-primary,
       .btn-outline {
         width: 100%;

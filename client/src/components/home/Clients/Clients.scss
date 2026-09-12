@@ -4,11 +4,14 @@
   position: relative;
   background: #ffffff;
   padding: clamp(48px, 6vw, 72px) 0;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
 
   .container {
-    width: min(1340px, calc(100% - clamp(28px, 4vw, 56px)));
+    width: 100%;
+    max-width: 1240px;
     margin: 0 auto;
+    padding: 0 clamp(16px, 3.5vw, 32px);
+    box-sizing: border-box;
   }
 
   &__header {
@@ -57,10 +60,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: clamp(62px, 7vw, 80px);
+  height: clamp(62px, 7vw, 78px);
   padding: 12px;
   border-radius: 16px;
-  font-size: clamp(0.85rem, 1.1vw, 0.98rem);
+  font-size: clamp(0.85rem, 1.1vw, 0.96rem);
   font-weight: 700;
   color: #1e293b;
   border: 1px solid #e2e8f0;
@@ -93,7 +96,6 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
   }
-
   .client-logo {
     height: 64px;
     font-size: 0.88rem;

@@ -1,0 +1,51 @@
+/* ==============================
+   Main Layout
+============================== */
+.main-content {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 120px;
+  overflow: visible !important;
+  background: #ffffff;
+
+  /* Global vertical boundary guide lines matching About Us */
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(
+      180deg,
+      rgba(226, 232, 240, 0.4) 0%,
+      rgba(226, 232, 240, 0.8) 15%,
+      rgba(226, 232, 240, 0.8) 85%,
+      rgba(226, 232, 240, 0.4) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &::before {
+    left: max(var(--site-gutter, 24px), calc((100% - var(--site-max-width, 1240px)) / 2));
+  }
+
+  &::after {
+    right: max(var(--site-gutter, 24px), calc((100% - var(--site-max-width, 1240px)) / 2));
+  }
+}
+
+@media (max-width: 900px) {
+  .main-content {
+    padding-top: 90px;
+
+    &::before {
+      left: 16px;
+    }
+    &::after {
+      right: 16px;
+    }
+  }
+}

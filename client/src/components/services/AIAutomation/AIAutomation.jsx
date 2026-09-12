@@ -4,7 +4,7 @@ import aiAutomationData from "./AIAutomationData";
 
 export default function AIAutomation() {
   return (
-    <section className="ai-automation">
+    <section className="ai-automation" id="ai-automation">
 
       <div className="container">
 

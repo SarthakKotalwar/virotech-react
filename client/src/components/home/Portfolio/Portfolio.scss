@@ -4,11 +4,14 @@
   position: relative;
   padding: clamp(54px, 7.2vw, 92px) 0;
   background: #f8fbff;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
 
   .container {
-    width: min(1340px, calc(100% - clamp(28px, 4vw, 56px)));
+    width: 100%;
+    max-width: 1240px;
     margin: 0 auto;
+    padding: 0 clamp(16px, 3.5vw, 32px);
+    box-sizing: border-box;
   }
 
   &__header {
@@ -93,7 +96,6 @@
         transform: translateY(-2px);
         box-shadow: 0 10px 25px -4px rgba(37, 99, 235, 0.4);
       }
-
       &:active {
         transform: translateY(0);
       }
@@ -111,9 +113,7 @@
   border: 1px solid #e2e8f0;
   box-shadow: 0 12px 35px -6px rgba(15, 23, 42, 0.05);
   overflow: hidden;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.35s ease,
-              border-color 0.35s ease;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
 
   &:hover {
     transform: translateY(-6px);
@@ -140,12 +140,10 @@
       gap: 6px;
       padding: 10px 16px;
       border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-
       .dot {
         width: 9px;
         height: 9px;
         border-radius: 50%;
-
         &.red { background: #fca5a5; }
         &.yellow { background: #fde047; }
         &.green { background: #86efac; }
@@ -164,7 +162,7 @@
         content: "";
         position: absolute;
         inset: 0;
-        background-image: 
+        background-image:
           linear-gradient(rgba(37, 99, 235, 0.04) 1px, transparent 1px),
           linear-gradient(90deg, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
         background-size: 28px 28px;
@@ -237,7 +235,6 @@
         height: 6px;
         border-radius: 50%;
       }
-
       &.live {
         background: #f0fdf4;
         color: #16a34a;
@@ -247,7 +244,6 @@
           box-shadow: 0 0 6px rgba(34, 197, 94, 0.8);
         }
       }
-
       &.ongoing {
         background: #fffbeb;
         color: #d97706;
@@ -347,20 +343,16 @@
 @media (max-width: 640px) {
   .portfolio .portfolio-card {
     border-radius: 18px;
-
     &__browser {
       height: 175px;
-
       .browser-screen img {
         max-width: 140px;
         max-height: 60px;
       }
     }
-
     &__content {
       padding: 18px 16px;
     }
-
     &__footer {
       flex-direction: column;
       align-items: flex-start;

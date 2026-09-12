@@ -1,8 +1,11 @@
 @use "../../../assets/scss/abstracts/mixins" as *;
 
 .about-container {
-  width: min(1340px, calc(100% - clamp(24px, 4vw, 56px)));
+  width: 100%;
+  max-width: 1240px;
   margin: 0 auto;
+  padding: 0 clamp(16px, 3.5vw, 32px);
+  box-sizing: border-box;
   position: relative;
   z-index: 2;
 }
@@ -11,6 +14,7 @@
   position: relative;
   padding: clamp(54px, 7vw, 88px) 0;
   overflow: clip;
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .about-section-header {

@@ -11,10 +11,10 @@ const navigationData = [
     label: "About",
     path: "/about",
   },
-  {
-    label: "Careers",
-    path: "/careers",
-  },
+  // {
+  //   label: "Careers",
+  //   path: "/careers",
+  // },
   {
     label: "Blog",
     path: "/blog",

@@ -5,7 +5,15 @@
   overflow: clip;
   padding: clamp(60px, 7.5vw, 90px) 0;
   background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
+
+  .about-container {
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 clamp(16px, 3.5vw, 32px);
+    box-sizing: border-box;
+  }
 
   &__grid {
     display: grid;

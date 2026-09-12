@@ -9,6 +9,8 @@ import Portfolio from "../pages/Portfolio";
 import Blog from "../pages/Blog";
 import Contact from "../pages/Contact";
 import Careers from "../pages/Careers";
+import Partnership from "../pages/Partnership";
+import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy";
 import NotFound from "../pages/NotFound";
 
 export default function AppRoutes() {
@@ -21,7 +23,10 @@ export default function AppRoutes() {
         <Route path="portfolio" element={<Portfolio />} />
         <Route path="blog" element={<Blog />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="partnership" element={<Partnership />} />
         <Route path="careers" element={<Careers />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

@@ -1,0 +1,314 @@
+.contact-info {
+  position: relative;
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+
+    .contact-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #2563eb;
+    }
+  }
+
+  &__arrow {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #e2e8f0;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #2563eb;
+    flex-shrink: 0;
+  }
+
+  &__intro {
+    h3 {
+      margin: 0;
+      color: #0f172a;
+      font-size: clamp(26px, 3.2vw, 42px);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      font-weight: 850;
+
+      span {
+        display: block;
+        color: #2563eb;
+      }
+    }
+
+    p {
+      max-width: 420px;
+      margin: 16px 0 0;
+      color: #64748b;
+      font-size: clamp(13px, 1.2vw, 14.5px);
+      line-height: 1.7;
+    }
+  }
+
+  &__list {
+    margin-top: 32px;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  &__item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 28px 38px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 14px;
+    min-height: 76px;
+    border-bottom: 1px solid #e2e8f0;
+    cursor: pointer;
+    transition: all 0.25s ease;
+
+    &:hover {
+      padding-left: 6px;
+      background: #f8fafc;
+
+      .contact-info__item-arrow {
+        color: #2563eb;
+      }
+    }
+
+    &--email {
+      user-select: none;
+
+      &.is-open {
+        background: #f8fafc;
+        border-bottom-color: transparent;
+      }
+    }
+  }
+
+  &__item-number {
+    color: #94a3b8;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  &__item-icon {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #dbeafe;
+    border-radius: 50%;
+    background: #eff6ff;
+    color: #2563eb;
+    flex-shrink: 0;
+  }
+
+  &__item-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    overflow: hidden;
+
+    span {
+      color: #64748b;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+    }
+
+    strong {
+      color: #0f172a;
+      font-size: 13.5px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  &__item-arrow {
+    color: #94a3b8;
+    flex-shrink: 0;
+    transition: transform 0.25s ease, color 0.2s ease;
+
+    .chevron {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+
+      &.rotate {
+        transform: rotate(180deg);
+        color: #2563eb;
+      }
+    }
+  }
+
+  .email-flyout {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 16px 36px -6px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04);
+    z-index: 50;
+    padding: 10px;
+    animation: flyoutSlide 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+    &__header {
+      padding: 6px 10px 8px;
+      border-bottom: 1px solid #f1f5f9;
+
+      span {
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        color: #94a3b8;
+      }
+    }
+
+    &__options {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 6px;
+
+      .flyout-option {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 12px;
+        border-radius: 10px;
+        color: #1e293b;
+        text-decoration: none;
+        background: transparent;
+        border: none;
+        width: 100%;
+        cursor: pointer;
+        text-align: left;
+        font-family: inherit;
+        transition: background 0.18s ease, transform 0.18s ease;
+
+        &:hover {
+          background: #f1f5f9;
+          transform: translateX(3px);
+
+          .option-arrow {
+            color: #2563eb;
+            transform: translate(2px, -2px);
+          }
+        }
+
+        .dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          flex-shrink: 0;
+
+          &--red { background: #ea4335; box-shadow: 0 0 6px rgba(234, 67, 53, 0.4); }
+          &--blue { background: #0078d4; box-shadow: 0 0 6px rgba(0, 120, 212, 0.4); }
+          &--neutral { background: #64748b; }
+          &--green { background: #16a34a; box-shadow: 0 0 6px rgba(22, 163, 74, 0.4); }
+        }
+
+        strong {
+          flex: 1;
+          font-size: 12px;
+          font-weight: 600;
+          color: #0f172a;
+        }
+
+        .option-arrow {
+          color: #94a3b8;
+          transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        .copy-check {
+          color: #16a34a;
+        }
+
+        &--copy {
+          border-top: 1px dashed #e2e8f0;
+          border-radius: 0 0 10px 10px;
+          margin-top: 2px;
+          padding-top: 9px;
+        }
+      }
+    }
+  }
+
+  &__response {
+    margin-top: 32px;
+    padding: 20px;
+    border-radius: 16px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+
+    span {
+      display: block;
+      color: #64748b;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+    }
+
+    strong {
+      display: block;
+      margin-top: 6px;
+      color: #2563eb;
+      font-size: 28px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    p {
+      margin: 8px 0 0;
+      color: #64748b;
+      font-size: 12px;
+    }
+  }
+}
+
+@keyframes flyoutSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 992px) {
+  .contact-info {
+    padding-right: 0;
+
+    &__intro p {
+      max-width: 100%;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .contact-info {
+    &__intro h3 {
+      font-size: 30px;
+    }
+
+    &__item {
+      grid-template-columns: 24px 34px minmax(0, 1fr) auto;
+      gap: 10px;
+      min-height: 66px;
+    }
+
+    &__response {
+      margin-top: 24px;
+      padding: 16px;
+    }
+  }
+}

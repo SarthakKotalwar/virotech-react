@@ -4,11 +4,14 @@
   position: relative;
   padding: clamp(54px, 7.2vw, 92px) 0;
   background: #ffffff;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
 
   .container {
-    width: min(1340px, calc(100% - clamp(28px, 4vw, 56px)));
+    width: 100%;
+    max-width: 1240px;
     margin: 0 auto;
+    padding: 0 clamp(16px, 3.5vw, 32px);
+    box-sizing: border-box;
   }
 
   &__header {
@@ -71,9 +74,7 @@
   border: 1px solid #e2e8f0;
   box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.04);
   overflow: hidden;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.3s ease,
-              border-color 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
 
   .card-spotlight {
     position: absolute;
@@ -81,11 +82,7 @@
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.3s ease;
-    background: radial-gradient(
-      380px circle at var(--mouse-x) var(--mouse-y),
-      rgba(37, 99, 235, 0.06),
-      transparent 70%
-    );
+    background: radial-gradient(380px circle at var(--mouse-x) var(--mouse-y), rgba(37, 99, 235, 0.06), transparent 70%);
   }
 
   &:hover {
@@ -96,7 +93,6 @@
     .card-spotlight {
       opacity: 1;
     }
-
     .author-avatar {
       background: #2563eb;
       color: #ffffff;
@@ -217,7 +213,6 @@
       grid-template-columns: 1fr;
       gap: 16px;
     }
-
     .testimonial-card {
       min-height: auto;
       padding: 18px 16px;

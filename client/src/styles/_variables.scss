@@ -1,26 +1,19 @@
-:root{
+/* client/src/styles/_variables.scss */
+:root {
+  --primary: #0E1B4D;
+  --secondary: #1F3C88;
+  --accent: #6F5BFF;
+  --orange: #FF6B35;
+  --white: #ffffff;
+  --black: #07090F;
+  --gray: #A1A9B8;
+  --surface: #0D111B;
+  --border: rgba(255, 255, 255, 0.08);
+  --glass: rgba(15, 20, 35, 0.72);
+  --radius: 20px;
 
---primary:#0E1B4D;
---secondary:#1F3C88;
-
---accent:#6F5BFF;
-
---orange:#FF6B35;
-
---white:#ffffff;
-
---black:#07090F;
-
---gray:#A1A9B8;
-
---surface:#0D111B;
-
---border:rgba(255,255,255,.08);
-
---glass:rgba(15,20,35,.72);
-
---container:1320px;
-
---radius:20px;
-
+  /* Standardized Page Layout Bounds matching About & Partnership */
+  --site-max-width: 1240px;
+  --site-gutter: clamp(16px, 3.5vw, 32px);
+  --site-border-color: #e2e8f0;
 }

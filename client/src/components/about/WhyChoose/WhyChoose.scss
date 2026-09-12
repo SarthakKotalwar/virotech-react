@@ -8,6 +8,15 @@
     radial-gradient(ellipse 60% 40% at 85% 10%, rgba(37, 99, 235, 0.08), transparent 60%),
     radial-gradient(circle 350px at 15% 90%, rgba(59, 130, 246, 0.06), transparent 50%),
     linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  border-bottom: 1px solid #e2e8f0;
+
+  .about-container {
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 clamp(16px, 3.5vw, 32px);
+    box-sizing: border-box;
+  }
 
   .deck-stage {
     display: grid;

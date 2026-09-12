@@ -4,7 +4,7 @@ import devOpsData from "./DevOpsData";
 
 export default function DevOps() {
   return (
-    <section className="devops">
+    <section className="devops" id="devops">
 
       <div className="container">
 

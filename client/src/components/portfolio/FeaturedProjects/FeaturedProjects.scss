@@ -5,11 +5,14 @@
   padding: clamp(60px, 8vw, 100px) 0;
   overflow: clip;
   background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
 
   .container {
-    width: min(1340px, calc(100% - clamp(24px, 4vw, 56px)));
+    width: 100%;
+    max-width: 1240px;
     margin: 0 auto;
+    padding: 0 clamp(16px, 3.5vw, 32px);
+    box-sizing: border-box;
   }
 
   &::before {
@@ -102,9 +105,7 @@
   background: #ffffff;
   border: 1px solid #e2e8f0;
   box-shadow: 0 12px 35px rgba(15, 23, 42, 0.05);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.4s ease,
-              border-color 0.4s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
 
   &:hover {
     transform: translateY(-8px);
@@ -136,7 +137,6 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-
     &.red { background: #ff5f56; }
     &.yellow { background: #ffbd2e; }
     &.green { background: #27c93f; }
@@ -229,7 +229,6 @@
       background: #f0fdf4;
       border: 1px solid #bbf7d0;
     }
-
     &.ongoing {
       color: #d97706;
       background: #fffbeb;
@@ -290,19 +289,12 @@
 
   .project-link {
     color: #2563eb;
-
     &:hover {
       gap: 10px;
       color: #1d4ed8;
-
-      svg {
-        transform: translate(2px, -2px);
-      }
+      svg { transform: translate(2px, -2px); }
     }
-
-    svg {
-      transition: transform 0.25s ease;
-    }
+    svg { transition: transform 0.25s ease; }
   }
 
   .disabled-link {
@@ -315,7 +307,6 @@
     grid-template-columns: 1fr;
     gap: 24px;
   }
-
   .project-card__browser {
     height: 220px;
   }
@@ -325,23 +316,18 @@
   .featured-projects {
     padding: 46px 0 36px;
   }
-
   .project-card {
     border-radius: 20px;
-
     &__browser {
       height: 180px;
-
       .browser-screen img {
         max-width: 150px;
         max-height: 65px;
       }
     }
-
     &__content {
       padding: 18px 16px;
     }
-
     &__footer {
       flex-direction: column;
       align-items: flex-start;

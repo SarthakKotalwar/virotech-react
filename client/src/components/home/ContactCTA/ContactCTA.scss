@@ -7,6 +7,14 @@
   overflow: hidden;
   isolation: isolate;
 
+  .container {
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 clamp(16px, 3.5vw, 32px);
+    box-sizing: border-box;
+  }
+
   &__ambient-glow {
     position: absolute;
     inset: 0;
@@ -14,7 +22,6 @@
     background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.08), transparent 70%);
   }
 
-  /* Deep Navy-Blue Enterprise Card */
   &__content {
     position: relative;
     z-index: 2;
@@ -93,12 +100,10 @@
       .arrow-icon {
         transition: transform 0.2s ease;
       }
-
       &:hover {
         background: #1d4ed8;
         transform: translateY(-2px);
         box-shadow: 0 14px 30px -4px rgba(37, 99, 235, 0.55);
-
         .arrow-icon {
           transform: translateX(3px);
         }
@@ -135,7 +140,6 @@
 @media (max-width: 992px) {
   .contact-cta {
     padding: 60px 0 50px;
-
     &__content {
       padding: 44px 28px;
       border-radius: 24px;
@@ -146,17 +150,14 @@
 @media (max-width: 640px) {
   .contact-cta {
     padding: 46px 0 38px;
-
     &__content {
       padding: 32px 18px;
       border-radius: 20px;
     }
-
     &__buttons {
       flex-direction: column;
       width: 100%;
       gap: 12px;
-
       .btn-primary,
       .btn-outline {
         width: 100%;

@@ -7,13 +7,13 @@
   background:
     radial-gradient(ellipse 70% 50% at 50% 65%, rgba(37, 99, 235, 0.08), transparent 70%),
     linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
 
   .about-container {
     width: 100%;
-    max-width: 1440px;
+    max-width: 1240px;
     margin: 0 auto;
-    padding: 0 clamp(16px, 3vw, 40px);
+    padding: 0 clamp(16px, 3.5vw, 32px);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -74,7 +74,7 @@
   .network-stage {
     position: relative;
     width: 100%;
-    max-width: 1360px;
+    max-width: 1240px;
     aspect-ratio: 1200 / 680;
     margin: 0 auto;
     perspective: 1000px;

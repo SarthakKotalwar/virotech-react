@@ -5,11 +5,14 @@
   overflow: hidden;
   padding: clamp(60px, 8vw, 100px) 0;
   background: linear-gradient(180deg, #ffffff 0%, #f8fbff 60%, #ffffff 100%);
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
 
   .container {
-    width: min(1340px, calc(100% - clamp(24px, 4vw, 56px)));
+    width: 100%;
+    max-width: 1240px;
     margin: 0 auto;
+    padding: 0 clamp(16px, 3.5vw, 32px);
+    box-sizing: border-box;
   }
 
   &__header {
@@ -128,7 +131,7 @@
 
   .technology__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
     gap: clamp(14px, 2vw, 22px);
     align-items: stretch;
   }
@@ -148,9 +151,7 @@
   border: 1px solid #e2e8f0;
   box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.04);
   overflow: hidden;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.3s ease,
-              border-color 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
 
   .card-spotlight {
     position: absolute;
@@ -158,11 +159,7 @@
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.3s ease;
-    background: radial-gradient(
-      260px circle at var(--mouse-x) var(--mouse-y),
-      rgba(37, 99, 235, 0.07),
-      transparent 70%
-    );
+    background: radial-gradient(260px circle at var(--mouse-x) var(--mouse-y), rgba(37, 99, 235, 0.07), transparent 70%);
   }
 
   &:hover {
@@ -173,7 +170,6 @@
     .card-spotlight {
       opacity: 1;
     }
-
     .technology-card__icon {
       background: #2563eb;
       color: #ffffff;
@@ -225,16 +221,13 @@
 @media (max-width: 640px) {
   .technology {
     padding: 46px 0 36px;
-
     &__tabs {
       gap: 6px;
-
       .tech-tab {
         padding: 8px 14px;
         font-size: 0.8rem;
       }
     }
-
     .technology-card {
       padding: 16px 14px;
       min-height: auto;

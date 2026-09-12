@@ -4,12 +4,15 @@
   position: relative;
   padding: clamp(52px, 6.8vw, 88px) 0;
   background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
   overflow: hidden;
 
   .container {
-    width: min(1340px, calc(100% - clamp(28px, 4vw, 56px)));
+    width: 100%;
+    max-width: 1240px;
     margin: 0 auto;
+    padding: 0 clamp(16px, 3.5vw, 32px);
+    box-sizing: border-box;
   }
 
   &__header {
@@ -80,11 +83,9 @@
     &::before {
       width: 100%;
     }
-
     .devops-card__number {
       color: rgba(37, 99, 235, 0.16);
     }
-
     .devops-card__icon {
       transform: rotate(-6deg) scale(1.08);
       background: #2563eb;
@@ -159,12 +160,10 @@
 @media (max-width: 640px) {
   .devops {
     padding: 46px 0 36px;
-
     &__grid {
       grid-template-columns: 1fr;
       gap: 16px;
     }
-
     .devops-card {
       min-height: auto;
       padding: 20px 18px;
