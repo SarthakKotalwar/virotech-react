@@ -1,5 +1,6 @@
 .contact-hero {
   position: relative;
+  /* Default Light Mode Background */
   background:
     radial-gradient(ellipse 60% 45% at 85% 15%, rgba(37, 99, 235, 0.08), transparent 65%),
     radial-gradient(ellipse 50% 40% at 15% 85%, rgba(56, 189, 248, 0.06), transparent 60%),
@@ -7,7 +8,12 @@
   color: #0f172a;
   overflow: clip;
   border-bottom: 1px solid #e2e8f0;
-  padding: clamp(36px, 4.5vw, 60px) 0 clamp(44px, 5.5vw, 68px);
+
+  /* Clearance for floating navbar */
+  padding-top: calc(var(--navbar-height, 88px) + clamp(32px, 4vw, 54px));
+  padding-bottom: clamp(44px, 5.5vw, 68px);
+  padding-left: 0;
+  padding-right: 0;
 
   &__ambient {
     display: none !important;
@@ -23,6 +29,7 @@
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    background: transparent !important;
   }
 
   &__meta {
@@ -124,35 +131,64 @@
     flex-wrap: wrap;
   }
 
+  /* =====================================================
+     BUTTON: LOCKED BLUE PILL WITH PURE WHITE TEXT
+  ===================================================== */
   &__primary-btn {
     display: inline-flex;
     align-items: center;
     gap: 12px;
     padding: 6px 6px 6px 22px;
     border-radius: 9999px;
-    border: none;
-    background: #2563eb;
-    color: #ffffff;
+    border: none !important;
+    background: #2563eb !important;
+    color: #ffffff !important;
     font-size: 13px;
     font-weight: 700;
     cursor: pointer;
     box-shadow: 0 10px 24px rgba(37, 99, 235, 0.35);
     transition: transform 0.25s ease, background 0.25s ease;
+    text-decoration: none;
+
+    &,
+    span,
+    strong,
+    div,
+    p {
+      color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
+    }
 
     .btn-circle {
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background: #ffffff;
-      color: #2563eb;
+      background: #ffffff !important;
+      color: #2563eb !important;
       display: grid;
       place-items: center;
       transition: transform 0.25s ease;
+
+      svg,
+      i {
+        color: #2563eb !important;
+        stroke: #2563eb !important;
+      }
     }
 
     &:hover {
-      background: #1d4ed8;
+      background: #1d4ed8 !important;
       transform: translateY(-2px);
+
+      &,
+      span,
+      strong,
+      div,
+      p {
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+      }
+
       .btn-circle {
         transform: rotate(45deg);
       }
@@ -448,6 +484,8 @@
 
 @media (max-width: 992px) {
   .contact-hero {
+    padding-top: calc(var(--navbar-height, 88px) + 24px);
+
     &__content {
       grid-template-columns: 1fr;
       gap: 36px;
@@ -473,6 +511,161 @@
     }
     &__scroll {
       align-self: center;
+    }
+  }
+}
+
+/* =====================================================
+   DARK THEME OVERRIDES (Smooth dark bg, crisp light text)
+===================================================== */
+[data-theme="dark"],
+.dark {
+  .contact-hero {
+    background: var(--bg-primary, #070d19) !important;
+    color: #f8fafc;
+    border-bottom-color: var(--border-color, #1e293b);
+
+    &__meta {
+      border-bottom-color: var(--border-color, #1e293b);
+    }
+
+    &__tag {
+      background: var(--bg-card, #111c35);
+      border-color: var(--border-color, #1e293b);
+      color: #60a5fa;
+    }
+
+    &__status {
+      background: var(--bg-card, #111c35);
+      border-color: var(--border-color, #1e293b);
+      color: #cbd5e1;
+    }
+
+    &__eyebrow {
+      color: #60a5fa;
+    }
+
+    h1 {
+      color: #f8fafc;
+      span {
+        color: #60a5fa;
+      }
+    }
+
+    &__copy > p {
+      color: #94a3b8;
+    }
+
+    &__metric {
+      strong {
+        color: #f8fafc;
+      }
+      span {
+        color: #94a3b8;
+      }
+    }
+
+    &__badges {
+      border-top-color: var(--border-color, #1e293b);
+
+      .badge-item {
+        color: #cbd5e1;
+
+        .badge-icon {
+          color: #60a5fa;
+        }
+      }
+    }
+
+    /* Terminal Card in Dark Mode */
+    .terminal-card {
+      background: var(--bg-card, #111c35);
+      border-color: var(--border-color, #1e293b);
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.4);
+
+      &__header {
+        border-bottom-color: var(--border-color, #1e293b);
+      }
+
+      &__title strong {
+        color: #f8fafc;
+      }
+
+      &__scope .tier-pills .tier-btn {
+        background: var(--bg-secondary, #0d1527);
+        border-color: var(--border-color, #1e293b);
+        color: #94a3b8;
+
+        &:hover {
+          background: #1e293b;
+          color: #f8fafc;
+        }
+
+        &.is-active {
+          background: rgba(37, 99, 235, 0.2);
+          border-color: #3b82f6;
+          color: #60a5fa;
+        }
+      }
+
+      &__stats .stat-box {
+        background: var(--bg-secondary, #0d1527);
+        border-color: var(--border-color, #1e293b);
+
+        .stat-label {
+          color: #94a3b8;
+        }
+
+        .stat-value {
+          color: #f8fafc;
+
+          &.highlight {
+            color: #60a5fa;
+          }
+        }
+      }
+
+      &__nodes .nodes-grid .node-item {
+        background: var(--bg-secondary, #0d1527);
+        border-color: var(--border-color, #1e293b);
+
+        .node-info {
+          strong {
+            color: #f8fafc;
+          }
+          span {
+            color: #94a3b8;
+          }
+        }
+      }
+
+      &__footer {
+        border-top-color: var(--border-color, #1e293b);
+        color: #60a5fa;
+      }
+    }
+
+    &__scroll {
+      color: #94a3b8;
+
+      &:hover {
+        color: #60a5fa;
+      }
+    }
+
+    /* Primary button stays permanently blue with white text */
+    &__primary-btn {
+      background: #2563eb !important;
+      color: #ffffff !important;
+
+      &,
+      span,
+      strong,
+      div,
+      p {
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+      }
     }
   }
 }

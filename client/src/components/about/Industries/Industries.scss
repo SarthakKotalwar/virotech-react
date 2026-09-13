@@ -61,7 +61,7 @@
   }
 
   /* =====================================================
-     STAGE CANVAS (NO NESTED SCROLL CONTAINERS)
+     STAGE CANVAS & SVG CONNECTING LINES
   ===================================================== */
   .network-scaler-box {
     width: 100%;
@@ -92,9 +92,21 @@
 
     path {
       vector-effect: non-scaling-stroke;
+      /* High-contrast crisp gray for light mode */
+      stroke: #cbd5e1;
+      stroke-width: 1.5px;
+      stroke-dasharray: 4 6;
+      opacity: 0.9;
+      transition: stroke 0.25s ease, opacity 0.25s ease;
     }
 
+    .branch-active,
+    path.is-active,
     .branch-active-glow {
+      stroke: #2563eb !important;
+      stroke-width: 2.5px;
+      stroke-dasharray: none !important;
+      opacity: 1;
       filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.8));
       transition: stroke 0.25s ease;
     }
@@ -149,13 +161,13 @@
         width: 80%;
         height: 80%;
         object-fit: contain;
+        display: block;
       }
 
+      /* Hides stray "V" or text nodes */
+      span,
       .root-fallback {
-        display: none;
-        color: #091124;
-        font-weight: 900;
-        font-size: 2.2rem;
+        display: none !important;
       }
     }
 
@@ -385,16 +397,10 @@
         }
       }
 
-      /* Clean mobile display: Hide static labels and popovers */
       &,
       &.is-active,
       &.node-inner {
-        .node-short-title {
-          display: none !important;
-          visibility: hidden !important;
-          opacity: 0 !important;
-        }
-
+        .node-short-title,
         .node-popover {
           display: none !important;
           visibility: hidden !important;
@@ -432,6 +438,73 @@
       .root-circle {
         width: 44px;
         height: 44px;
+      }
+    }
+  }
+}
+
+/* =====================================================
+   DARK THEME OVERRIDES (Leaves Light Mode Untouched)
+===================================================== */
+[data-theme="dark"],
+.dark {
+  .industries-network {
+    background: var(--bg-primary, #070d19) !important;
+    border-bottom-color: var(--border-color, #1e293b);
+
+    .network-svg path:not(.branch-active):not(.branch-active-glow) {
+      stroke: rgba(255, 255, 255, 0.22);
+      opacity: 0.7;
+    }
+
+    .mobile-sector-card {
+      background: var(--bg-card, #111c35);
+      border-color: var(--border-color, #1e293b);
+
+      h4 { color: #f8fafc; }
+      p { color: #94a3b8; }
+    }
+
+    .network-root .root-circle {
+      background: var(--bg-card, #111c35);
+      border-color: #2563eb;
+    }
+
+    .network-node {
+      .node-bubble {
+        background: var(--bg-card, #111c35);
+        border-color: var(--border-color, #1e293b);
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+
+        .node-icon {
+          color: #94a3b8;
+        }
+      }
+
+      .node-short-title {
+        color: #cbd5e1;
+      }
+
+      .node-popover {
+        background: var(--bg-card, #111c35);
+        border-color: var(--border-color, #1e293b);
+
+        h4 { color: #f8fafc; }
+        p { color: #94a3b8; }
+      }
+
+      &.is-active {
+        .node-bubble {
+          background: #2563eb;
+          border-color: #2563eb;
+
+          .node-icon {
+            color: #ffffff;
+          }
+        }
+        .node-short-title {
+          color: #60a5fa;
+        }
       }
     }
   }

@@ -4,10 +4,8 @@
   position: relative;
   overflow: clip;
   padding: clamp(65px, 8vw, 100px) 0;
-  background:
-    radial-gradient(ellipse 60% 45% at 50% 15%, rgba(37, 99, 235, 0.08), transparent 70%),
-    linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
-  border-bottom: 1px solid #e2e8f0;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
   user-select: none;
 
   .about-container {
@@ -16,11 +14,10 @@
     margin: 0 auto;
     padding: 0 clamp(16px, 3.5vw, 32px);
     box-sizing: border-box;
+    background: transparent !important;
   }
 
-  /* =====================================================
-     RUNWAY PROGRESS TRACK
-  ===================================================== */
+  /* RUNWAY PROGRESS TRACK */
   .runway-nav {
     position: relative;
     max-width: 680px;
@@ -33,7 +30,7 @@
       left: 12px;
       right: 12px;
       height: 2px;
-      background: #e2e8f0;
+      background: var(--border-color);
       z-index: 1;
     }
 
@@ -71,9 +68,9 @@
         width: 28px;
         height: 28px;
         border-radius: 50%;
-        background: #ffffff;
-        border: 2px solid #cbd5e1;
-        box-shadow: 0 4px 10px rgba(15, 23, 42, 0.05);
+        background: var(--bg-card);
+        border: 2px solid var(--border-color);
+        box-shadow: var(--shadow-xs);
         transition: all 0.3s ease;
         position: relative;
 
@@ -82,7 +79,7 @@
           position: absolute;
           inset: 6px;
           border-radius: 50%;
-          background: #cbd5e1;
+          background: var(--border-color);
           transition: all 0.3s ease;
         }
       }
@@ -90,7 +87,7 @@
       .runway-node-year {
         font-size: 0.82rem;
         font-weight: 700;
-        color: #94a3b8;
+        color: var(--text-secondary);
         letter-spacing: 0.04em;
         transition: color 0.3s ease;
       }
@@ -111,16 +108,14 @@
           transform: scale(1.15);
         }
         .runway-node-year {
-          color: #2563eb;
+          color: var(--color-primary-light, #60a5fa);
           font-weight: 800;
         }
       }
     }
   }
 
-  /* =====================================================
-     RUNWAY CAROUSEL DECK (Crisp Rendering Engine)
-  ===================================================== */
+  /* RUNWAY CAROUSEL DECK */
   .runway-deck {
     position: relative;
     max-width: 960px;
@@ -145,24 +140,22 @@
     width: min(560px, 92%);
     padding: clamp(28px, 4vw, 40px);
     border-radius: 26px;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     box-sizing: border-box;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    -webkit-font-smoothing: subpixel-antialiased;
     transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
                 opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
                 box-shadow 0.45s ease,
                 border-color 0.3s ease;
 
-    /* FRONT ACTIVE CARD: 100% Sharp, Crisp Vector Rendering */
     &--active {
       transform: translate3d(0, 0, 0) scale(1);
       opacity: 1;
       z-index: 5;
-      border-color: rgba(37, 99, 235, 0.35);
-      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(37, 99, 235, 0.08);
+      border-color: rgba(37, 99, 235, 0.4);
+      box-shadow: var(--shadow-lg);
       cursor: default;
 
       .runway-card__icon {
@@ -171,13 +164,12 @@
       }
     }
 
-    /* PREVIOUS CARD (Peek left) */
     &--prev {
       transform: translate3d(-62%, 0, 0) scale(0.9);
-      opacity: 0.4;
+      opacity: 0.35;
       z-index: 2;
       cursor: pointer;
-      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
+      box-shadow: var(--shadow-xs);
 
       &:hover {
         opacity: 0.65;
@@ -185,13 +177,12 @@
       }
     }
 
-    /* NEXT CARD (Peek right) */
     &--next {
       transform: translate3d(62%, 0, 0) scale(0.9);
-      opacity: 0.4;
+      opacity: 0.35;
       z-index: 2;
       cursor: pointer;
-      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
+      box-shadow: var(--shadow-xs);
 
       &:hover {
         opacity: 0.65;
@@ -199,7 +190,6 @@
       }
     }
 
-    /* HIDDEN CARDS */
     &--hidden {
       transform: translate3d(0, 0, 0) scale(0.8);
       opacity: 0;
@@ -218,9 +208,9 @@
       width: 54px;
       height: 54px;
       border-radius: 16px;
-      background: rgba(37, 99, 235, 0.08);
-      border: 1px solid rgba(37, 99, 235, 0.16);
-      color: #2563eb;
+      background: rgba(37, 99, 235, 0.1);
+      border: 1px solid rgba(37, 99, 235, 0.2);
+      color: var(--color-primary-light, #60a5fa);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -234,9 +224,9 @@
       gap: 6px;
       padding: 6px 14px;
       border-radius: 999px;
-      background: #eff6ff;
-      border: 1px solid #dbeafe;
-      color: #2563eb;
+      background: rgba(37, 99, 235, 0.12);
+      border: 1px solid rgba(37, 99, 235, 0.25);
+      color: var(--color-primary-light, #60a5fa);
       font-size: 0.82rem;
       font-weight: 800;
     }
@@ -247,30 +237,28 @@
       font-size: 0.74rem;
       font-weight: 800;
       letter-spacing: 0.12em;
-      color: #94a3b8;
+      color: var(--text-secondary);
       margin-bottom: 8px;
     }
 
     h3 {
       font-size: clamp(1.3rem, 2vw, 1.65rem);
       font-weight: 800;
-      color: #0f172a;
+      color: var(--text-primary);
       margin: 0 0 12px;
       line-height: 1.25;
       letter-spacing: -0.02em;
     }
 
     p {
-      color: #64748b;
+      color: var(--text-secondary);
       font-size: clamp(0.92rem, 1.15vw, 1rem);
       line-height: 1.75;
       margin: 0;
     }
   }
 
-  /* =====================================================
-     CONTROLS
-  ===================================================== */
+  /* CONTROLS */
   .runway-controls {
     display: flex;
     align-items: center;
@@ -282,15 +270,15 @@
       width: 46px;
       height: 46px;
       border-radius: 50%;
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      color: #0f172a;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.25rem;
       cursor: pointer;
-      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+      box-shadow: var(--shadow-xs);
       transition: all 0.25s ease;
 
       &:hover {
@@ -298,7 +286,7 @@
         border-color: #2563eb;
         color: #ffffff;
         transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+        box-shadow: var(--shadow-sm);
       }
     }
 
@@ -306,18 +294,15 @@
       font-family: monospace;
       font-size: 0.9rem;
       font-weight: 700;
-      color: #94a3b8;
+      color: var(--text-secondary);
 
       span {
-        color: #2563eb;
+        color: var(--color-primary-light, #60a5fa);
         font-size: 1.1rem;
       }
     }
   }
 
-  /* =====================================================
-     RESPONSIVE
-  ===================================================== */
   @media (max-width: 768px) {
     .runway-deck__stage {
       height: 350px;

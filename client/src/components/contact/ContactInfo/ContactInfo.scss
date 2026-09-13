@@ -312,3 +312,132 @@
     }
   }
 }
+
+/* =====================================================
+   DARK THEME OVERRIDES (Leaves Light Mode Untouched)
+===================================================== */
+[data-theme="dark"],
+.dark {
+  .contact-info {
+    &__header .contact-label {
+      color: #60a5fa;
+    }
+
+    &__arrow {
+      background: var(--bg-card, #111c35);
+      border-color: var(--border-color, #1e293b);
+      color: #60a5fa;
+    }
+
+    &__intro {
+      h3 {
+        color: #f8fafc;
+        span {
+          color: #60a5fa;
+        }
+      }
+      p {
+        color: #94a3b8;
+      }
+    }
+
+    &__list {
+      border-top-color: var(--border-color, #1e293b);
+    }
+
+    &__item {
+      border-bottom-color: var(--border-color, #1e293b);
+
+      &:hover {
+        background: var(--bg-secondary, #0d1527);
+
+        .contact-info__item-arrow {
+          color: #60a5fa;
+        }
+      }
+
+      &--email.is-open {
+        background: var(--bg-secondary, #0d1527);
+      }
+
+      &-number {
+        color: #94a3b8;
+      }
+
+      &-icon {
+        background: rgba(37, 99, 235, 0.15);
+        border-color: rgba(37, 99, 235, 0.3);
+        color: #60a5fa;
+      }
+
+      &-content {
+        span {
+          color: #94a3b8;
+        }
+        strong {
+          color: #f8fafc;
+        }
+      }
+
+      &-arrow {
+        color: #94a3b8;
+
+        .chevron.rotate {
+          color: #60a5fa;
+        }
+      }
+    }
+
+    .email-flyout {
+      background: var(--bg-card, #111c35);
+      border-color: var(--border-color, #1e293b);
+      box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.5);
+
+      &__header {
+        border-bottom-color: var(--border-color, #1e293b);
+        span {
+          color: #94a3b8;
+        }
+      }
+
+      &__options .flyout-option {
+        color: #cbd5e1;
+
+        &:hover {
+          background: var(--bg-secondary, #0d1527);
+
+          strong {
+            color: #ffffff !important;
+          }
+
+          .option-arrow {
+            color: #60a5fa;
+          }
+        }
+
+        strong {
+          color: #f8fafc;
+        }
+
+        &--copy {
+          border-top-color: var(--border-color, #1e293b);
+        }
+      }
+    }
+
+    &__response {
+      background: var(--bg-card, #111c35);
+      border-color: var(--border-color, #1e293b);
+
+      span {
+        color: #94a3b8;
+      }
+      strong {
+        color: #60a5fa;
+      }
+      p {
+        color: #cbd5e1;
+      }
+    }
+  }
+}

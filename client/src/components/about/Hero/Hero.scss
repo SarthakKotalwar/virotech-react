@@ -3,7 +3,11 @@
 .about-hero {
   position: relative;
   overflow: clip;
-  padding: clamp(70px, 8.5vw, 100px) 0 clamp(44px, 5vw, 64px);
+  /* Clearance for floating navbar (88px navbar + spacing) */
+  padding-top: calc(var(--navbar-height, 88px) + clamp(36px, 4.5vw, 56px));
+  padding-bottom: clamp(44px, 5vw, 64px);
+  padding-left: 0;
+  padding-right: 0;
   background:
     radial-gradient(circle at top right, rgba(37, 99, 235, 0.08), transparent 45%),
     radial-gradient(circle at bottom left, rgba(0, 180, 255, 0.06), transparent 40%),
@@ -225,7 +229,8 @@
   }
 
   @media (max-width: 992px) {
-    padding: 60px 0 36px;
+    padding-top: calc(var(--navbar-height, 88px) + 32px);
+    padding-bottom: 36px;
 
     &__grid {
       grid-template-columns: 1fr;
@@ -253,12 +258,68 @@
   }
 
   @media (max-width: 480px) {
+    padding-top: calc(var(--navbar-height, 88px) + 24px);
+
     &__buttons {
       flex-direction: column;
 
       .btn-primary,
       .btn-outline {
         width: 100%;
+      }
+    }
+  }
+}
+
+/* =====================================================
+   DARK THEME OVERRIDES FOR ABOUT HERO
+===================================================== */
+[data-theme="dark"],
+.dark {
+  .about-hero {
+    background: var(--bg-primary, #070d19) !important;
+    border-bottom: 1px solid var(--border-color, #1e293b);
+
+    &__badge {
+      background: var(--bg-card, #111c35);
+      border-color: var(--border-color, #1e293b);
+      color: #60a5fa;
+    }
+
+    h1 {
+      color: #f8fafc;
+    }
+
+    p {
+      color: #94a3b8;
+    }
+
+    .btn-outline {
+      background: var(--bg-card, #111c35);
+      border-color: var(--border-color, #1e293b);
+      color: #f8fafc;
+
+      &:hover {
+        background: #2563eb;
+        border-color: #2563eb;
+        color: #ffffff;
+      }
+    }
+
+    &__stats {
+      border-top-color: var(--border-color, #1e293b);
+
+      .about-stat-card {
+        background: var(--bg-card, #111c35);
+        border-color: var(--border-color, #1e293b);
+
+        h3 {
+          color: #60a5fa;
+        }
+
+        p {
+          color: #94a3b8;
+        }
       }
     }
   }

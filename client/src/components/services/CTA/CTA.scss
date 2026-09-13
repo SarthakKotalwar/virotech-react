@@ -4,8 +4,9 @@
   position: relative;
   overflow: clip;
   padding: clamp(54px, 7.2vw, 92px) 0;
-  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
-  border-bottom: 1px solid #e2e8f0;
+  /* Outer section adapts to theme, removing white seams */
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
 
   .container {
     width: 100%;
@@ -13,8 +14,10 @@
     margin: 0 auto;
     padding: 0 clamp(16px, 3.5vw, 32px);
     box-sizing: border-box;
+    background: transparent !important;
   }
 
+  /* Inner Card: Stays dark in BOTH light and dark themes */
   &__content {
     position: relative;
     z-index: 2;
@@ -23,10 +26,10 @@
     padding: clamp(38px, 5vw, 64px) clamp(20px, 4vw, 54px);
     text-align: center;
     border-radius: 28px;
-    background: #091124;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #091124 !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
     box-shadow: 0 24px 60px -10px rgba(9, 17, 36, 0.45);
-    color: #ffffff;
+    color: #ffffff !important;
     transition: transform 0.35s ease, box-shadow 0.35s ease;
 
     &:hover {
@@ -40,7 +43,7 @@
       border-radius: 999px;
       background: rgba(37, 99, 235, 0.15);
       border: 1px solid rgba(96, 165, 250, 0.25);
-      color: #60a5fa;
+      color: #60a5fa !important;
       font-size: 0.78rem;
       font-weight: 700;
       letter-spacing: 0.08em;
@@ -54,14 +57,14 @@
       line-height: 1.15;
       letter-spacing: -0.025em;
       font-weight: 800;
-      color: #ffffff;
+      color: #ffffff !important;
       text-wrap: balance;
     }
 
     > p {
       max-width: 740px;
       margin: 0 auto;
-      color: #94a3b8;
+      color: #94a3b8 !important;
       font-size: clamp(0.94rem, 1.2vw, 1.05rem);
       line-height: 1.8;
       text-wrap: pretty;
@@ -84,8 +87,8 @@
       min-width: 170px;
       padding: 12px 28px;
       border-radius: 9999px;
-      background: #2563eb;
-      color: #ffffff;
+      background: #2563eb !important;
+      color: #ffffff !important;
       font-weight: 600;
       font-size: 0.95rem;
       text-decoration: none;
@@ -93,7 +96,7 @@
       transition: all 0.25s ease;
 
       &:hover {
-        background: #1d4ed8;
+        background: #1d4ed8 !important;
         transform: translateY(-2px);
       }
     }
@@ -106,18 +109,18 @@
       min-width: 170px;
       padding: 12px 28px;
       border-radius: 9999px;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      background: rgba(255, 255, 255, 0.04);
-      color: #f1f5f9;
+      border: 1px solid rgba(255, 255, 255, 0.16) !important;
+      background: rgba(255, 255, 255, 0.05) !important;
+      color: #f1f5f9 !important;
       font-weight: 600;
       font-size: 0.95rem;
       text-decoration: none;
       transition: all 0.25s ease;
 
       &:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(255, 255, 255, 0.35);
-        color: #ffffff;
+        background: rgba(255, 255, 255, 0.12) !important;
+        border-color: rgba(255, 255, 255, 0.35) !important;
+        color: #ffffff !important;
         transform: translateY(-2px);
       }
     }
@@ -139,27 +142,27 @@
     gap: 16px;
     padding: clamp(18px, 2.2vw, 24px);
     border-radius: 20px;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.035);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-xs);
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 
     &:hover {
       transform: translateY(-4px);
       border-color: #93c5fd;
-      box-shadow: 0 16px 36px rgba(37, 99, 235, 0.09);
+      box-shadow: var(--shadow-md);
     }
 
     h3 {
       margin: 0 0 6px;
-      color: #0f172a;
+      color: var(--text-primary);
       font-size: clamp(1rem, 1.25vw, 1.1rem);
       font-weight: 700;
     }
 
     p {
       margin: 0;
-      color: #64748b;
+      color: var(--text-secondary);
       font-size: clamp(0.82rem, 1vw, 0.9rem);
       line-height: 1.6;
     }
@@ -173,9 +176,9 @@
     width: 40px;
     height: 40px;
     border-radius: 12px;
-    background: rgba(37, 99, 235, 0.08);
-    border: 1px solid #dbeafe;
-    color: #2563eb;
+    background: rgba(37, 99, 235, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    color: var(--color-primary-light, #60a5fa);
     font-size: 0.85rem;
     font-weight: 800;
   }

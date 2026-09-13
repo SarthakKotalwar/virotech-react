@@ -4,10 +4,8 @@
   position: relative;
   overflow: clip;
   padding: clamp(65px, 8vw, 100px) 0;
-  background:
-    radial-gradient(ellipse 60% 40% at 85% 15%, rgba(37, 99, 235, 0.08), transparent 70%),
-    linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
-  border-bottom: 1px solid #e2e8f0;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
   user-select: none;
 
   .about-container {
@@ -16,11 +14,10 @@
     margin: 0 auto;
     padding: 0 clamp(16px, 3.5vw, 32px);
     box-sizing: border-box;
+    background: transparent !important;
   }
 
-  /* =====================================================
-     CATEGORY CONTROLS WITH LIVE INTERVAL METERS
-  ===================================================== */
+  /* CATEGORY CONTROLS */
   &__nav-wrap {
     overflow-x: auto;
     scrollbar-width: none;
@@ -49,27 +46,27 @@
     align-items: center;
     padding: 10px 22px;
     border-radius: 999px;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    color: #64748b;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
     font-size: clamp(0.82rem, 1vw, 0.9rem);
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+    box-shadow: var(--shadow-xs);
     transition: all 0.25s ease;
     outline: none;
 
     &:hover {
       border-color: #93c5fd;
-      color: #2563eb;
+      color: var(--color-primary-light, #60a5fa);
       transform: translateY(-2px);
     }
 
     &.is-active {
-      background: #091124;
-      border-color: #091124;
-      color: #ffffff;
-      box-shadow: 0 10px 24px rgba(9, 17, 36, 0.2);
+      background: #2563eb !important;
+      border-color: #2563eb !important;
+      color: #ffffff !important;
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.35);
       transform: translateY(-2px);
     }
 
@@ -78,14 +75,12 @@
       bottom: 0;
       left: 0;
       height: 3px;
-      background: linear-gradient(90deg, #2563eb, #60a5fa);
+      background: linear-gradient(90deg, #60a5fa, #93c5fd);
       animation: autoProgress 4.5s linear infinite;
     }
   }
 
-  /* =====================================================
-     CONSOLE STAGE (DUAL WORKSPACE)
-  ===================================================== */
+  /* CONSOLE STAGE */
   &__stage {
     display: grid;
     grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.2fr);
@@ -95,19 +90,19 @@
     margin: 0 auto;
   }
 
-  /* Left Console Hub */
+  /* Left Console Hub: Permanently Dark */
   .tech-console-card {
     position: relative;
     padding: clamp(32px, 4vw, 44px);
     border-radius: 28px;
-    background: linear-gradient(145deg, #091124 0%, #172a54 60%, #1e3a8a 100%);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 24px 60px rgba(9, 17, 36, 0.24);
+    background: linear-gradient(145deg, #091124 0%, #172a54 60%, #1e3a8a 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 24px 60px rgba(9, 17, 36, 0.35);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
-    color: #ffffff;
+    color: #ffffff !important;
 
     &__glow {
       position: absolute;
@@ -136,7 +131,7 @@
       font-size: 0.76rem;
       font-weight: 800;
       letter-spacing: 0.08em;
-      color: #93c5fd;
+      color: #93c5fd !important;
 
       .console-dot {
         width: 7px;
@@ -156,13 +151,13 @@
       h3 {
         font-size: clamp(1.5rem, 2.4vw, 2rem);
         font-weight: 800;
-        color: #ffffff;
+        color: #ffffff !important;
         margin: 0 0 14px;
         letter-spacing: -0.02em;
       }
 
       p {
-        color: rgba(255, 255, 255, 0.8);
+        color: rgba(255, 255, 255, 0.8) !important;
         font-size: clamp(0.92rem, 1.15vw, 1.02rem);
         line-height: 1.75;
         margin: 0 0 28px;
@@ -180,14 +175,14 @@
         gap: 8px;
         padding: 8px 16px;
         border-radius: 12px;
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.08) !important;
+        border: 1px solid rgba(255, 255, 255, 0.14) !important;
         font-size: 0.8rem;
         font-weight: 700;
-        color: #dbeafe;
+        color: #dbeafe !important;
 
         svg {
-          color: #60a5fa;
+          color: #60a5fa !important;
           font-size: 0.95rem;
         }
       }
@@ -214,9 +209,9 @@
       gap: 16px;
       padding: 22px 20px;
       border-radius: 20px;
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.03);
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-xs);
       overflow: hidden;
       transition: all 0.28s ease;
       animation: chipFadeIn 0.4s ease both;
@@ -224,7 +219,7 @@
       &:hover {
         transform: translateY(-4px);
         border-color: rgba(37, 99, 235, 0.35);
-        box-shadow: 0 16px 36px rgba(37, 99, 235, 0.1);
+        box-shadow: var(--shadow-md);
 
         .tech-chip__indicator {
           background: #2563eb;
@@ -241,9 +236,9 @@
         width: 46px;
         height: 46px;
         border-radius: 14px;
-        background: rgba(37, 99, 235, 0.08);
-        border: 1px solid rgba(37, 99, 235, 0.16);
-        color: #2563eb;
+        background: rgba(37, 99, 235, 0.1);
+        border: 1px solid rgba(37, 99, 235, 0.2);
+        color: var(--color-primary-light, #60a5fa);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -261,14 +256,14 @@
           margin: 0;
           font-size: 1.05rem;
           font-weight: 800;
-          color: #0f172a;
+          color: var(--text-primary);
           letter-spacing: -0.01em;
         }
 
         span {
           font-size: 0.74rem;
           font-weight: 700;
-          color: #64748b;
+          color: var(--text-secondary);
           text-transform: uppercase;
           letter-spacing: 0.05em;
         }
@@ -286,7 +281,6 @@
       }
     }
 
-    /* Slider Micro-Controls */
     .tech-stage-controls {
       display: flex;
       align-items: center;
@@ -298,15 +292,15 @@
         width: 38px;
         height: 38px;
         border-radius: 50%;
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        color: #0f172a;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        color: var(--text-primary);
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 1.1rem;
         cursor: pointer;
-        box-shadow: 0 4px 10px rgba(15, 23, 42, 0.04);
+        box-shadow: var(--shadow-xs);
         transition: all 0.25s ease;
 
         &:hover {
@@ -321,12 +315,11 @@
         font-family: monospace;
         font-size: 0.84rem;
         font-weight: 700;
-        color: #94a3b8;
+        color: var(--text-secondary);
       }
     }
   }
 
-  /* Responsive Rules */
   @media (max-width: 992px) {
     &__stage {
       grid-template-columns: 1fr;
@@ -355,12 +348,6 @@
 }
 
 @keyframes chipFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }

@@ -388,3 +388,118 @@
     }
   }
 }
+
+/* =====================================================
+   DARK THEME OVERRIDES (Leaves Light Mode Untouched)
+===================================================== */
+[data-theme="dark"],
+.dark {
+  .blog-explorer {
+    background: var(--bg-primary, #070d19) !important;
+    border-bottom-color: var(--border-color, #1e293b);
+
+    &__eyebrow {
+      background: var(--bg-card, #111c35);
+      border-color: var(--border-color, #1e293b);
+      color: #60a5fa;
+    }
+
+    &__heading h2 {
+      color: #f8fafc;
+    }
+
+    &__description {
+      color: #94a3b8;
+    }
+
+    &__toolbar {
+      border-bottom-color: var(--border-color, #1e293b);
+    }
+
+    &__count span {
+      color: #94a3b8;
+    }
+  }
+
+  .blog-filter {
+    background: var(--bg-card, #111c35);
+    border-color: var(--border-color, #1e293b);
+    color: #94a3b8;
+
+    &:hover {
+      color: #60a5fa;
+      border-color: #3b82f6;
+    }
+
+    &--active {
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #2563eb;
+    }
+  }
+
+  .blog-explorer-card {
+    &__inner {
+      background: var(--bg-card, #111c35);
+      border-color: var(--border-color, #1e293b);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+      &:hover {
+        border-color: rgba(96, 165, 250, 0.4);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    &__media {
+      background: var(--bg-secondary, #0d1527);
+    }
+
+    &__number {
+      background: rgba(17, 28, 53, 0.85);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: #60a5fa;
+    }
+
+    &__open {
+      background: rgba(17, 28, 53, 0.85);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: #60a5fa;
+
+      &:hover {
+        background: #2563eb;
+        color: #ffffff;
+      }
+    }
+
+    h3 {
+      color: #f8fafc;
+
+      &:hover {
+        color: #60a5fa;
+      }
+    }
+
+    p {
+      color: #94a3b8;
+    }
+
+    &__meta {
+      color: #94a3b8;
+    }
+
+    &__tags span {
+      background: var(--bg-secondary, #0d1527);
+      border-color: var(--border-color, #1e293b);
+      color: #cbd5e1;
+    }
+
+    &__footer {
+      border-top-color: var(--border-color, #1e293b);
+      color: #60a5fa;
+
+      &-arrow {
+        background: rgba(37, 99, 235, 0.15);
+      }
+    }
+  }
+}

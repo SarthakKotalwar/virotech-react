@@ -1,89 +1,102 @@
-@use "../abstracts/mixins" as *;
-
 /* =====================================================
-   GLOBAL BASE
+   GLOBAL THEME VARIABLES & BASE
 ===================================================== */
 
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-card: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --border-color: #e2e8f0;
+}
+
+[data-theme="dark"],
+.dark {
+  --bg-primary: #070d19;
+  --bg-secondary: #0d1527;
+  --bg-card: #111c35;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --border-color: #1e293b;
+}
+
+/* Global smooth transition for background and font color changes */
+*,
+*::before,
+*::after {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+html,
 body {
-  background: var(--color-background);
-  color: var(--color-text);
-
-  margin: 0;
-}
-
-
-/* =====================================================
-   GLOBAL CONTAINER
-===================================================== */
-
-.container {
-  @include container;
-}
-
-
-/* =====================================================
-   MAIN CONTENT
-===================================================== */
-
-.main-content {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   min-height: 100vh;
-
-  padding-top: 120px;
+  margin: 0;
+  padding: 0;
 }
-
 
 /* =====================================================
-   GLOBAL SECTION SYSTEM
-   Consistent compact spacing across the website
+   DARK THEME OVERRIDES
 ===================================================== */
 
-section {
-  position: relative;
-
-  padding-top: 64px;
-  padding-bottom: 52px;
-}
-
-
-/* =====================================================
-   SECTION SPACING
-   Prevent unnecessary vertical gaps between sections
-===================================================== */
-
-section + section {
-  margin-top: 0;
-}
-
-
-/* =====================================================
-   RESPONSIVE SECTION SPACING
-===================================================== */
-
-@media (max-width: 1024px) {
-
-  section {
-    padding-top: 58px;
-    padding-bottom: 46px;
+[data-theme="dark"],
+.dark {
+  /* 1. All layout containers MUST be transparent to prevent two-tone boxes */
+  .container,
+  [class*="__container"],
+  [class*="container"],
+  [class*="__wrapper"],
+  [class*="wrapper"],
+  .hero__container,
+  .hero__left,
+  .hero__right {
+    background: transparent !important;
+    background-color: transparent !important;
   }
 
-}
-
-
-@media (max-width: 768px) {
-
-  section {
-    padding-top: 50px;
-    padding-bottom: 40px;
+  /* 2. All section wrappers adopt the root dark background */
+  section,
+  header:not(.navbar),
+  main,
+  article {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary);
   }
 
-}
-
-
-@media (max-width: 480px) {
-
-  section {
-    padding-top: 44px;
-    padding-bottom: 34px;
+  /* 3. Cards & elevated UI elements use the card token */
+  .card,
+  .box,
+  .hero-card,
+  .about-card,
+  .service-card,
+  .portfolio-card,
+  .process-card,
+  .testimonial-card,
+  .stats__card,
+  .faq__item,
+  .client-logo {
+    background-color: var(--bg-card) !important;
+    border-color: var(--border-color) !important;
   }
 
+  /* 4. Text & Heading colors */
+  h1, h2, h3, h4, h5, h6,
+  [class*="title"],
+  [class*="heading"] {
+    color: var(--text-primary) !important;
+  }
+
+  p, span, li,
+  a:not([class*="btn"]):not([class*="button"]) {
+    color: var(--text-secondary);
+  }
+
+  /* 5. Keep Contact CTA Card permanently dark in both themes */
+  .contact-cta__content {
+    background: #091124 !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
 }

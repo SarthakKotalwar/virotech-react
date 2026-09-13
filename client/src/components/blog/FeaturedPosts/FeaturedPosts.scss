@@ -266,3 +266,80 @@
     }
   }
 }
+
+/* =====================================================
+   DARK THEME OVERRIDES (Leaves Light Mode Untouched)
+===================================================== */
+[data-theme="dark"],
+.dark {
+  .featured-posts {
+    background: var(--bg-primary, #070d19) !important;
+    border-bottom-color: var(--border-color, #1e293b);
+
+    &__eyebrow {
+      background: var(--bg-card, #111c35);
+      border-color: var(--border-color, #1e293b);
+      color: #60a5fa;
+    }
+
+    h2 {
+      color: #f8fafc;
+    }
+
+    &__heading > p {
+      color: #94a3b8;
+    }
+  }
+
+  .featured-post {
+    background: var(--bg-card, #111c35);
+    border-color: var(--border-color, #1e293b);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+    &:hover {
+      border-color: rgba(96, 165, 250, 0.4);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+    }
+
+    &__visual {
+      background: radial-gradient(circle at 50% 50%, rgba(30, 41, 59, 0.6) 0%, transparent 60%), linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      border-bottom-color: var(--border-color, #1e293b);
+    }
+
+    &--purple &__visual {
+      background: radial-gradient(circle at 50% 50%, rgba(88, 28, 135, 0.4) 0%, transparent 60%), linear-gradient(135deg, #1e1b4b 0%, #2e1065 100%);
+    }
+
+    &--cyan &__visual {
+      background: radial-gradient(circle at 50% 50%, rgba(14, 116, 144, 0.4) 0%, transparent 60%), linear-gradient(135deg, #083344 0%, #164e63 100%);
+    }
+
+    &__number {
+      color: #94a3b8;
+    }
+
+    &__category {
+      color: #60a5fa;
+    }
+
+    h3 {
+      color: #f8fafc;
+    }
+
+    p {
+      color: #94a3b8;
+    }
+
+    &__meta {
+      color: #94a3b8;
+    }
+
+    &__link {
+      color: #60a5fa;
+
+      &:hover {
+        color: #93c5fd;
+      }
+    }
+  }
+}

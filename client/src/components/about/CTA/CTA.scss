@@ -4,17 +4,30 @@
   position: relative;
   overflow: clip;
   padding: clamp(60px, 8vw, 96px) 0;
-  background: #ffffff;
+  /* Outer section adopts theme background to prevent two-tone border seams */
+  background: var(--bg-primary, #ffffff);
+  border-bottom: 1px solid var(--border-color, #e2e8f0);
 
+  .container {
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 clamp(16px, 3.5vw, 32px);
+    box-sizing: border-box;
+    background: transparent !important;
+  }
+
+  /* Inner Card: Stays permanently dark in both light & dark themes */
   &__card {
     position: relative;
     overflow: hidden;
     padding: clamp(44px, 6vw, 76px) clamp(22px, 5vw, 60px);
     border-radius: 32px;
-    background: linear-gradient(135deg, #091124 0%, #17326c 55%, #1e4ed8 100%);
-    color: #ffffff;
+    background: linear-gradient(135deg, #091124 0%, #17326c 55%, #1e4ed8 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: #ffffff !important;
     text-align: center;
-    box-shadow: 0 35px 80px rgba(15, 23, 42, 0.25);
+    box-shadow: 0 35px 80px rgba(15, 23, 42, 0.35);
   }
 
   &__circle {
@@ -22,6 +35,7 @@
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.07);
     pointer-events: none;
+    animation: floatCircle 8s infinite ease-in-out;
 
     &--1 {
       width: 380px;
@@ -35,6 +49,7 @@
       height: 240px;
       left: -60px;
       bottom: -60px;
+      animation-delay: 2s;
     }
   }
 
@@ -42,13 +57,13 @@
     display: inline-flex;
     padding: 6px 16px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid rgba(255, 255, 255, 0.22) !important;
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     margin-bottom: 18px;
-    color: #ffffff;
+    color: #ffffff !important;
     text-transform: uppercase;
   }
 
@@ -58,11 +73,11 @@
     font-weight: 800;
     line-height: 1.12;
     letter-spacing: -0.025em;
-    color: #ffffff;
+    color: #ffffff !important;
     text-wrap: balance;
 
     span {
-      color: #93c5fd;
+      color: #93c5fd !important;
     }
   }
 
@@ -71,10 +86,11 @@
     margin: 20px auto 0;
     line-height: 1.75;
     font-size: clamp(0.94rem, 1.2vw, 1.05rem);
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.85) !important;
     text-wrap: pretty;
   }
 
+  /* BUTTONS: Exactly as in your screenshot in both themes */
   &__buttons {
     display: flex;
     justify-content: center;
@@ -83,6 +99,7 @@
     flex-wrap: wrap;
     margin-top: clamp(28px, 4vw, 40px);
 
+    /* 1. Primary Button: Solid White Pill with Blue Text */
     .btn-primary {
       display: inline-flex;
       align-items: center;
@@ -96,24 +113,38 @@
       text-decoration: none;
       background: #ffffff !important;
       color: #1d4ed8 !important;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
-      transition: all 0.25s ease;
+      border: 1px solid #ffffff !important;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2) !important;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
+      cursor: pointer;
 
-      .arrow-icon {
+      .arrow-icon,
+      svg,
+      span,
+      i {
+        color: #1d4ed8 !important;
+        stroke: #1d4ed8 !important;
         transition: transform 0.25s ease;
       }
 
       &:hover {
         background: #f8fafc !important;
+        color: #1e40af !important;
         transform: translateY(-3px);
-        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3) !important;
 
-        .arrow-icon {
+        .arrow-icon,
+        svg,
+        span,
+        i {
+          color: #1e40af !important;
+          stroke: #1e40af !important;
           transform: translateX(4px);
         }
       }
     }
 
+    /* 2. Secondary Button: Glass Outline with White Text */
     .btn-outline {
       display: inline-flex;
       align-items: center;
@@ -122,24 +153,41 @@
       min-height: 50px;
       padding: 13px 26px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      background: rgba(255, 255, 255, 0.08);
-      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.35) !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      color: #ffffff !important;
       font-weight: 600;
       font-size: 0.94rem;
       text-decoration: none;
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       transition: all 0.25s ease;
+      cursor: pointer;
+
+      svg,
+      span,
+      i {
+        color: #ffffff !important;
+        stroke: #ffffff !important;
+      }
 
       &:hover {
-        background: rgba(255, 255, 255, 0.18);
-        border-color: rgba(255, 255, 255, 0.55);
+        background: rgba(255, 255, 255, 0.18) !important;
+        border-color: rgba(255, 255, 255, 0.6) !important;
+        color: #ffffff !important;
         transform: translateY(-3px);
       }
     }
   }
 
   @media (max-width: 640px) {
+    padding: 46px 0 36px;
+
+    &__card {
+      padding: 36px 20px;
+      border-radius: 24px;
+    }
+
     &__buttons {
       flex-direction: column;
 
@@ -148,5 +196,18 @@
         width: 100%;
       }
     }
+  }
+}
+
+@keyframes floatCircle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-24px); }
+}
+
+[data-theme="dark"],
+.dark {
+  .about-cta {
+    background: var(--bg-primary, #070d19) !important;
+    border-bottom-color: var(--border-color, #1e293b);
   }
 }

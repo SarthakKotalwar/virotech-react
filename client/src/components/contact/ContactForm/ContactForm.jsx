@@ -21,14 +21,6 @@ const serviceOptions = [
   "E-Commerce Architecture",
 ];
 
-const budgetOptions = [
-  "₹2L – ₹5L",
-  "₹5L – ₹10L",
-  "₹10L – ₹20L",
-  "₹20L+",
-  "Flexible / Equity",
-];
-
 const ContactForm = () => {
   const [form, setForm] = useState({
     name: "",
@@ -45,7 +37,6 @@ const ContactForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [copied, setCopied] = useState(false);
 
-  // Dynamic receipt metadata
   const [receiptMeta, setReceiptMeta] = useState({
     refNumber: "",
     timestamp: "",
@@ -59,7 +50,7 @@ const ContactForm = () => {
   if (form.name.trim()) filledWeight++;
   if (form.email.trim()) filledWeight++;
   if (form.services.length > 0) filledWeight++;
-  if (form.budget) filledWeight++;
+  if (form.budget.trim()) filledWeight++;
   if (form.message.trim()) filledWeight++;
   const completionPercent = Math.round((filledWeight / totalWeight) * 100);
 
@@ -102,7 +93,6 @@ const ContactForm = () => {
       const data = await response.json();
 
       if (response.ok && data.success) {
-        // Sequential reference generator starting from VIRO-REF-1001
         const STARTING_INDEX = 1001;
         const currentCounter = parseInt(localStorage.getItem("viro_ref_counter") || `${STARTING_INDEX}`, 10);
         const generatedRef = `VIRO-REF-${currentCounter}`;
@@ -123,7 +113,6 @@ const ContactForm = () => {
           setSubmitted(true);
           setSubmitting(false);
 
-          // Center the confirmation section in view
           requestAnimationFrame(() => {
             wrapperRef.current?.scrollIntoView({
               behavior: "smooth",
@@ -182,7 +171,6 @@ const ContactForm = () => {
             </p>
           </div>
 
-          {/* Cleaned Telemetry Receipt (No SMTP / Target Inbox) */}
           <div className="telemetry-ticket">
             <div className="telemetry-ticket__header">
               <div className="telemetry-ticket__meta">
@@ -335,26 +323,42 @@ const ContactForm = () => {
             </div>
           </div>
 
+          {/* =====================================================
+              SECTION 03: ESTIMATED SCALE (TEXT INPUT + QUICK PILL)
+          ===================================================== */}
           <div className="contact-form__section">
             <div className="contact-form__section-title">
               <span>03</span>
               <strong>Estimated Scale</strong>
             </div>
-            <div className="contact-form__pills">
-              {budgetOptions.map((budget) => {
-                const active = form.budget === budget;
-                return (
-                  <button
-                    key={budget}
-                    type="button"
-                    className={`pill-btn pill-btn--budget ${active ? "active" : ""}`}
-                    onClick={() => updateField("budget", budget)}
-                  >
-                    <span>{budget}</span>
-                    {active && <Check size={12} strokeWidth={2.5} />}
-                  </button>
-                );
-              })}
+            <div className="contact-form__scale-row">
+              <div className="input-field contact-form__scale-input">
+                <input
+                  type="text"
+                  placeholder=" "
+                  value={form.budget}
+                  onChange={(e) => updateField("budget", e.target.value)}
+                />
+                <label>SPECIFY BUDGET (MIN. ₹20K) OR CUSTOM TARGET</label>
+              </div>
+
+              <button
+                type="button"
+                className={`pill-btn scale-pill ${
+                  form.budget === "Flexible / Equity" ? "active" : ""
+                }`}
+                onClick={() =>
+                  updateField(
+                    "budget",
+                    form.budget === "Flexible / Equity" ? "" : "Flexible / Equity"
+                  )
+                }
+              >
+                <span>Flexible / Equity</span>
+                {form.budget === "Flexible / Equity" && (
+                  <Check size={12} strokeWidth={2.5} />
+                )}
+              </button>
             </div>
           </div>
 

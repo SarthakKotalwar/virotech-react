@@ -1,4 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
+import ThemeToggle from "../../ThemeToggle"; // Adjust import path if needed
 import "./Footer.scss";
 
 export default function Footer() {
@@ -54,7 +55,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Company Links (Privacy Policy removed from here) */}
+          {/* Company Links */}
           <div className="footer__column">
             <h4>Company</h4>
             <ul>
@@ -78,16 +79,24 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact Information */}
-          <div className="footer__column">
-            <h4>Contact</h4>
-            <ul>
-              <li>support@virotech.in</li>
-              <li>India</li>
-            </ul>
+          {/* Contact Information + Top Right Theme Switcher */}
+          <div className="footer__column footer__column--contact">
+            <div>
+              <h4>Contact</h4>
+              <ul>
+                <li>support@virotech.in</li>
+                <li>India</li>
+              </ul>
+            </div>
+
+            {/* Positioned right above the divider line on the right side */}
+            <div className="footer__theme-switch-top">
+              <ThemeToggle />
+            </div>
           </div>
         </div>
 
+        {/* Bottom Bar (Clean: Only Copyright, Privacy, and Social Links) */}
         <div className="footer__bottom">
           <div className="footer__bottom-left">
             <p>© {new Date().getFullYear()} Virotech Technologies. All Rights Reserved.</p>
@@ -95,10 +104,13 @@ export default function Footer() {
               Privacy Policy
             </a>
           </div>
-          <div className="footer__social">
-            <a href="https://in.linkedin.com/company/virotechtechnologies" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="https://www.youtube.com/@virotech_pvt" target="_blank" rel="noopener noreferrer">Youtube</a>
-            <a href="https://www.instagram.com/virotech_pvt/" target="_blank" rel="noopener noreferrer">Instagram</a>
+
+          <div className="footer__bottom-right">
+            <div className="footer__social">
+              <a href="https://in.linkedin.com/company/virotechtechnologies" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="https://www.youtube.com/@virotech_pvt" target="_blank" rel="noopener noreferrer">Youtube</a>
+              <a href="https://www.instagram.com/virotech_pvt/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            </div>
           </div>
         </div>
       </div>

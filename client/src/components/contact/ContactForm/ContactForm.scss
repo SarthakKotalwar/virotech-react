@@ -192,6 +192,62 @@
     }
   }
 
+  /* =====================================================
+     SCALE ROW: CUSTOM TEXT FIELD + EXACT ROUNDED PILL
+  ===================================================== */
+  &__scale-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+
+    .contact-form__scale-input {
+      flex: 1;
+      min-width: 240px;
+      max-width: 360px;
+
+      input {
+        height: 44px;
+        padding: 16px 16px 6px;
+      }
+    }
+
+    /* Matches the smooth rounded pill border from Image 2 */
+    .scale-pill,
+    button.scale-pill {
+      height: 42px;
+      padding: 0 20px;
+      border-radius: 9999px !important;
+      border: 1px solid #e2e8f0 !important;
+      background: #f8fafc;
+      color: #475569;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      outline: none;
+      box-shadow: none !important;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+      &:hover {
+        border-color: #cbd5e1 !important;
+        background: #f1f5f9;
+        color: #0f172a;
+      }
+
+      &.active {
+        background: #eff6ff;
+        border-color: #2563eb !important;
+        color: #2563eb;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.14) !important;
+      }
+    }
+  }
+
   &__pills {
     display: flex;
     flex-wrap: wrap;
@@ -254,7 +310,11 @@
     }
   }
 
-  &__submit {
+  /* =====================================================
+     SEND DIRECTIVE BUTTON (LOCKED #ffffff TEXT)
+  ===================================================== */
+  button.contact-form__submit,
+  .contact-form__submit {
     position: relative;
     overflow: hidden;
     display: inline-flex;
@@ -262,37 +322,59 @@
     gap: 14px;
     padding: 6px 6px 6px 22px;
     border-radius: 9999px;
-    border: none;
-    background: #2563eb;
-    color: #ffffff;
+    border: none !important;
+    background: #2563eb !important;
+    color: #ffffff !important;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.4);
     transition: all 0.25s ease;
 
-    .btn-text {
-      position: relative;
-      z-index: 2;
+    &,
+    *,
+    .btn-text,
+    span:not(.btn-circle):not(.btn-circle *),
+    strong,
+    p {
+      color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
+      opacity: 1 !important;
     }
+
     .btn-circle {
       position: relative;
       z-index: 2;
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background: #ffffff;
-      color: #2563eb;
+      background: #ffffff !important;
+      color: #2563eb !important;
       display: grid;
       place-items: center;
       flex-shrink: 0;
       transition: transform 0.3s ease;
+
+      svg,
+      i {
+        color: #2563eb !important;
+        stroke: #2563eb !important;
+      }
     }
 
     &:hover:not(:disabled) {
-      background: #1d4ed8;
+      background: #1d4ed8 !important;
       transform: translateY(-2px);
       box-shadow: 0 12px 26px -4px rgba(37, 99, 235, 0.5);
+
+      &,
+      *,
+      .btn-text,
+      span:not(.btn-circle):not(.btn-circle *),
+      strong {
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+      }
 
       .btn-circle {
         transform: rotate(45deg);
@@ -300,12 +382,12 @@
     }
 
     &.is-launching {
-      background: #1e40af;
+      background: #1e40af !important;
       cursor: wait;
 
       .rocket-flight {
         animation: rocketShoot 1s infinite ease-in-out;
-        color: #2563eb;
+        color: #2563eb !important;
       }
       .btn-beam {
         position: absolute;
@@ -616,6 +698,18 @@
     &__fields {
       grid-template-columns: 1fr;
     }
+    &__scale-row {
+      flex-direction: column;
+      align-items: stretch;
+      .contact-form__scale-input {
+        max-width: 100%;
+      }
+      .scale-pill,
+      button.scale-pill {
+        width: 100%;
+        justify-content: center;
+      }
+    }
     &__pills .pill-btn {
       width: 100%;
       justify-content: space-between;
@@ -640,4 +734,227 @@
       }
     }
   }
+}
+
+/* =====================================================
+   DARK THEME OVERRIDES (Smooth dark surfaces)
+===================================================== */
+[data-theme="dark"],
+.dark {
+  .contact-form-wrapper {
+    background: var(--bg-card, #111c35);
+    border-color: var(--border-color, #1e293b);
+    box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.4);
+
+    &:hover {
+      border-color: rgba(96, 165, 250, 0.4);
+      box-shadow: 0 25px 45px -8px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  .contact-form {
+    color: #f8fafc;
+
+    &__header {
+      border-bottom-color: var(--border-color, #1e293b);
+
+      .contact-label {
+        color: #60a5fa;
+      }
+
+      h3 {
+        color: #f8fafc;
+        span {
+          color: #60a5fa;
+        }
+      }
+
+      .completion-tag {
+        background: var(--bg-secondary, #0d1527);
+        border-color: var(--border-color, #1e293b);
+        color: #60a5fa;
+
+        .dot {
+          background: #60a5fa;
+          box-shadow: 0 0 6px #60a5fa;
+        }
+      }
+    }
+
+    &__section {
+      border-bottom-color: var(--border-color, #1e293b);
+
+      &-title {
+        span {
+          background: rgba(37, 99, 235, 0.15);
+          color: #60a5fa;
+        }
+        strong {
+          color: #f8fafc;
+        }
+      }
+    }
+
+    .input-field {
+      input, textarea {
+        background: var(--bg-secondary, #0d1527);
+        border-color: var(--border-color, #1e293b);
+        color: #f8fafc;
+
+        &:focus {
+          border-color: #3b82f6;
+          background: #0f1a30;
+          box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        &:focus + label,
+        &:not(:placeholder-shown) + label {
+          color: #60a5fa;
+        }
+      }
+
+      label {
+        color: #94a3b8;
+      }
+    }
+
+    /* Target Section 02 pills and Section 03 pill with identical smooth borders */
+    &__pills .pill-btn,
+    &__scale-row .scale-pill,
+    &__scale-row button.scale-pill {
+      background: var(--bg-secondary, #0d1527) !important;
+      border: 1px solid var(--border-color, #1e293b) !important;
+      border-radius: 9999px !important;
+      color: #94a3b8 !important;
+
+      &:hover {
+        background: #1e293b !important;
+        color: #f8fafc !important;
+        border-color: #3b82f6 !important;
+      }
+
+      &.active {
+        background: rgba(37, 99, 235, 0.2) !important;
+        border-color: #3b82f6 !important;
+        color: #60a5fa !important;
+      }
+    }
+
+    &__footer {
+      .footer-status {
+        color: #94a3b8;
+        .term-icon {
+          color: #60a5fa;
+        }
+      }
+    }
+
+    /* Send Directive Button: Locks white text inside dark wrapper */
+    button.contact-form__submit,
+    .contact-form__submit {
+      background: #2563eb !important;
+
+      &,
+      *,
+      .btn-text,
+      span:not(.btn-circle):not(.btn-circle *),
+      strong,
+      p {
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+        opacity: 1 !important;
+      }
+    }
+
+    &--success {
+      .success-header {
+        h3 {
+          color: #f8fafc;
+          em {
+            background: linear-gradient(135deg, #60a5fa, #93c5fd);
+            -webkit-background-clip: text;
+            background-clip: text;
+          }
+        }
+        p {
+          color: #94a3b8;
+        }
+      }
+
+      .telemetry-ticket {
+        background: var(--bg-secondary, #0d1527);
+        border-color: var(--border-color, #1e293b);
+
+        &__header {
+          border-bottom-color: var(--border-color, #1e293b);
+
+          .telemetry-ticket__meta strong {
+            color: #cbd5e1;
+          }
+
+          .copy-hash-btn {
+            background: var(--bg-card, #111c35);
+            border-color: var(--border-color, #1e293b);
+            color: #cbd5e1;
+
+            &:hover {
+              border-color: #3b82f6;
+              color: #60a5fa;
+            }
+          }
+        }
+
+        .telemetry-grid .telemetry-item {
+          .telemetry-label {
+            color: #94a3b8;
+          }
+          .telemetry-val {
+            color: #f8fafc;
+            &.hash-val {
+              color: #60a5fa;
+            }
+          }
+        }
+
+        &__footer {
+          border-top-color: var(--border-color, #1e293b);
+
+          .sla-indicator {
+            color: #94a3b8;
+            strong {
+              color: #f8fafc;
+            }
+          }
+        }
+      }
+
+      .contact-form__reset {
+        background: var(--bg-card, #111c35);
+        border-color: var(--border-color, #1e293b);
+        color: #60a5fa;
+
+        &:hover {
+          background: var(--bg-secondary, #0d1527);
+          border-color: #3b82f6;
+        }
+      }
+    }
+  }
+}
+
+/* ==========================================================================
+   FIX FOR SECTION#CONTACT-MAIN (ELIMINATES BRIGHT WHITE BOTTOM BORDER)
+========================================================================== */
+#contact-main,
+.contact-main {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+[data-theme="dark"] #contact-main,
+.dark #contact-main,
+[data-theme="dark"] .contact-main,
+.dark .contact-main,
+[data-theme="dark"] section#contact-main.contact-main,
+.dark section#contact-main.contact-main {
+  border-bottom: 1px solid var(--border-color, #1e293b) !important;
 }

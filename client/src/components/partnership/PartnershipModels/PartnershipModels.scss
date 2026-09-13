@@ -199,3 +199,73 @@
     }
   }
 }
+
+/* =====================================================
+   DARK THEME OVERRIDES (Leaves Light Mode Untouched)
+===================================================== */
+[data-theme="dark"],
+.dark {
+  .partnership-models {
+    background: var(--bg-primary, #070d19) !important;
+
+    &__heading {
+      .section-label {
+        background: var(--bg-card, #111c35);
+        border-color: var(--border-color, #1e293b);
+        color: #60a5fa;
+      }
+
+      h2 {
+        color: #f8fafc;
+      }
+
+      > p {
+        color: #94a3b8;
+      }
+    }
+  }
+
+  .partnership-model {
+    background: var(--bg-card, #111c35);
+    border-color: var(--border-color, #1e293b);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      border-color: rgba(96, 165, 250, 0.4);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+    }
+
+    &__top span {
+      color: #60a5fa;
+    }
+
+    &__icon {
+      background: rgba(37, 99, 235, 0.15);
+      color: #60a5fa;
+    }
+
+    &__body {
+      h3 {
+        color: #f8fafc;
+      }
+      p {
+        color: #94a3b8;
+      }
+    }
+
+    &__tags span {
+      background: var(--bg-secondary, #0d1527);
+      color: #cbd5e1;
+    }
+
+    &__arrow {
+      background: rgba(37, 99, 235, 0.15);
+      color: #60a5fa;
+    }
+
+    &:hover &__arrow {
+      background: #2563eb;
+      color: #ffffff;
+    }
+  }
+}

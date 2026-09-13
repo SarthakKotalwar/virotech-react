@@ -241,7 +241,7 @@ export default function Industries() {
                     }
                   }}
                 />
-                <span className="root-fallback">V</span>
+                <span className="root-fallback"></span>
               </div>
               <span className="root-label">VIROTECH CORE</span>
             </div>

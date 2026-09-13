@@ -3,8 +3,8 @@
 .faq {
   position: relative;
   padding: clamp(54px, 7.2vw, 92px) 0;
-  background: #f8fbff;
-  border-bottom: 1px solid #e2e8f0;
+  background: var(--color-background-alt);
+  border-bottom: 1px solid var(--color-border);
 
   .container {
     width: 100%;
@@ -23,9 +23,9 @@
       display: inline-block;
       padding: 6px 14px;
       border-radius: 999px;
-      background: rgba(43, 91, 255, 0.08);
-      border: 1px solid rgba(43, 91, 255, 0.14);
-      color: #2563eb;
+      background: rgba(43, 91, 255, 0.1);
+      border: 1px solid rgba(43, 91, 255, 0.2);
+      color: var(--color-primary-light);
       font-weight: 700;
       font-size: clamp(0.72rem, 1.1vw, 0.82rem);
       letter-spacing: 0.08em;
@@ -36,7 +36,7 @@
       margin: 0 0 12px;
       font-size: clamp(2.1rem, 4.2vw, 3.3rem);
       line-height: 1.15;
-      color: #0f172a;
+      color: var(--color-heading);
       letter-spacing: -0.025em;
       font-weight: 800;
     }
@@ -44,7 +44,7 @@
     p {
       max-width: 680px;
       margin: 0 auto;
-      color: #64748b;
+      color: var(--color-text-light);
       line-height: 1.75;
       font-size: clamp(0.92rem, 1.2vw, 1.04rem);
     }
@@ -62,25 +62,25 @@
 
 .faq__item {
   position: relative;
-  background: #ffffff;
+  background: var(--color-background-soft);
   border-radius: 18px;
   overflow: hidden;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.025);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-xs);
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.05);
-    border-color: #cbd5e1;
+    box-shadow: var(--shadow-sm);
+    border-color: var(--color-border-light);
   }
 
   &.active {
-    box-shadow: 0 16px 36px rgba(37, 99, 235, 0.07);
-    border-color: #93c5fd;
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary-light);
 
     .faq__question {
-      color: #2563eb;
+      color: var(--color-primary);
     }
     .faq__answer {
       max-height: 350px;
@@ -100,7 +100,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  color: #0f172a;
+  color: var(--color-heading);
   font-size: 1.02rem;
   font-weight: 700;
   line-height: 1.4;
@@ -108,7 +108,7 @@
   transition: color 0.25s ease;
 
   &:hover {
-    color: #2563eb;
+    color: var(--color-primary);
   }
 }
 
@@ -121,7 +121,7 @@
   p {
     margin: 0;
     padding: 0 24px 20px;
-    color: #64748b;
+    color: var(--color-text);
     font-size: 0.94rem;
     line-height: 1.75;
   }

@@ -7,3 +7,175 @@
 @use "./styles/mobile";
 @use "./styles/responsive";
 @use "./styles/animations";
+
+/* ==========================================================
+   BASE & LIGHT THEME STYLES (PRESERVED)
+========================================================== */
+.navbar,
+header.navbar,
+.header {
+  transition: 
+    background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &__container,
+  .navbar-container,
+  .nav-wrapper {
+    background: var(--glass-bg, rgba(255, 255, 255, 0.82));
+    border: 1px solid var(--glass-border, rgba(226, 232, 240, 0.85));
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: var(--shadow-sm, 0 10px 30px -10px rgba(15, 23, 42, 0.08));
+    transition: 
+      background 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Logo */
+  &__logo,
+  &__brand,
+  .navbar-logo {
+    img {
+      transition: filter 0.35s ease, opacity 0.35s ease;
+    }
+  }
+
+  /* Nav Links */
+  &__link,
+  .nav-link,
+  a:not(.navbar__cta) {
+    color: var(--color-heading, #334155);
+    transition: color 0.25s ease;
+
+    &:hover,
+    &.active {
+      color: var(--color-primary-light, #2563eb);
+    }
+  }
+
+  /* Exact CTA Button from Inspect Tooltip */
+  a.navbar__cta,
+  .navbar__cta {
+    background: #2563eb !important;
+    border-radius: 9999px !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.45) !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+
+    &,
+    *,
+    span,
+    strong {
+      color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
+      font-weight: 700 !important;
+    }
+
+    svg,
+    i {
+      color: #ffffff !important;
+      stroke: #ffffff !important;
+      transition: transform 0.25s ease;
+    }
+
+    &:hover {
+      background: #1d4ed8 !important;
+      transform: translateY(-1.5px);
+      box-shadow: 0 12px 26px -4px rgba(37, 99, 235, 0.6) !important;
+
+      svg,
+      i {
+        transform: translateX(2px);
+      }
+    }
+  }
+}
+
+/* ==========================================================
+   TARGETED DARK THEME OVERRIDES (HIGH SPECIFICITY)
+========================================================== */
+[data-theme="dark"],
+.dark {
+  /* 1. Navbar Glass Capsule */
+  .navbar__container,
+  .navbar-container,
+  .nav-wrapper {
+    background: rgba(7, 13, 25, 0.82) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    box-shadow: 
+      0 18px 45px -10px rgba(0, 0, 0, 0.65),
+      inset 0 1px 1px rgba(255, 255, 255, 0.14),
+      0 0 25px rgba(37, 99, 235, 0.08) !important;
+
+    &:hover {
+      border-color: rgba(96, 165, 250, 0.35) !important;
+      box-shadow: 
+        0 22px 50px -10px rgba(0, 0, 0, 0.75),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2),
+        0 0 35px rgba(37, 99, 235, 0.15) !important;
+    }
+  }
+
+  /* 2. Logo: Brightens dark 'VIROTECH' text on transparent PNG */
+  .navbar img,
+  .navbar__logo img,
+  .navbar__brand img {
+    filter: brightness(1.25) contrast(1.15) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5)) !important;
+  }
+
+  /* 3. Links */
+  .navbar a:not(.navbar__cta),
+  .navbar__link,
+  .nav-link {
+    color: #94a3b8 !important;
+
+    &:hover,
+    &.active {
+      color: #ffffff !important;
+    }
+  }
+
+  /* 4. Fix Start Project CTA (Pure white text & vibrant blue) */
+  a.navbar__cta,
+  .navbar__cta {
+    background: #2563eb !important;
+    box-shadow: 0 8px 24px -2px rgba(37, 99, 235, 0.55) !important;
+
+    &,
+    *,
+    span,
+    strong,
+    p {
+      color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
+      opacity: 1 !important;
+    }
+
+    svg,
+    i {
+      color: #ffffff !important;
+      stroke: #ffffff !important;
+    }
+
+    &:hover {
+      background: #1d4ed8 !important;
+      box-shadow: 0 12px 30px -2px rgba(37, 99, 235, 0.75) !important;
+
+      &,
+      *,
+      span,
+      strong {
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+      }
+    }
+  }
+}
