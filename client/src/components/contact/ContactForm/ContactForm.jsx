@@ -12,6 +12,8 @@ import {
 } from "lucide-react";
 import "./ContactForm.scss";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 const serviceOptions = [
   "Web Platforms",
   "Cloud & DevOps",
@@ -44,7 +46,6 @@ const ContactForm = () => {
 
   const wrapperRef = useRef(null);
 
-  // Form completion percentage
   const totalWeight = 5;
   let filledWeight = 0;
   if (form.name.trim()) filledWeight++;
@@ -82,7 +83,7 @@ const ContactForm = () => {
     setErrorMessage("");
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch(`${API_URL}/api/contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -257,68 +258,30 @@ const ContactForm = () => {
             </div>
             <div className="contact-form__fields">
               <div className="input-field">
-                <input
-                  type="text"
-                  required
-                  placeholder=" "
-                  value={form.name}
-                  onChange={(e) => updateField("name", e.target.value)}
-                />
+                <input type="text" required placeholder=" " value={form.name} onChange={(e) => updateField("name", e.target.value)} />
                 <label>YOUR NAME *</label>
               </div>
-
               <div className="input-field">
-                <input
-                  type="email"
-                  required
-                  placeholder=" "
-                  value={form.email}
-                  onChange={(e) => updateField("email", e.target.value)}
-                />
+                <input type="email" required placeholder=" " value={form.email} onChange={(e) => updateField("email", e.target.value)} />
                 <label>WORK EMAIL *</label>
               </div>
-
               <div className="input-field">
-                <input
-                  type="text"
-                  placeholder=" "
-                  value={form.company}
-                  onChange={(e) => updateField("company", e.target.value)}
-                />
+                <input type="text" placeholder=" " value={form.company} onChange={(e) => updateField("company", e.target.value)} />
                 <label>ORGANIZATION</label>
               </div>
-
               <div className="input-field">
-                <input
-                  type="tel"
-                  placeholder=" "
-                  value={form.phone}
-                  onChange={(e) => updateField("phone", e.target.value)}
-                />
+                <input type="tel" placeholder=" " value={form.phone} onChange={(e) => updateField("phone", e.target.value)} />
                 <label>CONTACT NUMBER</label>
               </div>
             </div>
           </div>
 
           <div className="contact-form__section">
-            <div className="contact-form__section-title">
-              <span>02</span>
-              <strong>Domain Architecture</strong>
-            </div>
+            <div className="contact-form__section-title"><span>02</span><strong>Domain Architecture</strong></div>
             <div className="contact-form__pills">
               {serviceOptions.map((service) => {
                 const active = form.services.includes(service);
-                return (
-                  <button
-                    key={service}
-                    type="button"
-                    className={`pill-btn ${active ? "active" : ""}`}
-                    onClick={() => toggleService(service)}
-                  >
-                    <span>{service}</span>
-                    {active && <Check size={12} strokeWidth={2.5} />}
-                  </button>
-                );
+                return <button key={service} type="button" className={`pill-btn ${active ? "active" : ""}`} onClick={() => toggleService(service)}><span>{service}</span>{active && <Check size={12} strokeWidth={2.5} />}</button>;
               })}
             </div>
           </div>
@@ -331,6 +294,7 @@ const ContactForm = () => {
               <span>03</span>
               <strong>Estimated Scale</strong>
             </div>
+
             <div className="contact-form__scale-row">
               <div className="input-field contact-form__scale-input">
                 <input
@@ -350,7 +314,9 @@ const ContactForm = () => {
                 onClick={() =>
                   updateField(
                     "budget",
-                    form.budget === "Flexible / Equity" ? "" : "Flexible / Equity"
+                    form.budget === "Flexible / Equity"
+                      ? ""
+                      : "Flexible / Equity"
                   )
                 }
               >
@@ -363,46 +329,24 @@ const ContactForm = () => {
           </div>
 
           <div className="contact-form__section">
-            <div className="contact-form__section-title">
-              <span>04</span>
-              <strong>Project Objectives</strong>
-            </div>
+            <div className="contact-form__section-title"><span>04</span><strong>Project Objectives</strong></div>
             <div className="input-field input-field--textarea">
-              <textarea
-                required
-                rows="4"
-                placeholder="Briefly outline your goals, timeline, or engineering obstacles..."
-                value={form.message}
-                onChange={(e) => updateField("message", e.target.value)}
-              />
+              <textarea required rows="4" placeholder="Briefly outline your goals, timeline, or engineering obstacles..." value={form.message} onChange={(e) => updateField("message", e.target.value)} />
             </div>
           </div>
 
           {errorMessage && <p className="form-error-msg">{errorMessage}</p>}
 
+          <p className="contact-form__privacy">
+            By submitting this form, you agree that Virotech may use your details to respond to your inquiry. Read our{" "}
+            <a href="/privacy-policy" target="_blank" rel="noreferrer">Privacy Policy</a>.
+          </p>
+
           <div className="contact-form__footer">
-            <div className="footer-status">
-              <Terminal size={14} className="term-icon" />
-              <span>Direct engineer dispatch • NDA protected</span>
-            </div>
-
-            <button
-              type="submit"
-              className={`contact-form__submit ${submitting ? "is-launching" : ""}`}
-              disabled={submitting}
-            >
-              <span className="btn-text">
-                {submitting ? "Broadcasting Directive..." : "Send Directive"}
-              </span>
-
-              <span className="btn-circle">
-                {submitting ? (
-                  <Send size={15} className="rocket-flight" />
-                ) : (
-                  <ArrowUpRight size={16} strokeWidth={2} className="btn-arrow" />
-                )}
-              </span>
-
+            <div className="footer-status"><Terminal size={14} className="term-icon" /><span>Direct engineer dispatch • NDA protected</span></div>
+            <button type="submit" className={`contact-form__submit ${submitting ? "is-launching" : ""}`} disabled={submitting}>
+              <span className="btn-text">{submitting ? "Broadcasting Directive..." : "Send Directive"}</span>
+              <span className="btn-circle">{submitting ? <Send size={15} className="rocket-flight" /> : <ArrowUpRight size={16} strokeWidth={2} className="btn-arrow" />}</span>
               {submitting && <span className="btn-beam" />}
             </button>
           </div>
