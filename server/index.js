@@ -7,8 +7,34 @@ import nodemailer from "nodemailer";
 
 const app = express();
 
-// Permissive CORS to handle local dev + live domain
+const escapeHtml = (value) => {
+  if (typeof value !== "string") return "";
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+};
+
+const sanitizeString = (value) => {
+  if (typeof value !== "string") return "";
+  return escapeHtml(value.trim()).slice(0, 5000);
+};
+
+const sanitizeEmail = (value) => {
+  const cleaned = sanitizeString(value);
+  return cleaned.length > 254 ? cleaned.slice(0, 254) : cleaned;
+};
+
+const normalizeOrigins = (raw = "") =>
+  raw
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+
 const allowedOrigins = [
+  ...normalizeOrigins(process.env.ALLOWED_ORIGINS),
   "http://localhost:5173",
   "http://127.0.0.1:5173",
   "http://localhost:3000",
@@ -16,10 +42,11 @@ const allowedOrigins = [
   "https://www.virotech.in",
 ];
 
+app.disable("x-powered-by");
+
 app.use(
   cors({
-    origin: (origin, callback) => {
-      // Allow requests with no origin (e.g. mobile apps, curl, or same-origin on Hostinger)
+    origin(origin, callback) {
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
@@ -27,26 +54,30 @@ app.use(
       }
     },
     credentials: true,
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+app.options(/.*/, cors());
+app.use(express.json({ limit: "1mb" }));
 
-app.use(express.json());
-
-// Transporter using App Password
 const transporter = nodemailer.createTransport({
   host: "smtp.hostinger.com",
-  port: 465,
-  secure: true,
+  port: 587,
+  secure: false,
+  requireTLS: true,
+  connectionTimeout: 20000,
+  greetingTimeout: 20000,
+  socketTimeout: 30000,
   auth: {
     user: (process.env.HOSTINGER_EMAIL_USER || "").trim(),
     pass: (process.env.HOSTINGER_EMAIL_PASS || "").trim(),
   },
   tls: {
-    rejectUnauthorized: false,
+    minVersion: "TLSv1.2",
   },
 });
 
-// Verification check
 transporter.verify((error) => {
   if (error) {
     console.error("Hostinger SMTP Verification Error:", error);
@@ -55,14 +86,19 @@ transporter.verify((error) => {
   }
 });
 
-// Health check endpoint
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok", uptime: process.uptime() });
 });
 
-// Contact dispatch endpoint
 app.post("/api/contact", async (req, res) => {
-  const { name, email, company, phone, services, budget, message } = req.body;
+  const body = req.body || {};
+  const name = sanitizeString(body.name);
+  const email = sanitizeEmail(body.email);
+  const company = sanitizeString(body.company);
+  const phone = sanitizeString(body.phone);
+  const message = sanitizeString(body.message);
+  const services = Array.isArray(body.services) ? body.services.map(sanitizeString) : [];
+  const budget = sanitizeString(body.budget);
 
   if (!name || !email || !message) {
     return res.status(400).json({
@@ -71,9 +107,15 @@ app.post("/api/contact", async (req, res) => {
     });
   }
 
-  const selectedServices = Array.isArray(services) && services.length > 0 
-    ? services.join(", ") 
-    : "None specified";
+  const emailRegex = /^[^\s@]+@[^^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({
+      success: false,
+      message: "Please provide a valid email address.",
+    });
+  }
+
+  const selectedServices = services.length > 0 ? services.join(", ") : "None specified";
 
   const mailOptions = {
     from: `"Virotech Inquiries" <${process.env.HOSTINGER_EMAIL_USER}>`,
@@ -81,40 +123,20 @@ app.post("/api/contact", async (req, res) => {
     replyTo: email,
     subject: `New Inquiry: ${name} (${company || "Direct Client"})`,
     html: `
-      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
-        <div style="background: #0f172a; padding: 24px; color: #ffffff;">
+      <div style="font-family: Arial, sans-serif; max-width: 640px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
+        <div style="background: #0f172a; padding: 24px; color: #fff;">
           <h2 style="margin: 0; font-size: 20px;">New Consultation Brief</h2>
-          <p style="margin: 4px 0 0; color: #94a3b8; font-size: 13px;">Received via virotech.in</p>
+          <p style="margin: 6px 0 0; color: #cbd5e1; font-size: 13px;">Received via virotech.in</p>
         </div>
-        
         <div style="padding: 24px; background: #ffffff;">
           <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
-            <tr>
-              <td style="padding: 10px 0; color: #64748b; width: 140px; border-bottom: 1px solid #f1f5f9;"><strong>Name</strong></td>
-              <td style="padding: 10px 0; color: #0f172a; border-bottom: 1px solid #f1f5f9;">${name}</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px 0; color: #64748b; border-bottom: 1px solid #f1f5f9;"><strong>Email</strong></td>
-              <td style="padding: 10px 0; color: #2563eb; border-bottom: 1px solid #f1f5f9;"><a href="mailto:${email}">${email}</a></td>
-            </tr>
-            <tr>
-              <td style="padding: 10px 0; color: #64748b; border-bottom: 1px solid #f1f5f9;"><strong>Organization</strong></td>
-              <td style="padding: 10px 0; color: #0f172a; border-bottom: 1px solid #f1f5f9;">${company || "N/A"}</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px 0; color: #64748b; border-bottom: 1px solid #f1f5f9;"><strong>Phone</strong></td>
-              <td style="padding: 10px 0; color: #0f172a; border-bottom: 1px solid #f1f5f9;">${phone || "N/A"}</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px 0; color: #64748b; border-bottom: 1px solid #f1f5f9;"><strong>Services</strong></td>
-              <td style="padding: 10px 0; color: #0f172a; border-bottom: 1px solid #f1f5f9;">${selectedServices}</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px 0; color: #64748b; border-bottom: 1px solid #f1f5f9;"><strong>Budget</strong></td>
-              <td style="padding: 10px 0; color: #0f172a; border-bottom: 1px solid #f1f5f9;">${budget || "Not Specified"}</td>
-            </tr>
+            <tr><td style="padding: 10px 0; color: #64748b; width: 150px; border-bottom: 1px solid #f1f5f9;"><strong>Name</strong></td><td style="padding: 10px 0; color: #0f172a; border-bottom: 1px solid #f1f5f9;">${name}</td></tr>
+            <tr><td style="padding: 10px 0; color: #64748b; border-bottom: 1px solid #f1f5f9;"><strong>Email</strong></td><td style="padding: 10px 0; color: #0f172a; border-bottom: 1px solid #f1f5f9;"><a href="mailto:${email}">${email}</a></td></tr>
+            <tr><td style="padding: 10px 0; color: #64748b; border-bottom: 1px solid #f1f5f9;"><strong>Organization</strong></td><td style="padding: 10px 0; color: #0f172a; border-bottom: 1px solid #f1f5f9;">${company || "N/A"}</td></tr>
+            <tr><td style="padding: 10px 0; color: #64748b; border-bottom: 1px solid #f1f5f9;"><strong>Phone</strong></td><td style="padding: 10px 0; color: #0f172a; border-bottom: 1px solid #f1f5f9;">${phone || "N/A"}</td></tr>
+            <tr><td style="padding: 10px 0; color: #64748b; border-bottom: 1px solid #f1f5f9;"><strong>Services</strong></td><td style="padding: 10px 0; color: #0f172a; border-bottom: 1px solid #f1f5f9;">${selectedServices}</td></tr>
+            <tr><td style="padding: 10px 0; color: #64748b; border-bottom: 1px solid #f1f5f9;"><strong>Budget</strong></td><td style="padding: 10px 0; color: #0f172a; border-bottom: 1px solid #f1f5f9;">${budget || "Not specified"}</td></tr>
           </table>
-
           <div style="margin-top: 20px; padding: 16px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
             <strong style="display: block; font-size: 13px; color: #475569; margin-bottom: 8px;">Project Scope:</strong>
             <p style="margin: 0; color: #0f172a; line-height: 1.6; font-size: 14px; white-space: pre-wrap;">${message}</p>
@@ -133,8 +155,7 @@ app.post("/api/contact", async (req, res) => {
   }
 });
 
-// Hostinger assigns process.env.PORT automatically; defaults to 5000 locally
-const PORT = process.env.PORT || 5000;
+const PORT = Number(process.env.PORT || 5000);
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
