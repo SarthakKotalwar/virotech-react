@@ -63,8 +63,12 @@ app.use(express.json({ limit: "1mb" }));
 
 const transporter = nodemailer.createTransport({
   host: "smtp.hostinger.com",
-  port: 465,
-  secure: true,
+  port: 587,
+  secure: false,
+  requireTLS: true,
+  connectionTimeout: 20000,
+  greetingTimeout: 20000,
+  socketTimeout: 30000,
   auth: {
     user: (process.env.HOSTINGER_EMAIL_USER || "").trim(),
     pass: (process.env.HOSTINGER_EMAIL_PASS || "").trim(),
@@ -103,7 +107,7 @@ app.post("/api/contact", async (req, res) => {
     });
   }
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailRegex = /^[^\s@]+@[^^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     return res.status(400).json({
       success: false,
