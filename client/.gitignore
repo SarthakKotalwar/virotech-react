@@ -1,5 +1,13 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Production build output
+dist/
+dist-ssr/
+
 # Logs
-logs
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -7,18 +15,37 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Local environment files
+.env.local
+.env.*.local
+
+# Keep the production frontend API configuration tracked
+# client/.env.production is intentionally not ignored
+
+# Test and coverage output
+coverage/
+
+# Vite cache
+.vite/
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
-.idea
+.idea/
 .DS_Store
+
+# Visual Studio files
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# OS files
+Thumbs.db
