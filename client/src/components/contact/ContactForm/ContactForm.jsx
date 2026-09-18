@@ -12,6 +12,8 @@ import {
 } from "lucide-react";
 import "./ContactForm.scss";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 const serviceOptions = [
   "Web Platforms",
   "Cloud & DevOps",
@@ -45,7 +47,6 @@ const ContactForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [copied, setCopied] = useState(false);
 
-  // Dynamic receipt metadata
   const [receiptMeta, setReceiptMeta] = useState({
     refNumber: "",
     timestamp: "",
@@ -53,7 +54,6 @@ const ContactForm = () => {
 
   const wrapperRef = useRef(null);
 
-  // Form completion percentage
   const totalWeight = 5;
   let filledWeight = 0;
   if (form.name.trim()) filledWeight++;
@@ -91,7 +91,7 @@ const ContactForm = () => {
     setErrorMessage("");
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch(`${API_URL}/api/contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -102,7 +102,6 @@ const ContactForm = () => {
       const data = await response.json();
 
       if (response.ok && data.success) {
-        // Sequential reference generator starting from VIRO-REF-1001
         const STARTING_INDEX = 1001;
         const currentCounter = parseInt(localStorage.getItem("viro_ref_counter") || `${STARTING_INDEX}`, 10);
         const generatedRef = `VIRO-REF-${currentCounter}`;
@@ -123,7 +122,6 @@ const ContactForm = () => {
           setSubmitted(true);
           setSubmitting(false);
 
-          // Center the confirmation section in view
           requestAnimationFrame(() => {
             wrapperRef.current?.scrollIntoView({
               behavior: "smooth",
@@ -182,7 +180,6 @@ const ContactForm = () => {
             </p>
           </div>
 
-          {/* Cleaned Telemetry Receipt (No SMTP / Target Inbox) */}
           <div className="telemetry-ticket">
             <div className="telemetry-ticket__header">
               <div className="telemetry-ticket__meta">
@@ -375,6 +372,15 @@ const ContactForm = () => {
           </div>
 
           {errorMessage && <p className="form-error-msg">{errorMessage}</p>}
+
+          <p className="contact-form__privacy">
+            By submitting this form, you agree that Virotech may use your details to
+            respond to your inquiry. See our{" "}
+            <a href="/privacy-policy.html" target="_blank" rel="noreferrer">
+              Privacy Policy
+            </a>
+            .
+          </p>
 
           <div className="contact-form__footer">
             <div className="footer-status">
