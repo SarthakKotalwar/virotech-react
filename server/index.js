@@ -85,6 +85,10 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+app.get("/", (_req, res) => {
+  res.send("Virotech API is running");
+});
+
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", uptime: process.uptime() });
 });
