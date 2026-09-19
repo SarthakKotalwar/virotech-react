@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: virotech-api
+    runtime: node
+    rootDir: server
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SMTP_HOST
+        value: smtp.hostinger.com
+      - key: SMTP_PORT
+        value: "465"
+      - key: SMTP_SECURE
+        value: "true"
+      - key: CONTACT_RECIPIENT
+        value: support@virotech.in
+      - key: ALLOWED_ORIGINS
+        value: https://virotech.in,https://www.virotech.in
+      - key: HOSTINGER_EMAIL_USER
+        sync: false
+      - key: HOSTINGER_EMAIL_PASS
+        sync: false

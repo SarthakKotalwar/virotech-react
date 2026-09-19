@@ -1,6 +1,11 @@
 import dotenv from "dotenv";
 dotenv.config();
 
+import dns from "node:dns";
+if (dns.setDefaultResultOrder) {
+  dns.setDefaultResultOrder("ipv4first");
+}
+
 import express from "express";
 import cors from "cors";
 import nodemailer from "nodemailer";
@@ -13,7 +18,7 @@ const escapeHtml = (value) => {
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
-    .replace(/\"/g, "&quot;")
+    .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 };
 
@@ -22,10 +27,7 @@ const sanitizeString = (value) => {
   return escapeHtml(value.trim()).slice(0, 5000);
 };
 
-const sanitizeEmail = (value) => {
-  const cleaned = sanitizeString(value);
-  return cleaned.length > 254 ? cleaned.slice(0, 254) : cleaned;
-};
+const sanitizeEmail = (value) => sanitizeString(value).slice(0, 254);
 
 const normalizeOrigins = (raw = "") =>
   raw
@@ -43,50 +45,47 @@ const allowedOrigins = [
 ];
 
 app.disable("x-powered-by");
-
 app.use(
   cors({
     origin(origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Blocked by CORS policy"));
-      }
+      if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
+      return callback(new Error("Blocked by CORS policy"));
     },
     credentials: true,
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-app.options(/.*/, cors());
 app.use(express.json({ limit: "1mb" }));
 
+// Hostinger SMTP Configuration
+const hostDomain = (process.env.SMTP_HOST || "smtp.hostinger.com").trim();
+const smtpPort = Number(process.env.SMTP_PORT || 587);
+const smtpSecure = process.env.SMTP_SECURE === "true";
+const smtpUser = (process.env.HOSTINGER_EMAIL_USER || "").trim();
+const smtpPass = (process.env.HOSTINGER_EMAIL_PASS || "").trim();
+const recipient = (process.env.CONTACT_RECIPIENT || "support@virotech.in").trim();
+
 const transporter = nodemailer.createTransport({
-  host: "smtp.hostinger.com",
-  port: 587,
-  secure: false,
-  requireTLS: true,
+  host: hostDomain,
+  port: smtpPort,
+  secure: smtpSecure,
+  requireTLS: !smtpSecure,
+  family: 4,
   connectionTimeout: 20000,
   greetingTimeout: 20000,
   socketTimeout: 30000,
   auth: {
-    user: (process.env.HOSTINGER_EMAIL_USER || "").trim(),
-    pass: (process.env.HOSTINGER_EMAIL_PASS || "").trim(),
+    user: smtpUser,
+    pass: smtpPass,
   },
   tls: {
     minVersion: "TLSv1.2",
+    servername: hostDomain,
   },
 });
 
-transporter.verify((error) => {
-  if (error) {
-    console.error("Hostinger SMTP Verification Error:", error);
-  } else {
-    console.log("Hostinger SMTP Server ready to dispatch");
-  }
-});
-
-app.get("/api/health", (req, res) => {
+app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", uptime: process.uptime() });
 });
 
@@ -101,27 +100,37 @@ app.post("/api/contact", async (req, res) => {
   const budget = sanitizeString(body.budget);
 
   if (!name || !email || !message) {
-    return res.status(400).json({
-      success: false,
-      message: "Name, email, and message are required.",
-    });
+    return res.status(400).json({ success: false, message: "Name, email, and message are required." });
   }
 
-  const emailRegex = /^[^\s@]+@[^^\s@]+\.[^\s@]+$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
-    return res.status(400).json({
-      success: false,
-      message: "Please provide a valid email address.",
-    });
+    return res.status(400).json({ success: false, message: "Please provide a valid email address." });
   }
 
-  const selectedServices = services.length > 0 ? services.join(", ") : "None specified";
+  if (!smtpUser || !smtpPass) {
+    console.error("SMTP credentials missing in environment variables.");
+    return res.status(503).json({ success: false, message: "Email service is not configured." });
+  }
+
+  const selectedServices = services.length ? services.join(", ") : "None specified";
 
   const mailOptions = {
-    from: `"Virotech Inquiries" <${process.env.HOSTINGER_EMAIL_USER}>`,
-    to: "support@virotech.in",
+    from: `"Virotech Inquiries" <${smtpUser}>`,
+    to: recipient,
     replyTo: email,
     subject: `New Inquiry: ${name} (${company || "Direct Client"})`,
+    text: [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Organization: ${company || "N/A"}`,
+      `Phone: ${phone || "N/A"}`,
+      `Services: ${selectedServices}`,
+      `Budget: ${budget || "Not specified"}`,
+      "",
+      "Project Scope:",
+      message,
+    ].join("\n"),
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 640px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
         <div style="background: #0f172a; padding: 24px; color: #fff;">
@@ -151,11 +160,9 @@ app.post("/api/contact", async (req, res) => {
     return res.status(200).json({ success: true, message: "Inquiry dispatched." });
   } catch (error) {
     console.error("Nodemailer error:", error);
-    return res.status(500).json({ success: false, message: "Email dispatch failed." });
+    return res.status(502).json({ success: false, message: "Email dispatch failed." });
   }
 });
 
-const PORT = Number(process.env.PORT || 5000);
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+const port = Number(process.env.PORT || 5000);
+app.listen(port, () => console.log(`Server running on port ${port}`));
