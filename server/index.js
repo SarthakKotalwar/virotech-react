@@ -86,13 +86,13 @@ const transporter = nodemailer.createTransport({
 });
 
 // Non-blocking verification check
-transporter.verify((error) => {
-  if (error) {
-    console.error("Hostinger SMTP Verification Error:", error.message || error);
-  } else {
-    console.log("Hostinger SMTP Server ready to dispatch");
-  }
-});
+// transporter.verify((error) => {
+//   if (error) {
+//     console.error("Hostinger SMTP Verification Error:", error.message || error);
+//   } else {
+//     console.log("Hostinger SMTP Server ready to dispatch");
+//   }
+// });
 
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", uptime: process.uptime() });
