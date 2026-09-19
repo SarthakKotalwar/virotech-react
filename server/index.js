@@ -22,17 +22,8 @@ const sanitizeString = (value) => {
   return escapeHtml(value.trim()).slice(0, 5000);
 };
 
-const sanitizeEmail = (value) => {
-  const cleaned = sanitizeString(value);
-  return cleaned.length > 254 ? cleaned.slice(0, 254) : cleaned;
-};
-
-const normalizeOrigins = (raw = "") =>
-  raw
-    .split(",")
-    .map((item) => item.trim())
-    .filter(Boolean);
-
+const sanitizeEmail = (value) => sanitizeString(value).slice(0, 254);
+const normalizeOrigins = (raw = "") => raw.split(",").map((item) => item.trim()).filter(Boolean);
 const allowedOrigins = [
   ...normalizeOrigins(process.env.ALLOWED_ORIGINS),
   "http://localhost:5173",
@@ -43,50 +34,43 @@ const allowedOrigins = [
 ];
 
 app.disable("x-powered-by");
-
-app.use(
-  cors({
-    origin(origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Blocked by CORS policy"));
-      }
-    },
-    credentials: true,
-    methods: ["GET", "POST", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
-app.options(/.*/, cors());
+app.use(cors({
+  origin(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error("Blocked by CORS policy"));
+  },
+  credentials: true,
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}));
 app.use(express.json({ limit: "1mb" }));
 
+const smtpPort = Number(process.env.SMTP_PORT || 465);
+const smtpSecure = process.env.SMTP_SECURE
+  ? process.env.SMTP_SECURE === "true"
+  : smtpPort === 465;
+const smtpUser = (process.env.HOSTINGER_EMAIL_USER || "").trim();
+const smtpPass = (process.env.HOSTINGER_EMAIL_PASS || "").trim();
+const recipient = (process.env.CONTACT_RECIPIENT || smtpUser).trim();
+
 const transporter = nodemailer.createTransport({
-  host: "smtp.hostinger.com",
-  port: 587,
-  secure: false,
-  requireTLS: true,
-  connectionTimeout: 20000,
-  greetingTimeout: 20000,
+  host: process.env.SMTP_HOST || "smtp.hostinger.com",
+  port: smtpPort,
+  secure: smtpSecure,
+  requireTLS: !smtpSecure,
+  connectionTimeout: 30000,
+  greetingTimeout: 30000,
   socketTimeout: 30000,
-  auth: {
-    user: (process.env.HOSTINGER_EMAIL_USER || "").trim(),
-    pass: (process.env.HOSTINGER_EMAIL_PASS || "").trim(),
-  },
-  tls: {
-    minVersion: "TLSv1.2",
-  },
+  auth: { user: smtpUser, pass: smtpPass },
+  tls: { minVersion: "TLSv1.2" },
 });
 
 transporter.verify((error) => {
-  if (error) {
-    console.error("Hostinger SMTP Verification Error:", error);
-  } else {
-    console.log("Hostinger SMTP Server ready to dispatch");
-  }
+  if (error) console.error("SMTP verification failed:", error);
+  else console.log("SMTP server ready to dispatch");
 });
 
-app.get("/api/health", (req, res) => {
+app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", uptime: process.uptime() });
 });
 
@@ -101,49 +85,34 @@ app.post("/api/contact", async (req, res) => {
   const budget = sanitizeString(body.budget);
 
   if (!name || !email || !message) {
-    return res.status(400).json({
-      success: false,
-      message: "Name, email, and message are required.",
-    });
+    return res.status(400).json({ success: false, message: "Name, email, and message are required." });
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return res.status(400).json({ success: false, message: "Please provide a valid email address." });
+  }
+  if (!smtpUser || !smtpPass || !recipient) {
+    console.error("SMTP environment variables are incomplete");
+    return res.status(503).json({ success: false, message: "Email service is not configured." });
   }
 
-  const emailRegex = /^[^\s@]+@[^^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    return res.status(400).json({
-      success: false,
-      message: "Please provide a valid email address.",
-    });
-  }
-
-  const selectedServices = services.length > 0 ? services.join(", ") : "None specified";
-
+  const selectedServices = services.length ? services.join(", ") : "None specified";
   const mailOptions = {
-    from: `"Virotech Inquiries" <${process.env.HOSTINGER_EMAIL_USER}>`,
-    to: "support@virotech.in",
+    from: `Virotech Inquiries <${smtpUser}>`,
+    to: recipient,
     replyTo: email,
     subject: `New Inquiry: ${name} (${company || "Direct Client"})`,
-    html: `
-      <div style="font-family: Arial, sans-serif; max-width: 640px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
-        <div style="background: #0f172a; padding: 24px; color: #fff;">
-          <h2 style="margin: 0; font-size: 20px;">New Consultation Brief</h2>
-          <p style="margin: 6px 0 0; color: #cbd5e1; font-size: 13px;">Received via virotech.in</p>
-        </div>
-        <div style="padding: 24px; background: #ffffff;">
-          <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
-            <tr><td style="padding: 10px 0; color: #64748b; width: 150px; border-bottom: 1px solid #f1f5f9;"><strong>Name</strong></td><td style="padding: 10px 0; color: #0f172a; border-bottom: 1px solid #f1f5f9;">${name}</td></tr>
-            <tr><td style="padding: 10px 0; color: #64748b; border-bottom: 1px solid #f1f5f9;"><strong>Email</strong></td><td style="padding: 10px 0; color: #0f172a; border-bottom: 1px solid #f1f5f9;"><a href="mailto:${email}">${email}</a></td></tr>
-            <tr><td style="padding: 10px 0; color: #64748b; border-bottom: 1px solid #f1f5f9;"><strong>Organization</strong></td><td style="padding: 10px 0; color: #0f172a; border-bottom: 1px solid #f1f5f9;">${company || "N/A"}</td></tr>
-            <tr><td style="padding: 10px 0; color: #64748b; border-bottom: 1px solid #f1f5f9;"><strong>Phone</strong></td><td style="padding: 10px 0; color: #0f172a; border-bottom: 1px solid #f1f5f9;">${phone || "N/A"}</td></tr>
-            <tr><td style="padding: 10px 0; color: #64748b; border-bottom: 1px solid #f1f5f9;"><strong>Services</strong></td><td style="padding: 10px 0; color: #0f172a; border-bottom: 1px solid #f1f5f9;">${selectedServices}</td></tr>
-            <tr><td style="padding: 10px 0; color: #64748b; border-bottom: 1px solid #f1f5f9;"><strong>Budget</strong></td><td style="padding: 10px 0; color: #0f172a; border-bottom: 1px solid #f1f5f9;">${budget || "Not specified"}</td></tr>
-          </table>
-          <div style="margin-top: 20px; padding: 16px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-            <strong style="display: block; font-size: 13px; color: #475569; margin-bottom: 8px;">Project Scope:</strong>
-            <p style="margin: 0; color: #0f172a; line-height: 1.6; font-size: 14px; white-space: pre-wrap;">${message}</p>
-          </div>
-        </div>
-      </div>
-    `,
+    text: [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Organization: ${company || "N/A"}`,
+      `Phone: ${phone || "N/A"}`,
+      `Services: ${selectedServices}`,
+      `Budget: ${budget || "Not specified"}`,
+      "",
+      "Project Scope:",
+      message,
+    ].join("\n"),
+    html: `<h2>New Consultation Brief</h2><p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p><p><strong>Organization:</strong> ${company || "N/A"}</p><p><strong>Phone:</strong> ${phone || "N/A"}</p><p><strong>Services:</strong> ${selectedServices}</p><p><strong>Budget:</strong> ${budget || "Not specified"}</p><hr><p><strong>Project Scope:</strong></p><p>${message.replace(/\n/g, "<br>")}</p>`,
   };
 
   try {
@@ -151,11 +120,9 @@ app.post("/api/contact", async (req, res) => {
     return res.status(200).json({ success: true, message: "Inquiry dispatched." });
   } catch (error) {
     console.error("Nodemailer error:", error);
-    return res.status(500).json({ success: false, message: "Email dispatch failed." });
+    return res.status(502).json({ success: false, message: "Email dispatch failed." });
   }
 });
 
-const PORT = Number(process.env.PORT || 5000);
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+const port = Number(process.env.PORT || 5000);
+app.listen(port, () => console.log(`Server running on port ${port}`));
