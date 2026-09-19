@@ -54,6 +54,12 @@ app.use(
 );
 app.use(express.json({ limit: "1mb" }));
 
+console.log("SMTP runtime:", {
+  host: process.env.SMTP_HOST,
+  port: process.env.SMTP_PORT,
+  secure: process.env.SMTP_SECURE,
+});
+
 // Asynchronously resolves Hostinger's IPv4 address directly
 async function createMailTransporter() {
   const smtpHost = (process.env.SMTP_HOST || "smtp.hostinger.com").trim();
