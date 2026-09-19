@@ -1,7 +1,6 @@
 /* ==========================================
    NAVBAR STYLES
 ========================================== */
-
 @use "./styles/base";
 @use "./styles/desktop";
 @use "./styles/mobile";
@@ -11,20 +10,20 @@
 /* ==========================================================
    BASE & LIGHT THEME STYLES (PRESERVED)
 ========================================================== */
-.navbar,
-header.navbar,
-.header {
+.navbar, header.navbar, .header {
   transition: 
     background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
     border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 
-  &__container,
+  &__wrapper,
+  .navbar__wrapper,
   .navbar-container,
   .nav-wrapper {
     background: var(--glass-bg, rgba(255, 255, 255, 0.82));
     border: 1px solid var(--glass-border, rgba(226, 232, 240, 0.85));
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
+    border-radius: 9999px;
     box-shadow: var(--shadow-sm, 0 10px 30px -10px rgba(15, 23, 42, 0.08));
     transition: 
       background 0.35s cubic-bezier(0.16, 1, 0.3, 1),
@@ -44,7 +43,7 @@ header.navbar,
   /* Nav Links */
   &__link,
   .nav-link,
-  a:not(.navbar__cta) {
+  a:not(.navbar__cta):not(.mobile-menu__cta) {
     color: var(--color-heading, #334155);
     transition: color 0.25s ease;
 
@@ -54,43 +53,37 @@ header.navbar,
     }
   }
 
-  /* Exact CTA Button from Inspect Tooltip */
+  /* CTA Button */
   a.navbar__cta,
   .navbar__cta {
-    background: #2563eb !important;
-    border-radius: 9999px !important;
+    background: #2563eb;
+    border-radius: 9999px;
     color: #ffffff !important;
-    text-decoration: none !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.45) !important;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.45);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 
-    &,
-    *,
-    span,
-    strong {
+    span, strong {
       color: #ffffff !important;
-      -webkit-text-fill-color: #ffffff !important;
-      font-weight: 700 !important;
+      font-weight: 700;
     }
 
-    svg,
-    i {
+    svg, i {
       color: #ffffff !important;
       stroke: #ffffff !important;
       transition: transform 0.25s ease;
     }
 
     &:hover {
-      background: #1d4ed8 !important;
+      background: #1d4ed8;
       transform: translateY(-1.5px);
-      box-shadow: 0 12px 26px -4px rgba(37, 99, 235, 0.6) !important;
+      box-shadow: 0 12px 26px -4px rgba(37, 99, 235, 0.6);
 
-      svg,
-      i {
+      svg, i {
         transform: translateX(2px);
       }
     }
@@ -98,16 +91,15 @@ header.navbar,
 }
 
 /* ==========================================================
-   TARGETED DARK THEME OVERRIDES (HIGH SPECIFICITY)
+   TARGETED DARK THEME OVERRIDES
 ========================================================== */
-[data-theme="dark"],
-.dark {
+[data-theme="dark"], .dark {
   /* 1. Navbar Glass Capsule */
-  .navbar__container,
+  .navbar__wrapper,
   .navbar-container,
   .nav-wrapper {
     background: rgba(7, 13, 25, 0.82) !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
     box-shadow: 
@@ -117,14 +109,10 @@ header.navbar,
 
     &:hover {
       border-color: rgba(96, 165, 250, 0.35) !important;
-      box-shadow: 
-        0 22px 50px -10px rgba(0, 0, 0, 0.75),
-        inset 0 1px 1px rgba(255, 255, 255, 0.2),
-        0 0 35px rgba(37, 99, 235, 0.15) !important;
     }
   }
 
-  /* 2. Logo: Brightens dark 'VIROTECH' text on transparent PNG */
+  /* 2. Logo Enhancement */
   .navbar img,
   .navbar__logo img,
   .navbar__brand img {
@@ -132,7 +120,7 @@ header.navbar,
   }
 
   /* 3. Links */
-  .navbar a:not(.navbar__cta),
+  .navbar a:not(.navbar__cta):not(.mobile-menu__cta),
   .navbar__link,
   .nav-link {
     color: #94a3b8 !important;
@@ -143,39 +131,19 @@ header.navbar,
     }
   }
 
-  /* 4. Fix Start Project CTA (Pure white text & vibrant blue) */
+  /* 4. CTA Button in Dark Theme */
   a.navbar__cta,
   .navbar__cta {
     background: #2563eb !important;
     box-shadow: 0 8px 24px -2px rgba(37, 99, 235, 0.55) !important;
 
-    &,
-    *,
-    span,
-    strong,
-    p {
+    span, strong {
       color: #ffffff !important;
-      -webkit-text-fill-color: #ffffff !important;
-      opacity: 1 !important;
-    }
-
-    svg,
-    i {
-      color: #ffffff !important;
-      stroke: #ffffff !important;
     }
 
     &:hover {
       background: #1d4ed8 !important;
       box-shadow: 0 12px 30px -2px rgba(37, 99, 235, 0.75) !important;
-
-      &,
-      *,
-      span,
-      strong {
-        color: #ffffff !important;
-        -webkit-text-fill-color: #ffffff !important;
-      }
     }
   }
 }
