@@ -1,6 +1,12 @@
 import dotenv from "dotenv";
 dotenv.config();
 
+// CRITICAL: Prevent Node 24 from routing to unreachable IPv6 on Render
+import dns from "node:dns";
+if (dns.setDefaultResultOrder) {
+  dns.setDefaultResultOrder("ipv4first");
+}
+
 import express from "express";
 import cors from "cors";
 import nodemailer from "nodemailer";
@@ -23,6 +29,7 @@ const sanitizeString = (value) => {
 };
 
 const sanitizeEmail = (value) => sanitizeString(value).slice(0, 254);
+
 const normalizeOrigins = (raw = "") =>
   raw
     .split(",")
@@ -54,9 +61,7 @@ app.use(express.json({ limit: "1mb" }));
 
 // SMTP Configuration
 const smtpPort = Number(process.env.SMTP_PORT || 587);
-const smtpSecure = process.env.SMTP_SECURE
-  ? process.env.SMTP_SECURE === "true"
-  : smtpPort === 465;
+const smtpSecure = process.env.SMTP_SECURE === "true";
 const smtpUser = (process.env.HOSTINGER_EMAIL_USER || "").trim();
 const smtpPass = (process.env.HOSTINGER_EMAIL_PASS || "").trim();
 const recipient = (process.env.CONTACT_RECIPIENT || "support@virotech.in").trim();
@@ -66,11 +71,14 @@ const transporter = nodemailer.createTransport({
   port: smtpPort,
   secure: smtpSecure,
   requireTLS: !smtpSecure,
-  family: 4, // Forces IPv4 to fix Render ENETUNREACH
+  family: 4, // Explicitly force IPv4 on socket creation
   connectionTimeout: 20000,
   greetingTimeout: 20000,
   socketTimeout: 30000,
-  auth: { user: smtpUser, pass: smtpPass },
+  auth: { 
+    user: smtpUser, 
+    pass: smtpPass 
+  },
   tls: {
     minVersion: "TLSv1.2",
     rejectUnauthorized: true,
