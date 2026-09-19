@@ -6,11 +6,6 @@ import express from "express";
 import cors from "cors";
 import nodemailer from "nodemailer";
 
-// Enforce IPv4 lookups globally across Node's DNS engine
-if (dns.setDefaultResultOrder) {
-  dns.setDefaultResultOrder("ipv4first");
-}
-
 const app = express();
 
 const escapeHtml = (value) => {
@@ -59,35 +54,43 @@ app.use(
 );
 app.use(express.json({ limit: "1mb" }));
 
-// SMTP Configuration
-const smtpPort = Number(process.env.SMTP_PORT || 587);
-const smtpSecure = process.env.SMTP_SECURE === "true";
-const smtpUser = (process.env.HOSTINGER_EMAIL_USER || "").trim();
-const smtpPass = (process.env.HOSTINGER_EMAIL_PASS || "").trim();
-const recipient = (process.env.CONTACT_RECIPIENT || "support@virotech.in").trim();
+// Helper function to resolve host to a concrete IPv4 address
+async function getMailTransporter() {
+  const hostDomain = (process.env.SMTP_HOST || "smtp.hostinger.com").trim();
+  const smtpPort = Number(process.env.SMTP_PORT || 587);
+  const smtpSecure = process.env.SMTP_SECURE === "true";
+  const smtpUser = (process.env.HOSTINGER_EMAIL_USER || "").trim();
+  const smtpPass = (process.env.HOSTINGER_EMAIL_PASS || "").trim();
 
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || "smtp.hostinger.com",
-  port: smtpPort,
-  secure: smtpSecure,
-  requireTLS: !smtpSecure,
-  // CRITICAL FIX: Explicitly intercept DNS lookups to force IPv4 (family 4)
-  // This bypasses Render's inability to route outbound IPv6 (2606:4700:...)
-  lookup: (hostname, options, callback) => {
-    return dns.lookup(hostname, { family: 4 }, callback);
-  },
-  connectionTimeout: 20000,
-  greetingTimeout: 20000,
-  socketTimeout: 30000,
-  auth: { 
-    user: smtpUser, 
-    pass: smtpPass 
-  },
-  tls: {
-    minVersion: "TLSv1.2",
-    rejectUnauthorized: false,
-  },
-});
+  let resolvedHost = hostDomain;
+  try {
+    const ipv4Addresses = await dns.promises.resolve4(hostDomain);
+    if (ipv4Addresses && ipv4Addresses.length > 0) {
+      resolvedHost = ipv4Addresses[0]; // Guaranteed IPv4 address (e.g. 195.35.x.x)
+    }
+  } catch (err) {
+    console.warn("Could not pre-resolve IPv4, falling back to domain:", err.message);
+  }
+
+  return nodemailer.createTransport({
+    host: resolvedHost,
+    port: smtpPort,
+    secure: smtpSecure,
+    requireTLS: !smtpSecure,
+    connectionTimeout: 20000,
+    greetingTimeout: 20000,
+    socketTimeout: 30000,
+    auth: { 
+      user: smtpUser, 
+      pass: smtpPass 
+    },
+    tls: {
+      servername: hostDomain, // Required when connecting via IP address
+      minVersion: "TLSv1.2",
+      rejectUnauthorized: false,
+    },
+  });
+}
 
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", uptime: process.uptime() });
@@ -112,8 +115,12 @@ app.post("/api/contact", async (req, res) => {
     return res.status(400).json({ success: false, message: "Please provide a valid email address." });
   }
 
+  const smtpUser = (process.env.HOSTINGER_EMAIL_USER || "").trim();
+  const smtpPass = (process.env.HOSTINGER_EMAIL_PASS || "").trim();
+  const recipient = (process.env.CONTACT_RECIPIENT || "support@virotech.in").trim();
+
   if (!smtpUser || !smtpPass) {
-    console.error("SMTP environment variables (HOSTINGER_EMAIL_USER / HOSTINGER_EMAIL_PASS) are missing.");
+    console.error("SMTP credentials missing in environment variables.");
     return res.status(503).json({ success: false, message: "Email service is not configured." });
   }
 
@@ -160,6 +167,7 @@ app.post("/api/contact", async (req, res) => {
   };
 
   try {
+    const transporter = await getMailTransporter();
     await transporter.sendMail(mailOptions);
     return res.status(200).json({ success: true, message: "Inquiry dispatched." });
   } catch (error) {
