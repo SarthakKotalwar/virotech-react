@@ -13,7 +13,7 @@ const escapeHtml = (value) => {
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
-    .replace(/\"/g, "&quot;")
+    .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 };
 
@@ -61,11 +61,17 @@ app.use(
 app.options(/.*/, cors());
 app.use(express.json({ limit: "1mb" }));
 
+// Configure Nodemailer with IPv4 resolution
+const smtpPort = Number(process.env.SMTP_PORT || 587);
+const isSecure = smtpPort === 465;
+
 const transporter = nodemailer.createTransport({
-  host: "smtp.hostinger.com",
-  port: 587,
-  secure: false,
-  requireTLS: true,
+  host: process.env.SMTP_HOST || "smtp.hostinger.com",
+  port: smtpPort,
+  secure: isSecure, // false for port 587, true for port 465
+  requireTLS: !isSecure,
+  // CRITICAL FIX: Forces IPv4 to bypass Render's lack of outbound IPv6 routing
+  family: 4,
   connectionTimeout: 20000,
   greetingTimeout: 20000,
   socketTimeout: 30000,
@@ -75,12 +81,14 @@ const transporter = nodemailer.createTransport({
   },
   tls: {
     minVersion: "TLSv1.2",
+    rejectUnauthorized: true,
   },
 });
 
+// Non-blocking verification check
 transporter.verify((error) => {
   if (error) {
-    console.error("Hostinger SMTP Verification Error:", error);
+    console.error("Hostinger SMTP Verification Error:", error.message);
   } else {
     console.log("Hostinger SMTP Server ready to dispatch");
   }
@@ -107,7 +115,7 @@ app.post("/api/contact", async (req, res) => {
     });
   }
 
-  const emailRegex = /^[^\s@]+@[^^\s@]+\.[^\s@]+$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     return res.status(400).json({
       success: false,
