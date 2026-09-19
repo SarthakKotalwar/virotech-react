@@ -12,6 +12,13 @@ import nodemailer from "nodemailer";
 
 const app = express();
 
+import net from "node:net";
+const probe = net.createConnection({ host: "smtp.hostinger.com", port: 587, family: 4 });
+probe.setTimeout(20000);
+probe.on("connect", () => { console.log("SMTP TCP: CONNECTED"); probe.end(); });
+probe.on("timeout", () => { console.log("SMTP TCP: TIMEOUT"); probe.destroy(); });
+probe.on("error", (e) => console.log("SMTP TCP:", e.code, e.message));
+
 const escapeHtml = (value) => {
   if (typeof value !== "string") return "";
   return value
