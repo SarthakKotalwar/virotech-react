@@ -58,33 +58,33 @@ app.use(
 );
 app.use(express.json({ limit: "1mb" }));
 
-// Hostinger-recommended Mail Transporter setup
-  async function getMailTransporter() {
-  const hostDomain = (process.env.SMTP_HOST || "smtp.hostinger.com").trim();
-  const smtpPort = Number(process.env.SMTP_PORT || 587);
-  const smtpSecure = process.env.SMTP_SECURE === "true";
-  const smtpUser = (process.env.HOSTINGER_EMAIL_USER || "").trim();
-  const smtpPass = (process.env.HOSTINGER_EMAIL_PASS || "").trim();
+// SMTP Configuration
+const hostDomain = (process.env.SMTP_HOST || "smtp.hostinger.com").trim();
+const smtpPort = Number(process.env.SMTP_PORT || 587);
+const smtpSecure = process.env.SMTP_SECURE === "true";
+const smtpUser = (process.env.HOSTINGER_EMAIL_USER || "").trim();
+const smtpPass = (process.env.HOSTINGER_EMAIL_PASS || "").trim();
+const recipient = (process.env.CONTACT_RECIPIENT || "support@virotech.in").trim();
 
-  return nodemailer.createTransport({
-    host: hostDomain,
-    port: smtpPort,
-    secure: smtpSecure,
-    requireTLS: !smtpSecure,
-    family: 4, // Enforce IPv4 on the socket connection
-    connectionTimeout: 20000,
-    greetingTimeout: 20000,
-    socketTimeout: 30000,
-    auth: {
-      user: smtpUser,
-      pass: smtpPass,
-    },
-    tls: {
-      minVersion: "TLSv1.2",
-      servername: hostDomain,
-    },
-  });
-}
+// Single persistent transporter instance
+const transporter = nodemailer.createTransport({
+  host: hostDomain,
+  port: smtpPort,
+  secure: smtpSecure,
+  requireTLS: !smtpSecure,
+  family: 4, // Enforce IPv4 on socket connection
+  connectionTimeout: 20000,
+  greetingTimeout: 20000,
+  socketTimeout: 30000,
+  auth: {
+    user: smtpUser,
+    pass: smtpPass,
+  },
+  tls: {
+    minVersion: "TLSv1.2",
+    servername: hostDomain,
+  },
+});
 
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", uptime: process.uptime() });
@@ -108,10 +108,6 @@ app.post("/api/contact", async (req, res) => {
   if (!emailRegex.test(email)) {
     return res.status(400).json({ success: false, message: "Please provide a valid email address." });
   }
-
-  const smtpUser = (process.env.HOSTINGER_EMAIL_USER || "").trim();
-  const smtpPass = (process.env.HOSTINGER_EMAIL_PASS || "").trim();
-  const recipient = (process.env.CONTACT_RECIPIENT || "support@virotech.in").trim();
 
   if (!smtpUser || !smtpPass) {
     console.error("SMTP credentials missing in environment variables.");
@@ -161,7 +157,6 @@ app.post("/api/contact", async (req, res) => {
   };
 
   try {
-    const transporter = getMailTransporter();
     await transporter.sendMail(mailOptions);
     return res.status(200).json({ success: true, message: "Inquiry dispatched." });
   } catch (error) {
