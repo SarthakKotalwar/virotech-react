@@ -2,6 +2,10 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import dns from "node:dns";
+if (dns.setDefaultResultOrder) {
+  dns.setDefaultResultOrder("ipv4first");
+}
+
 import express from "express";
 import cors from "cors";
 import nodemailer from "nodemailer";
@@ -54,40 +58,30 @@ app.use(
 );
 app.use(express.json({ limit: "1mb" }));
 
-// Helper function to resolve host to a concrete IPv4 address
-async function getMailTransporter() {
+// Hostinger-recommended Mail Transporter setup
+  async function getMailTransporter() {
   const hostDomain = (process.env.SMTP_HOST || "smtp.hostinger.com").trim();
   const smtpPort = Number(process.env.SMTP_PORT || 587);
   const smtpSecure = process.env.SMTP_SECURE === "true";
   const smtpUser = (process.env.HOSTINGER_EMAIL_USER || "").trim();
   const smtpPass = (process.env.HOSTINGER_EMAIL_PASS || "").trim();
 
-  let resolvedHost = hostDomain;
-  try {
-    const ipv4Addresses = await dns.promises.resolve4(hostDomain);
-    if (ipv4Addresses && ipv4Addresses.length > 0) {
-      resolvedHost = ipv4Addresses[0]; // Guaranteed IPv4 address (e.g. 195.35.x.x)
-    }
-  } catch (err) {
-    console.warn("Could not pre-resolve IPv4, falling back to domain:", err.message);
-  }
-
   return nodemailer.createTransport({
-    host: resolvedHost,
+    host: hostDomain,
     port: smtpPort,
     secure: smtpSecure,
     requireTLS: !smtpSecure,
+    family: 4, // Enforce IPv4 on the socket connection
     connectionTimeout: 20000,
     greetingTimeout: 20000,
     socketTimeout: 30000,
-    auth: { 
-      user: smtpUser, 
-      pass: smtpPass 
+    auth: {
+      user: smtpUser,
+      pass: smtpPass,
     },
     tls: {
-      servername: hostDomain, // Required when connecting via IP address
       minVersion: "TLSv1.2",
-      rejectUnauthorized: false,
+      servername: hostDomain,
     },
   });
 }
@@ -167,7 +161,7 @@ app.post("/api/contact", async (req, res) => {
   };
 
   try {
-    const transporter = await getMailTransporter();
+    const transporter = getMailTransporter();
     await transporter.sendMail(mailOptions);
     return res.status(200).json({ success: true, message: "Inquiry dispatched." });
   } catch (error) {
