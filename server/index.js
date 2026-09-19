@@ -1,15 +1,15 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-// CRITICAL: Prevent Node 24 from routing to unreachable IPv6 on Render
 import dns from "node:dns";
-if (dns.setDefaultResultOrder) {
-  dns.setDefaultResultOrder("ipv4first");
-}
-
 import express from "express";
 import cors from "cors";
 import nodemailer from "nodemailer";
+
+// Enforce IPv4 globally across the runtime
+if (dns.setDefaultResultOrder) {
+  dns.setDefaultResultOrder("ipv4first");
+}
 
 const app = express();
 
@@ -71,7 +71,10 @@ const transporter = nodemailer.createTransport({
   port: smtpPort,
   secure: smtpSecure,
   requireTLS: !smtpSecure,
-  family: 4, // Explicitly force IPv4 on socket creation
+  // Custom lookup interceptor to strictly force IPv4
+  lookup: (hostname, options, callback) => {
+    return dns.lookup(hostname, { family: 4 }, callback);
+  },
   connectionTimeout: 20000,
   greetingTimeout: 20000,
   socketTimeout: 30000,
@@ -84,15 +87,6 @@ const transporter = nodemailer.createTransport({
     rejectUnauthorized: true,
   },
 });
-
-// Non-blocking verification check
-// transporter.verify((error) => {
-//   if (error) {
-//     console.error("Hostinger SMTP Verification Error:", error.message || error);
-//   } else {
-//     console.log("Hostinger SMTP Server ready to dispatch");
-//   }
-// });
 
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", uptime: process.uptime() });
