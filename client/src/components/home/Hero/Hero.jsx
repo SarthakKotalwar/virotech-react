@@ -51,11 +51,11 @@ export default function Hero() {
           </div>
           <div className="hero__stats">
             <div className="hero__stat">
-              <h3>100+</h3>
+              <h3>50+</h3>
               <p>Projects Delivered</p>
             </div>
             <div className="hero__stat">
-              <h3>50+</h3>
+              <h3>20+</h3>
               <p>Happy Clients</p>
             </div>
             <div className="hero__stat">

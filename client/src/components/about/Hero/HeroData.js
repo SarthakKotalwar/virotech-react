@@ -20,12 +20,12 @@ const heroData = {
   stats: [
 
     {
-      value: "100+",
+      value: "50+",
       label: "Projects Delivered",
     },
 
     {
-      value: "50+",
+      value: "20+",
       label: "Happy Clients",
     },
 

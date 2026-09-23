@@ -2,11 +2,11 @@ import "./Hero.scss";
 
 const stats = [
   {
-    number: "100+",
+    number: "50+",
     label: "Projects Delivered",
   },
   {
-    number: "50+",
+    number: "20+",
     label: "Happy Clients",
   },
   {

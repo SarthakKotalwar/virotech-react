@@ -12,15 +12,15 @@ const heroData = {
 
   stats: [
     {
-      number: "100+",
+      number: "50+",
       label: "Projects Delivered",
     },
     {
-      number: "50+",
+      number: "20+",
       label: "Happy Clients",
     },
     {
-      number: "8+",
+      number: "4+",
       label: "Years Experience",
     },
   ],

@@ -32,3 +32,20 @@
 ===================================================== */
 
 /* Page-specific styles will be imported later if needed. */
+
+/* ==========================================================
+   GLOBAL SPEEDSHOP ORIGINALS LOGO THEME ADAPTATION
+   (Works everywhere on Home, Hero, Portfolio, Marquee, etc.)
+========================================================== */
+
+/* 1. Light Theme: Automatically convert to crisp black */
+img[src*="speedshop-originals"] {
+  filter: invert(1) drop-shadow(0 4px 14px rgba(15, 23, 42, 0.12));
+  transition: filter 0.3s ease;
+}
+
+/* 2. Dark Theme: Keep as pure white */
+[data-theme="dark"] img[src*="speedshop-originals"],
+.dark img[src*="speedshop-originals"] {
+  filter: invert(0) drop-shadow(0 4px 18px rgba(255, 255, 255, 0.18)) !important;
+}

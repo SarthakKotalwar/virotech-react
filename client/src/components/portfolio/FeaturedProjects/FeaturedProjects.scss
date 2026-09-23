@@ -348,3 +348,22 @@
     }
   }
 }
+
+/* Invert white-only logos in light theme so they are bold and visible */
+.portfolio-card__browser,
+.project-card__browser {
+  .browser-screen img[src*="speedshop-originals"] {
+    filter: invert(1) drop-shadow(0 8px 18px rgba(15, 23, 42, 0.12));
+  }
+}
+
+/* Revert to crisp white in dark theme */
+[data-theme="dark"],
+.dark {
+  .portfolio-card__browser,
+  .project-card__browser {
+    .browser-screen img[src*="speedshop-originals"] {
+      filter: invert(0) drop-shadow(0 8px 24px rgba(255, 255, 255, 0.18)) !important;
+    }
+  }
+}

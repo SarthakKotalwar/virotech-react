@@ -115,8 +115,8 @@
   /* 2. Logo Enhancement */
   .navbar img,
   .navbar__logo img,
-  .navbar__brand img {
-    filter: brightness(1.25) contrast(1.15) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5)) !important;
+  .navbar__logo-image {
+    filter: invert(1) hue-rotate(180deg) brightness(1.2) contrast(1.1) !important;
   }
 
   /* 3. Links */
