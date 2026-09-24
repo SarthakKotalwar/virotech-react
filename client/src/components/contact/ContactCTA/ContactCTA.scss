@@ -1,6 +1,7 @@
 .contact-cta {
   position: relative;
-  padding: clamp(54px, 7vw, 92px) 0;
+  /* Balanced top spacing to ensure the floating navbar never cuts the card */
+  padding: clamp(84px, 11vw, 108px) 0 clamp(48px, 6vw, 76px);
   background: var(--bg-primary, #ffffff);
   border-bottom: 1px solid var(--border-color, #e2e8f0);
   overflow: clip;
@@ -21,37 +22,52 @@
     background: transparent !important;
   }
 
+  &__perspective-wrapper {
+    perspective: 1600px;
+    perspective-origin: 50% 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
   /* =====================================================
-     INNER CARD (STAYS IDENTICAL IN BOTH THEMES)
+     INNER CARD (RESTORED TO FULL PANORAMIC DESKTOP WIDTH)
   ===================================================== */
   &__card {
     --tx: 0px;
     --ty: 0px;
     --rx: 0deg;
     --ry: 0deg;
+
     position: relative;
     width: 100%;
+    max-width: 100%; /* Spans full width of the 1240px container on desktop */
     min-height: 420px;
     margin: 0 auto;
-    padding: clamp(32px, 4.5vw, 54px) clamp(24px, 4vw, 56px);
+    padding: clamp(36px, 4.5vw, 54px) clamp(28px, 4.5vw, 64px);
     border-radius: 28px;
     background: #080e1a !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    box-shadow: 0 25px 65px -10px rgba(0, 0, 0, 0.5);
     color: #ffffff !important;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    perspective: 1400px;
-    transform: perspective(1400px) rotateX(var(--rx)) rotateY(var(--ry));
+
     transform-style: preserve-3d;
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+    transform: rotateX(var(--rx)) rotateY(var(--ry));
+    box-shadow: 
+      0 25px 65px -10px rgba(0, 0, 0, 0.55),
+      0 0 35px -10px rgba(37, 99, 235, 0.2);
+    transition: transform 0.28s cubic-bezier(0.2, 0.9, 0.3, 1), box-shadow 0.3s ease;
     will-change: transform;
     box-sizing: border-box;
+    touch-action: pan-y;
 
     &:hover {
-      box-shadow: 0 30px 75px -10px rgba(37, 99, 235, 0.25);
+      box-shadow: 
+        0 30px 75px -10px rgba(0, 0, 0, 0.65),
+        0 0 40px -8px rgba(37, 99, 235, 0.25);
     }
   }
 
@@ -67,19 +83,23 @@
     letter-spacing: 0.14em;
     color: #94a3b8 !important;
     gap: 16px;
-    flex-wrap: wrap;
+    transform: translateZ(8px);
+    transform-style: preserve-3d;
+    box-sizing: border-box;
 
     span {
       color: #94a3b8 !important;
       text-transform: uppercase;
+      white-space: nowrap;
     }
   }
 
   &__title {
     text-align: center;
     margin: 24px 0 28px;
-    transform: translate3d(var(--tx), var(--ty), 18px);
-    transition: transform 0.2s ease-out;
+    transform: translate3d(var(--tx), var(--ty), 14px);
+    transform-style: preserve-3d;
+    transition: transform 0.22s ease-out;
 
     span,
     strong {
@@ -100,9 +120,7 @@
     }
   }
 
-  /* =====================================================
-     DEPLOY PROJECT BUTTON (EXACT BLUE PILL & WHITE ARROW)
-  ===================================================== */
+  /* CTA Button */
   button.contact-cta__button,
   a.contact-cta__button,
   .contact-cta__button {
@@ -118,26 +136,20 @@
     font-size: 14px !important;
     font-weight: 700 !important;
     cursor: pointer !important;
-    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.45) !important;
-    transform: translateZ(20px);
+    box-shadow: 0 12px 28px rgba(37, 99, 235, 0.45) !important;
+    transform: translateZ(18px);
+    transform-style: preserve-3d;
     transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
     text-decoration: none !important;
 
-    /* Label text */
-    > span:not(.icon-wrapper):not(.btn-circle):not(.arrow-circle),
-    > strong {
+    > span:not(.btn-circle) {
       color: #ffffff !important;
       -webkit-text-fill-color: #ffffff !important;
       font-weight: 700 !important;
     }
 
-    /* Target the white circle container */
-    .icon-wrapper,
-    .btn-circle,
-    .arrow-circle,
-    .btn-arrow {
+    .btn-circle {
       position: relative !important;
-      z-index: 5 !important;
       width: 38px !important;
       height: 38px !important;
       min-width: 38px !important;
@@ -150,37 +162,23 @@
       flex-shrink: 0 !important;
       transition: transform 0.25s ease;
 
-      /* Arrow Icon (SVG or Icon Font) */
-      svg,
-      i {
+      svg {
         font-size: 18px !important;
         width: 18px !important;
         height: 18px !important;
         color: #2563eb !important;
         stroke: #2563eb !important;
-        fill: none !important;
+        stroke-width: 2.2;
         display: block !important;
-      }
-
-      /* Fallback in case the JSX renders a text arrow like <span>↗</span> */
-      span {
-        color: #2563eb !important;
-        -webkit-text-fill-color: #2563eb !important;
-        font-size: 18px !important;
-        font-weight: 900 !important;
-        line-height: 1 !important;
       }
     }
 
     &:hover {
       background: #1d4ed8 !important;
-      transform: translateZ(20px) translateY(-3px);
-      box-shadow: 0 18px 40px rgba(37, 99, 235, 0.6) !important;
+      transform: translateZ(22px) translateY(-2px);
+      box-shadow: 0 16px 36px rgba(37, 99, 235, 0.58) !important;
 
-      .icon-wrapper,
-      .btn-circle,
-      .arrow-circle,
-      .btn-arrow {
+      .btn-circle {
         transform: rotate(45deg);
       }
     }
@@ -188,44 +186,13 @@
 }
 
 /* =====================================================
-   DARK THEME OVERRIDES (Leaves button appearance locked)
+   DARK THEME OVERRIDES
 ===================================================== */
 [data-theme="dark"],
 .dark {
   .contact-cta {
     background: var(--bg-primary, #070d19) !important;
     border-bottom-color: var(--border-color, #1e293b);
-
-    button.contact-cta__button,
-    a.contact-cta__button,
-    .contact-cta__button {
-      background: #2563eb !important;
-      color: #ffffff !important;
-
-      > span:not(.icon-wrapper):not(.btn-circle):not(.arrow-circle),
-      > strong {
-        color: #ffffff !important;
-        -webkit-text-fill-color: #ffffff !important;
-      }
-
-      .icon-wrapper,
-      .btn-circle,
-      .arrow-circle,
-      .btn-arrow {
-        background: #ffffff !important;
-
-        svg,
-        i {
-          color: #2563eb !important;
-          stroke: #2563eb !important;
-        }
-
-        span {
-          color: #2563eb !important;
-          -webkit-text-fill-color: #2563eb !important;
-        }
-      }
-    }
   }
 }
 
@@ -237,40 +204,81 @@
     &__card {
       min-height: 380px;
       padding: 34px 24px;
-      transform: none !important;
-    }
-    &__title,
-    &__button {
-      transform: none !important;
     }
   }
 }
 
 @media (max-width: 640px) {
   .contact-cta {
-    padding: 44px 0 36px;
+    padding: calc(84px + env(safe-area-inset-top, 0px)) 0 clamp(36px, 7vw, 54px);
+
+    &__perspective-wrapper {
+      perspective: 1400px;
+    }
 
     &__card {
-      border-radius: 20px;
-      min-height: 330px;
-      padding: 24px 18px;
+      border-radius: 22px;
+      min-height: auto;
+      padding: 30px 18px;
+      gap: 20px;
     }
 
     &__top,
     &__bottom {
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       text-align: center;
       gap: 6px;
+      width: 100%;
+      transform: translateZ(6px);
+
+      span {
+        white-space: normal;
+        text-align: center;
+        display: block;
+        line-height: 1.4;
+      }
+
+      .meta-left {
+        font-size: 9.5px;
+        letter-spacing: 0.12em;
+        color: #94a3b8 !important;
+      }
+
+      .meta-right {
+        font-size: 9.5px;
+        letter-spacing: 0.12em;
+        color: #60a5fa !important;
+      }
+    }
+
+    &__bottom {
+      .meta-left {
+        font-size: 8.5px;
+        letter-spacing: 0.08em;
+      }
+      .meta-right {
+        font-size: 9.5px;
+      }
     }
 
     &__title {
-      margin: 18px 0;
+      margin: 4px 0 10px;
+      transform: translate3d(var(--tx), var(--ty), 10px);
+
+      span,
+      strong {
+        font-size: clamp(28px, 7.5vw, 38px);
+        line-height: 1.08;
+      }
     }
 
     &__button {
       width: 100%;
       max-width: 250px;
+      min-height: 46px;
+      transform: translateZ(12px);
     }
   }
 }

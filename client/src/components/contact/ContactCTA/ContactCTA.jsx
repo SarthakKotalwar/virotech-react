@@ -1,85 +1,115 @@
-import React, { useRef } from "react";
-import { ArrowUpRight } from "lucide-react";
+import React, { useRef, useEffect } from "react";
+import { FiArrowUpRight } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import "./ContactCTA.scss";
 
-const ContactCTA = () => {
+export default function ContactCTA() {
   const cardRef = useRef(null);
 
-  const handleMouseMove = (e) => {
+  useEffect(() => {
     const card = cardRef.current;
     if (!card) return;
-    const rect = card.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
 
-    card.style.setProperty("--rx", `${y * -6}deg`);
-    card.style.setProperty("--ry", `${x * 6}deg`);
-    card.style.setProperty("--tx", `${x * 8}px`);
-    card.style.setProperty("--ty", `${y * 8}px`);
-  };
+    let isInteracting = false;
 
-  const handleMouseLeave = () => {
-    const card = cardRef.current;
-    if (!card) return;
-    card.style.setProperty("--rx", "0deg");
-    card.style.setProperty("--ry", "0deg");
-    card.style.setProperty("--tx", "0px");
-    card.style.setProperty("--ty", "0px");
-  };
+    const updateCardRotation = (clientX, clientY) => {
+      const rect = card.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
 
-  const scrollToContactForm = () => {
-    const formElement =
-      document.querySelector(".contact-form-wrapper") ||
-      document.querySelector(".contact-main");
-    if (formElement) {
-      formElement.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-    }
-  };
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      // Restrained subtle tilt (max ~5.5deg)
+      const rotateX = ((y - centerY) / centerY) * -5.5;
+      const rotateY = ((x - centerX) / centerX) * 5.5;
+
+      const tx = ((x - centerX) / centerX) * 4;
+      const ty = ((y - centerY) / centerY) * 4;
+
+      card.style.setProperty("--rx", `${rotateX.toFixed(2)}deg`);
+      card.style.setProperty("--ry", `${rotateY.toFixed(2)}deg`);
+      card.style.setProperty("--tx", `${tx.toFixed(2)}px`);
+      card.style.setProperty("--ty", `${ty.toFixed(2)}px`);
+    };
+
+    const resetCard = () => {
+      card.style.setProperty("--rx", "0deg");
+      card.style.setProperty("--ry", "0deg");
+      card.style.setProperty("--tx", "0px");
+      card.style.setProperty("--ty", "0px");
+    };
+
+    // Desktop Mouse Handlers
+    const handleMouseMove = (e) => updateCardRotation(e.clientX, e.clientY);
+    const handleMouseLeave = () => resetCard();
+
+    // Mobile Touch Handlers
+    const handleTouchStart = (e) => {
+      isInteracting = true;
+      if (e.touches[0]) updateCardRotation(e.touches[0].clientX, e.touches[0].clientY);
+    };
+
+    const handleTouchMove = (e) => {
+      if (!isInteracting || !e.touches[0]) return;
+      updateCardRotation(e.touches[0].clientX, e.touches[0].clientY);
+    };
+
+    const handleTouchEnd = () => {
+      isInteracting = false;
+      resetCard();
+    };
+
+    card.addEventListener("mousemove", handleMouseMove);
+    card.addEventListener("mouseleave", handleMouseLeave);
+    card.addEventListener("touchstart", handleTouchStart, { passive: true });
+    card.addEventListener("touchmove", handleTouchMove, { passive: true });
+    card.addEventListener("touchend", handleTouchEnd, { passive: true });
+
+    return () => {
+      card.removeEventListener("mousemove", handleMouseMove);
+      card.removeEventListener("mouseleave", handleMouseLeave);
+      card.removeEventListener("touchstart", handleTouchStart);
+      card.removeEventListener("touchmove", handleTouchMove);
+      card.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, []);
 
   return (
-    <section className="contact-cta">
+    <section className="contact-cta" id="contact-cta">
       <div className="contact-cta__ambient-glow" />
-      
-      {/* Outer Grid Alignment Container */}
+
       <div className="container">
-        <div
-          ref={cardRef}
-          className="contact-cta__card"
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
-        >
-          <div className="contact-cta__top">
-            <span>05 / DEPLOYMENT READY</span>
-            <span>VIROTECH ARCHITECTURE</span>
-          </div>
+        <div className="contact-cta__perspective-wrapper">
+          <div className="contact-cta__card" ref={cardRef}>
+            {/* Top Status */}
+            <div className="contact-cta__top">
+              <span className="meta-left">05 / DEPLOYMENT READY</span>
+              <span className="meta-right">VIROTECH ARCHITECTURE</span>
+            </div>
 
-          <div className="contact-cta__title">
-            <span>Let's build</span>
-            <strong>the future.</strong>
-          </div>
+            {/* Parallax Depth Title */}
+            <div className="contact-cta__title">
+              <span>Let's build</span>
+              <strong>the future.</strong>
+            </div>
 
-          <button
-            type="button"
-            className="contact-cta__button"
-            onClick={scrollToContactForm}
-          >
-            <span>Deploy Project</span>
-            <span className="icon-wrapper">
-              <ArrowUpRight size={16} strokeWidth={2.4} />
-            </span>
-          </button>
+            {/* Deploy Button */}
+            <Link to="/contact" className="contact-cta__button">
+              <span>Deploy Project</span>
+              <span className="btn-circle">
+                <FiArrowUpRight />
+              </span>
+            </Link>
 
-          <div className="contact-cta__bottom">
-            <span>3D RIGID BODY PHYSICS / FAST INFERENCE</span>
-            <span>&gt;_ SYSTEM ACTIVE</span>
+            {/* Bottom Status */}
+            <div className="contact-cta__bottom">
+              <span className="meta-left">3D RIGID BODY PHYSICS / FAST INFERENCE</span>
+              <span className="meta-right">&gt;_ SYSTEM ACTIVE</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
-};
-
-export default ContactCTA;
+}
